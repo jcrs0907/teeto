@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.teeto.faq.mapper.FaqMapper">
+
+    <select id="getList"
+            parameterType="String"
+            resultType="faqVO">
+        SELECT /* select - faqMapper.xml : 210916 @eunseo */
+            f.FAQ_SEQNO AS faqSeqno
+           ,f.FAQ_QUESTION AS faqQuestion
+           ,f.FAQ_ANSWER AS faqAnswer
+        FROM TB_FAQ_L f
+        WHERE 1=1
+        AND f.USE_YN = 'Y'
+        AND f.FAQ_CD = #{faqCd}
+        ORDER BY f.FAQ_SEQNO DESC
+    </select>
+
+</mapper>
