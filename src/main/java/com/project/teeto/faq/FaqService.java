@@ -1,7 +1,7 @@
 package com.project.teeto.faq;
 
 import com.project.teeto.faq.mapper.FaqMapper;
-import com.project.teeto.faq.model.FaqVO;
+import com.project.teeto.faq.model.Faq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +13,8 @@ public class FaqService {
     @Autowired
     FaqMapper faqMapper;
 
-    public List<FaqVO> getList(String faqCd) {
-        List<FaqVO> faqList = faqMapper.getList(faqCd);
+    public List<Faq> getList(String faqCd) {
+        List<Faq> faqList = faqMapper.getList(faqCd);
         return faqList;
     }
 }

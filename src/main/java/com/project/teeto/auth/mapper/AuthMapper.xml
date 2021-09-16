@@ -2,5 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.teeto.auth.mapper.AuthMapper">
 
+    <insert id="insert"
+            parameterType="auth">
+        <selectKey keyProperty="apvReqSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_AUTH_L_SEQ.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO
+          TB_AUTH_L (
+             APV_REQ_SEQNO
+            ,APV_REQ_TP_CD
+            ,APV_REQ_TP_VAL
+            ,CERT_NO
+            ,UNIX_TIME_APV_STRT_DTTM
+            ,UNIX_TIME_APV_END_DTTM
+            ,CRE_DTTM
+          ) VALUES (
+             #{apvReqSeqno}
+            ,#{apvReqTpCd}
+            ,#{apvReqTpVal}
+            ,#{certNo}
+            ,#{unixTimeApvStrtDttm}
+            ,#{unixTimeApvEndDttm}
+            ,SYSDATE
+          )
+    </insert>
 
 </mapper>

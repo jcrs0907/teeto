@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
-@Alias("faqVO")
+@Alias("faq")
 @Getter
 @Setter
-public class FaqVO {
+public class Faq {
     private int faqSeqno;           //시퀀스
     private String faqQuestion;     //질문
     private String faqCd;           //타입코드

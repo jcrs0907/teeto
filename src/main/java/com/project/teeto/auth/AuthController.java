@@ -1,6 +1,5 @@
 package com.project.teeto.auth;
 
-import com.project.teeto.mail.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("auth")
 public class AuthController {
-
-    @Autowired
-    MailService mailService;
 
     @Autowired
     AuthService authService;
@@ -36,9 +32,8 @@ public class AuthController {
     @ResponseBody
     public String sendAuthMail(String email) {
         String result = "";
-        if(mailService.sendAuthMail(email)) {
-            result = "{\"process\" : \"send mail success\"}";
-        }
+        authService.sendAuthMail(email);
+        result = "{\"process\" : \"send mail success\"}";
         return result;
     }
 

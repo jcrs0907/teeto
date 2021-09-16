@@ -4,7 +4,7 @@
 
     <select id="getList"
             parameterType="String"
-            resultType="faqVO">
+            resultType="faq">
         SELECT /* select - faqMapper.xml : 210916 @eunseo */
             f.FAQ_SEQNO AS faqSeqno
            ,f.FAQ_QUESTION AS faqQuestion

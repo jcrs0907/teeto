@@ -22,7 +22,13 @@ import static com.project.teeto.constant.AppConstant.MAIL_SMTP_AUTH;
 @Service
 public class MailService {
 
-        public boolean sendAuthMail(String email) {
+        /**
+         * 메일 발송
+         * @param email
+         * @param authCode
+         * @return
+         */
+        public boolean sendAuthMail(String email, String authCode) {
             boolean result = false;
             Properties properties = new Properties();
             properties.put("mail.smtp.user", MAIL_SMTP_USER);
@@ -45,7 +51,7 @@ public class MailService {
 
                 Multipart multi = new MimeMultipart();
                 MimeBodyPart mbp = new MimeBodyPart();
-                mbp.setContent("<body><h1>인증번호는 123456 입니다.</h1></body>","text/html; charset=UTF-8");
+                mbp.setContent("<body><h1>인증번호는 [ "+ authCode +" ] 입니다.</h1></body>","text/html; charset=UTF-8");
                 multi.addBodyPart(mbp);
                 msg.setContent(multi);
 
@@ -57,9 +63,12 @@ public class MailService {
             return result;
         }
 
+        /**
+         * 보내는 메일계정
+         */
         private static class senderAccount extends javax.mail.Authenticator {
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(MAIL_SMTP_ID,MAIL_SMTP_PASSWORD);
+                return new PasswordAuthentication(MAIL_SMTP_ID, MAIL_SMTP_PASSWORD);
             }
         }
 
