@@ -17,4 +17,8 @@ public class Auth {
     private String unixTimeApvEndDttm;
     private String certChckYn;
 
+    //인증 체크
+    private String checkCertNo;
+    private String checkApvTime;
+
 }

@@ -1,12 +1,10 @@
 package com.project.teeto.auth;
 
+import com.project.teeto.auth.model.Auth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -31,9 +29,25 @@ public class AuthController {
     @PostMapping(value = "/sendMail", produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public String sendAuthMail(String email) {
+        //TODO 문자발송시 메소드변경, 분기처리
         String result = "";
         authService.sendAuthMail(email);
         result = "{\"process\" : \"send mail success\"}";
+        return result;
+    }
+
+    /**
+     * 인증번호 체크
+     * @param auth
+     * @return
+     */
+    @PostMapping(value = "/checkCertNo", produces = {"application/json;charset=utf-8"})
+    @ResponseBody
+    public boolean checkCertNo(@ModelAttribute Auth auth) {
+        boolean result = false;
+        if(authService.checkCertNo(auth)) {
+            result = true;
+        }
         return result;
     }
 
