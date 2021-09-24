@@ -6,7 +6,7 @@
             parameterType="auth">
         <selectKey keyProperty="apvReqSeqno" resultType="integer" order="BEFORE">
             SELECT TB_AUTH_L_SEQ.nextval FROM DUAL
-        </selectKey>
+        </selectKey> /* select - AuthMapper.xml : 210917 @eunseo */
         INSERT INTO
           TB_AUTH_L (
              APV_REQ_SEQNO
@@ -27,4 +27,39 @@
           )
     </insert>
 
+    <select id="select"
+            parameterType="auth"
+            resultType="auth">
+        SELECT /* select - AuthMapper.xml : 210917 @eunseo */
+            TMST.APV_REQ_SEQNO AS apvReqSeqno
+           ,TMST.CERT_NO AS certNo
+        FROM(
+              SELECT
+                    ROW_NUMBER() OVER(PARTITION BY MST.APV_REQ_TP_VAL ORDER BY MST.CRE_DTTM) AS MST_ROWNUM
+                   ,MST.APV_REQ_SEQNO
+                   ,MST.CERT_NO
+              FROM (
+                      SELECT
+                            A.APV_REQ_SEQNO
+                           ,A.APV_REQ_TP_VAL
+                           ,A.CERT_NO
+                           ,A.CRE_DTTM
+                      FROM TB_AUTH_L A
+                      WHERE A.APV_REQ_TP_VAL = #{apvReqTpVal}
+                      AND A.UNIX_TIME_APV_STRT_DTTM <![CDATA[<]]> #{checkApvTime}
+                      AND A.UNIX_TIME_APV_END_DTTM <![CDATA[>]]> #{checkApvTime}
+                      ORDER BY A.CRE_DTTM DESC
+                    ) MST
+              ) TMST
+        WHERE ROWNUM = 1
+    </select>
+
+    <update id="update"
+            parameterType="auth">
+        UPDATE TB_AUTH_L /* select - AuthMapper.xml : 210917 @eunseo */
+           SET
+               CERT_CHCK_YN = 'Y'
+              ,UPT_DTTM = SYSDATE
+        WHERE APV_REQ_SEQNO = #{apvReqSeqno}
+    </update>
 </mapper>

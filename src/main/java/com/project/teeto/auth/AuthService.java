@@ -77,4 +77,24 @@ public class AuthService {
         authMapper.insert(auth);
 
     }
+
+    @Transactional
+    public boolean checkCertNo(Auth auth) {
+        boolean result = true;
+
+        //유효시간 유닉스타임
+        String unixTime = currentTimeMillis()+"";
+        Timestamp time = new Timestamp(Long.parseLong(unixTime));
+        auth.setCheckApvTime(time.getTime()/1000 +"");
+
+        Auth authRslt = authMapper.select(auth);
+
+        System.out.println(authRslt.getApvReqSeqno());
+        System.out.println(authRslt.getCertNo());
+        if (auth.getCheckCertNo() == null || !auth.getCheckCertNo().equals(authRslt.getCertNo())) {
+            result = false;
+        }
+        authMapper.update(authRslt);
+        return result;
+    }
 }

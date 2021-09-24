@@ -8,4 +8,7 @@ public interface AuthMapper {
 
     void insert(Auth auth);
 
+    Auth select(Auth auth);
+
+    void update(Auth auth);
 }
