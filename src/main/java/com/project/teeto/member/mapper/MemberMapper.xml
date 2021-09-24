@@ -19,6 +19,6 @@
             parameterType="member">
        INSERT INTO TB_MEMBER_L (
             MEM_ID, MEM_NM, MEM_EMAIL, MEM_TEL, MEM_PROFILE_FILE_SEQNO, MEM_TP_CD,  CRE_DTTM)
-        VALUES (#{memId}, #{memNm}, #{memEmail}, #{memTel}, 1, 'MT01', sysdate )
+        VALUES (#{memId}, #{memNm}, #{memEmail}, #{memTel, jdbcType=VARCHAR}, 1, 'MT01', sysdate )
     </insert>
 </mapper>
