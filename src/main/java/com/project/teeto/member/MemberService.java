@@ -11,11 +11,8 @@ public class MemberService {
     MemberMapper memberMapper;
 
     //회원 등록
-    public int insertMember(Member member) {
-//        Member member = new Member();
-//        member.setMemId();
+    public void insertMember(Member member) {
+        member.setMemId("MT-00000001");
         memberMapper.insertMember(member);
-        return 1;
-
     }
 }

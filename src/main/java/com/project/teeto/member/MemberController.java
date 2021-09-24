@@ -5,14 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
-
 public class MemberController {
 
     @Autowired
@@ -27,12 +23,12 @@ public class MemberController {
 
     @PostMapping(value = "/register", produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public String register(Member member) {
+    public String register(@ModelAttribute Member member) {
         String result = "";
 
-        MemberService.insertMember(member);
+        memberService.insertMember(member);
 
-        result = "{\"process\" : \"send mail success\"}";
+        result = "{\"res\" : \"join success\"}";
         return result;
     }
 }

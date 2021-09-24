@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface MemberMapper {
 
     //멤버 인서트
-    //insertMember(Member member);
+    void insertMember(Member member);
 }

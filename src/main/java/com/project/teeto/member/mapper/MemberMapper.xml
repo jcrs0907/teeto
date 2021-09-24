@@ -15,8 +15,10 @@
         <!--INTO TB_MEMBER_L VALUES(MENTEE_ID, MEM_ID, MENTEE_NM, USE_YN,CRE_DTTM) (#{menteeId},#{memNm}, #{menteeNm}, #{useYn}, sysdate);-->
     <!--</insert>-->
 
-    <insert id="insertMember">
-       INSERT INTO TB_MEMBER_L (MEM_ID, MEM_NM, MEM_EMAIL,MEM_TEL, MEM_PROFILE_FILE_SEQNO, MEM_TP_CD, USE_YN, CRE_DTTM)
-        VALUES (#{memId}, #{memNm}, #{memEmail},#{memTel}, #{memProfileFileSeqNo}, #{memTpCd}, #{useYn}, sysdate );
+    <insert id="insertMember"
+            parameterType="member">
+       INSERT INTO TB_MEMBER_L (
+            MEM_ID, MEM_NM, MEM_EMAIL, MEM_TEL, MEM_PROFILE_FILE_SEQNO, MEM_TP_CD,  CRE_DTTM)
+        VALUES (#{memId}, #{memNm}, #{memEmail}, #{memTel}, 1, 'MT01', sysdate )
     </insert>
 </mapper>
