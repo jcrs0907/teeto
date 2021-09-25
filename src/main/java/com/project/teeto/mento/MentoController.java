@@ -14,13 +14,21 @@ public class MentoController {
     @Autowired
     MentoService mentoService;
 
-    @PostMapping
+    //멘토 신청하기 페이지
+    @GetMapping("/applyForm")
+    public String mento(){
+        return "mentoApplyForm";
+    }
+
+    @PostMapping(value = "/apply", produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public boolean insert(@ModelAttribute Mento mento) {
-        boolean result = false;
-        if(mentoService.insert(mento)) {
-            result = true;
-        }
-        return result;
+        return mentoService.insert(mento);
+    }
+
+    @GetMapping("/checkNm")
+    @ResponseBody
+    public boolean checkNm(String mentoNm){
+        return mentoService.checkNm(mentoNm);
     }
 }

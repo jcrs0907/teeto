@@ -18,7 +18,23 @@ public class MentoService {
     public boolean insert(Mento mento) {
         boolean result = false;
 
-        mentoMapper.insert(mento);
+        //멘토 아이디 필요
+        //mento.setMentoId("");
+        int count = mentoMapper.insert(mento);
+        if(count == 1) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    public boolean checkNm(String mentoNm){
+        boolean result = false;
+
+        int count = mentoMapper.checkNm(mentoNm);
+        if(count == 1) {
+            result = true;
+        }
 
         return result;
     }

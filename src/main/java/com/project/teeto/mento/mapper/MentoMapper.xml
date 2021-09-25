@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.teeto.mento.mapper.MentoMapper">
 
+    <!--멘토 생성-->
+    <!--멤버 아이디를 가지고와서 해당 아이디에 닉네임, 전화번호, 소개(선택), 은행, 계좌 추가-->
+    <insert id="insert"
+            parameterType="mento">
+       INSERT INTO TB_MENTO_I (
+            MENTO_ID,MEM_ID, MENTO_NM, MENTO_TEL, MENTO_DSTN, MENTO_BANK, MENTO_ACCOUNT, CRE_DTTM)
+        VALUES (#{mentoId},#{memId}, #{mentoNm}, #{mentoTel}, #{mentoDSTN, jdbcType=VARCHAR}, #{mentoBank}, #{mentoAccount} , sysdate)
+    </insert>
+
+
+    <!--멘토 닉네임 중복 체크-->
+    <select id="checkNm" parameterType="String" resultType="int">
+       SELECT COUNT(*) FROM TB_MENTO_I WHERE MENTO_NM = #{mentoNm}
+    </select>
 </mapper>

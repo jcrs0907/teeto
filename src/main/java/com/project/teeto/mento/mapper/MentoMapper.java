@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface MentoMapper {
 
     int insert(Mento mento);
+
+    int checkNm(String mentoNm);
 }
