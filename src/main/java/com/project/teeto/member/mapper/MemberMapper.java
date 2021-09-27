@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberMapper {
 
-    //멤버 인서트
-    void insertMember(Member member);
+    void insert(Member member);
+
+    int checkEmailUse(String email);
+
+    int checkNickNameUse(String nickName);
 }

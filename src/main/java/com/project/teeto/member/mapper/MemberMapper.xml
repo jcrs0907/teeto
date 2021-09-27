@@ -4,21 +4,47 @@
     <!--적은 닉네임을 가지고와서 멘티 테이블에서 그 닉네임이 있는지 확인-->
     <!--<select id="checkId" parameterType="String" resultType="Integer">-->
 
-    <!--</select>-->
+    <select id="checkEmailUse"
+            parameterType="String"
+            resultType="int">
+       SELECT /* select - MemberMapper.xml : 210925 @eunseo */
+            COUNT(*)
+        FROM TB_MEMBER_L
+       WHERE 1=1
+       AND USE_YN = 'Y'
+       AND MEM_EMAIL = #{email}
+    </select>
 
-    <!--MEMBER_L, MENTEE_L-->
-    <!--<insert id="insertMember">-->
-        <!--INSERT into TB_MEMBER_L-->
-        <!--INSERT ALL-->
-        <!--INTO TB_MEMBER_L (MEM_ID, MEM_NM, MEM_EMAIL,MEM_TEL, MEM_PROFILE_FILE_SEQNO, MEM_TP_CD, USE_YN, CRE_DTTM)-->
-        <!--VALUES (#{memId}, #{memNm}, #{memEmail},#{memTel}, #{memProfileFileSeqNo}, #{memTpCd}, #{useYn}, sysdate )-->
-        <!--INTO TB_MEMBER_L VALUES(MENTEE_ID, MEM_ID, MENTEE_NM, USE_YN,CRE_DTTM) (#{menteeId},#{memNm}, #{menteeNm}, #{useYn}, sysdate);-->
-    <!--</insert>-->
+    <select id="checkNickNameUse"
+            parameterType="String"
+            resultType="int">
+       SELECT /* select - MemberMapper.xml : 210925 @eunseo */
+            COUNT(*)
+        FROM TB_MENTEE_I
+       WHERE 1=1
+       AND USE_YN = 'Y'
+       AND MENTEE_NM = #{nickName}
+    </select>
 
-    <insert id="insertMember"
+    <insert id="insert"
             parameterType="member">
-       INSERT INTO TB_MEMBER_L (
-            MEM_ID, MEM_NM, MEM_EMAIL, MEM_TEL, MEM_PROFILE_FILE_SEQNO, MEM_TP_CD,  CRE_DTTM)
-        VALUES (#{memId}, #{memNm}, #{memEmail}, #{memTel, jdbcType=VARCHAR}, 1, 'MT01', sysdate )
+       INSERT INTO
+        TB_MEMBER_L (
+             MEM_ID
+           , MEM_NM
+           , MEM_EMAIL
+           , MEM_TEL
+           , MEM_PROFILE_FILE_SEQNO
+           , MEM_TP_CD
+           , CRE_DTTM
+        ) VALUES (
+             #{memId}
+           , #{memNm}
+           , #{memEmail}
+           , #{memTel, jdbcType=VARCHAR}
+           , #{memProfileFileSeqno, jdbcType=INTEGER}
+           , 'MT01'
+           , sysdate
+        )
     </insert>
 </mapper>

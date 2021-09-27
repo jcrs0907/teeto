@@ -63,10 +63,14 @@
             dataType: 'json',
             contentType:'application/json',
             success : function (res) {
-                console.log("저장");
+                if(res) {
+                    alert("가입 성공!");
+                }else {
+                    alert("가입 실패!");
+                }
             },
             error: function (xhr) {
-                console.log("실패");
+                console.log("error");
             }
         });
     });

@@ -56,10 +56,26 @@
 
     <update id="update"
             parameterType="auth">
-        UPDATE TB_AUTH_L /* select - AuthMapper.xml : 210917 @eunseo */
+        UPDATE TB_AUTH_L /* update - AuthMapper.xml : 210917 @eunseo */
            SET
                CERT_CHCK_YN = 'Y'
               ,UPT_DTTM = SYSDATE
         WHERE APV_REQ_SEQNO = #{apvReqSeqno}
     </update>
+
+    <insert id="insertLoginInfo"
+            parameterType="auth">
+        INSERT INTO /* insert - AuthMapper.xml : 210925 @eunseo */
+          TB_LOGIN_I (
+             MEM_ID
+            ,LOGIN_ID
+            ,PASSWORD
+            ,CRE_DTTM
+          ) VALUES (
+             #{memId}
+            ,#{loginId}
+            ,#{password}
+            ,SYSDATE
+          )
+    </insert>
 </mapper>

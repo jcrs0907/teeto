@@ -11,4 +11,6 @@ public interface AuthMapper {
     Auth select(Auth auth);
 
     void update(Auth auth);
+
+    void insertLoginInfo(Auth auth);
 }

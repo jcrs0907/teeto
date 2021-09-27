@@ -4,6 +4,7 @@ package com.project.teeto.auth;
 import com.project.teeto.auth.mapper.AuthMapper;
 import com.project.teeto.auth.model.Auth;
 import com.project.teeto.mail.MailService;
+import com.project.teeto.member.model.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,6 +79,11 @@ public class AuthService {
 
     }
 
+    /**
+     * 인증번호 체크
+     * @param auth
+     * @return
+     */
     @Transactional
     public boolean checkCertNo(Auth auth) {
         boolean result = true;
@@ -96,5 +102,18 @@ public class AuthService {
         }
         authMapper.update(authRslt);
         return result;
+    }
+
+    /**
+     * 로그인 정보(회원가입)
+     * @param member
+     */
+    @Transactional
+    public void insertLoginInfo(Member member) {
+        Auth auth = new Auth();
+        auth.setMemId(member.getMemId());
+        auth.setLoginId(member.getMemEmail());
+        auth.setPassword(member.getPassword());
+        authMapper.insertLoginInfo(auth);
     }
 }

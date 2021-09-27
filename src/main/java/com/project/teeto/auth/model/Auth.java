@@ -21,4 +21,9 @@ public class Auth {
     private String checkCertNo;
     private String checkApvTime;
 
+    //로그인
+    private String memId;
+    private String loginId;
+    private String password;
+
 }

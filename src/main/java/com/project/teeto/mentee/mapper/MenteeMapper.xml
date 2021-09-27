@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.teeto.mentee.mapper.MenteeMapper">
+
+    <insert id="insert"
+            parameterType="mentee">
+       INSERT INTO
+        TB_MENTEE_I (
+             MEM_ID
+           , MENTEE_ID
+           , MENTEE_NM
+           , CRE_DTTM
+        ) VALUES (
+             #{memId}
+           , #{menteeId}
+           , #{menteeNm}
+           , sysdate
+        )
+    </insert>
+</mapper>

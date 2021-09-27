@@ -11,6 +11,9 @@ import java.io.File;
 @Setter
 public class Member {
 
+    /**
+     * 회원
+     */
     private String memId;
     private String memNm;
     private String memEmail;
@@ -18,5 +21,12 @@ public class Member {
     private File memImgFile;
     private String memProfileFileSeqno;
     private String memTpCd;
+    private String nickName;
+
+    /**
+     * 로그인정보
+     */
+    private String loginId;
+    private String password;
 
 }
