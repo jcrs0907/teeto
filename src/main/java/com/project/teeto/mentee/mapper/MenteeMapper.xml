@@ -4,6 +4,9 @@
 
     <insert id="insert"
             parameterType="mentee">
+        <selectKey keyProperty="menteeId" resultType="String" order="BEFORE">
+            SELECT FN_PK_GEN('TE') FROM DUAL
+        </selectKey>
        INSERT INTO
         TB_MENTEE_I (
              MEM_ID

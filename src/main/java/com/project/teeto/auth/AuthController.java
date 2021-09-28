@@ -51,4 +51,24 @@ public class AuthController {
         return result;
     }
 
+    /**
+     * 로그인 폼
+     */
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login";
+    }
+
+//    /**
+//     * ajax 로그인
+//     * @param auth
+//     * @return
+//     */
+//    @PostMapping("/ajax/login")
+//    @ResponseBody
+//    public String login(@ModelAttribute Auth auth) {
+//        String result = "";
+////        result = authService.login(auth);
+//    }
+
 }

@@ -66,10 +66,10 @@ public class MemberService {
     public boolean insert(Member member) {
 
         boolean result = false;
-
+        String memId = "";
         try {
-            //TODO 오라클 함수 만들기 전까지는 테스트시 수동 ++
-//            member.setMemId("MT-00000002");
+            memId = memberMapper.selJoinMemId();
+            member.setMemId(memId);
             memberMapper.insert(member);
             authService.insertLoginInfo(member);
             menteeService.insert(member);

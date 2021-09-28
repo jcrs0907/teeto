@@ -19,7 +19,6 @@ public class MenteeService {
     public void insert(Member member) {
         Mentee mentee = new Mentee();
         mentee.setMemId(member.getMemId());
-//        mentee.setMenteeId("MTE-00000001");
         mentee.setMenteeNm(member.getNickName());
 
         menteeMapper.insert(mentee);

@@ -47,4 +47,9 @@
            , sysdate
         )
     </insert>
+
+    <select id="selJoinMemId"
+            resultType="String">
+       SELECT FN_PK_GEN('ME') FROM DUAL
+    </select>
 </mapper>

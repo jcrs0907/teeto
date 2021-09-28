@@ -11,4 +11,6 @@ public interface MemberMapper {
     int checkEmailUse(String email);
 
     int checkNickNameUse(String nickName);
+
+    String selJoinMemId();
 }

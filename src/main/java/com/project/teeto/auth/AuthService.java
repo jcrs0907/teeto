@@ -116,4 +116,13 @@ public class AuthService {
         auth.setPassword(member.getPassword());
         authMapper.insertLoginInfo(auth);
     }
+
+//    /**
+//     * 로그인
+//     * @param auth
+//     * @return
+//     */
+//    public String login(Auth auth) {
+//
+//    }
 }
