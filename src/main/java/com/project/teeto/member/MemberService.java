@@ -4,6 +4,7 @@ import com.project.teeto.auth.AuthService;
 import com.project.teeto.member.mapper.MemberMapper;
 import com.project.teeto.member.model.Member;
 import com.project.teeto.mentee.MenteeService;
+import com.project.teeto.pwd.PwdService;
 import com.project.teeto.terms.TermsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class MemberService {
 
     @Autowired
     TermsService termsService;
+
+    @Autowired
+    PwdService pwdService;
 
     /**
      * 이메일 중복체크
@@ -67,13 +71,20 @@ public class MemberService {
 
         boolean result = false;
         String memId = "";
+        String pwd = "";
         try {
+            //회원ID
             memId = memberMapper.selJoinMemId();
             member.setMemId(memId);
+            //암호화
+            pwd = pwdService.encodePassword(member.getPassword());
+            member.setPassword(pwd);
+
             memberMapper.insert(member);
             authService.insertLoginInfo(member);
             menteeService.insert(member);
             termsService.insertMemTermsInfo(member.getMemId());
+
             result = true;
         }catch (Exception e) {
             e.printStackTrace();

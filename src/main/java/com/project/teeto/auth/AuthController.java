@@ -72,7 +72,7 @@ public class AuthController {
     public boolean login(@ModelAttribute Auth auth, HttpServletRequest req) {
         Auth member = null;
         member = authService.login(auth);
-        if(member != null) {
+        if(member.getMemId() != null) {
             HttpSession session = req.getSession();
             session.setAttribute("member", member);
             return true;

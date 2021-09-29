@@ -5,6 +5,7 @@ import com.project.teeto.auth.mapper.AuthMapper;
 import com.project.teeto.auth.model.Auth;
 import com.project.teeto.mail.MailService;
 import com.project.teeto.member.model.Member;
+import com.project.teeto.pwd.PwdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class AuthService {
 
     @Autowired
     MailService mailService;
+
+    @Autowired
+    PwdService pwdService;
 
     /**
      * 랜덤 인증번호
@@ -123,9 +127,15 @@ public class AuthService {
      * @return
      */
     public Auth login(Auth auth) {
-        Auth member = null;
-        member = authMapper.login(auth);
+        Auth member = new Auth();
+        Auth login = new Auth();
+        login = authMapper.login(auth);
 
+        if(pwdService.matchPassword(auth.getPassword(),login.getPassword())) {
+            member = login;
+            member.setMemId(login.getMemId());
+            member.setMemTpCd(login.getMemTpCd());
+        }
         return member;
     }
 }

@@ -39,6 +39,27 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!--&lt;!&ndash;스프링시큐리티 web 라이브러리&ndash;&gt;-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.security</groupId>-->
+			<!--<artifactId>spring-security-web</artifactId>-->
+		<!--</dependency>-->
+		<!--&lt;!&ndash;스프링시큐리티 core 라이브러리&ndash;&gt;-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.security</groupId>-->
+			<!--<artifactId>spring-security-core</artifactId>-->
+		<!--</dependency>-->
+		<!--&lt;!&ndash;스프링시큐리티 config 라이브러리&ndash;&gt;-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.security</groupId>-->
+			<!--<artifactId>spring-security-config</artifactId>-->
+		<!--</dependency>-->
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
