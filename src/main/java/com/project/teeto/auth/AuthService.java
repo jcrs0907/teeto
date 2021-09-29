@@ -14,8 +14,8 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Random;
 
-import static java.lang.System.currentTimeMillis;
 import static com.project.teeto.constant.AppConstant.AUTH_TP_CD_EMAIL;
+import static java.lang.System.currentTimeMillis;
 
 @Slf4j
 @Service
@@ -117,12 +117,15 @@ public class AuthService {
         authMapper.insertLoginInfo(auth);
     }
 
-//    /**
-//     * 로그인
-//     * @param auth
-//     * @return
-//     */
-//    public String login(Auth auth) {
-//
-//    }
+    /**
+     * 로그인
+     * @param auth
+     * @return
+     */
+    public Auth login(Auth auth) {
+        Auth member = null;
+        member = authMapper.login(auth);
+
+        return member;
+    }
 }

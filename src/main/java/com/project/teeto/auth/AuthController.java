@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @Controller
 @RequestMapping("auth")
@@ -59,16 +62,23 @@ public class AuthController {
         return "login";
     }
 
-//    /**
-//     * ajax 로그인
-//     * @param auth
-//     * @return
-//     */
-//    @PostMapping("/ajax/login")
-//    @ResponseBody
-//    public String login(@ModelAttribute Auth auth) {
-//        String result = "";
-////        result = authService.login(auth);
-//    }
+    /**
+     * ajax 로그인
+     * @param auth
+     * @return
+     */
+    @PostMapping("/login")
+    @ResponseBody
+    public boolean login(@ModelAttribute Auth auth, HttpServletRequest req) {
+        Auth member = null;
+        member = authService.login(auth);
+        if(member != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("member", member);
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }

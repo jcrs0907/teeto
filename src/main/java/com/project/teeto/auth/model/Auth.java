@@ -23,6 +23,7 @@ public class Auth {
 
     //로그인
     private String memId;
+    private String memTpCd;
     private String loginId;
     private String password;
 
