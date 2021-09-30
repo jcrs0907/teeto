@@ -28,7 +28,7 @@
 
     <insert id="insert"
             parameterType="member">
-       INSERT INTO
+       INSERT INTO /* insert - MemberMapper.xml : 210927 @eunseo */
         TB_MEMBER_L (
              MEM_ID
            , MEM_NM
@@ -44,12 +44,55 @@
            , #{memTel, jdbcType=VARCHAR}
            , #{memProfileFileSeqno, jdbcType=INTEGER}
            , 'MT01'
-           , sysdate
+           , SYSDATE
         )
     </insert>
 
     <select id="selJoinMemId"
             resultType="String">
-       SELECT FN_PK_GEN('ME') FROM DUAL
+       SELECT FN_PK_GEN('ME') FROM DUAL /* select - MemberMapper.xml : 210928 @eunseo */
     </select>
+
+    <select id="selMemPwd"
+            parameterType="String"
+            resultType="String">
+       SELECT /* select - MemberMapper.xml : 210930 @eunseo */
+             PASSWORD
+       FROM TB_LOGIN_I
+       WHERE 1=1
+       AND USE_YN = 'Y'
+       AND MEM_ID = #{memId}
+    </select>
+
+    <insert id="insertSecInfo"
+            parameterType="member">
+        <selectKey keyProperty="secessionSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_MEM_SECESSION_I_SEQ.nextval FROM DUAL
+        </selectKey>
+       INSERT INTO /* insert - MemberMapper.xml : 210930 @eunseo */
+        TB_MEM_SECESSION_I (
+             SECESSION_SEQNO
+            ,MEM_ID
+            ,SECESSION_TP_CD
+            ,SECESSION_REASON
+            ,SECESSION_DATE
+            ,CRE_DTTM
+        ) VALUES (
+             #{secessionSeqno}
+            ,#{memId}
+            ,#{secessionTpCd}
+            ,#{secessionReason, jdbcType=VARCHAR}
+            ,SYSDATE
+            ,SYSDATE
+        )
+    </insert>
+
+    <update id="delete"
+            parameterType="member">
+        UPDATE /* update - MemberMapper.xml : 210930 @eunseo */
+               TB_MEMBER_L
+        SET  USE_YN = 'N'
+            ,UPT_DTTM = SYSDATE
+        WHERE MEM_ID = #{memId}
+    </update>
 </mapper>

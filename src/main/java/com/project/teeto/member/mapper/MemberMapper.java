@@ -13,4 +13,10 @@ public interface MemberMapper {
     int checkNickNameUse(String nickName);
 
     String selJoinMemId();
+
+    String selMemPwd(String memId);
+
+    void insertSecInfo(Member member);
+
+    void delete(Member member);
 }

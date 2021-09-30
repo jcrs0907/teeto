@@ -91,4 +91,24 @@ public class MemberService {
         }
         return result;
     }
+
+
+    public boolean delete(Member member) {
+        boolean result = false;
+        String pwd = "";
+
+        pwd = memberMapper.selMemPwd(member.getMemId());
+
+        //비번체크
+        if(pwdService.matchPassword(member.getPassword(), pwd)) {
+            //TODO 추후 관련 테이블 DB변경 필요
+            //탈퇴정보
+            memberMapper.insertSecInfo(member);
+            //회원
+            memberMapper.delete(member);
+            result = true;
+        }
+
+        return result;
+    }
 }

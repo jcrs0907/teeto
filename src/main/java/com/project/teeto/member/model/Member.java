@@ -23,10 +23,19 @@ public class Member {
     private String memTpCd;
     private String nickName;
 
+
     /**
      * 로그인정보
      */
     private String loginId;
     private String password;
+
+
+    /**
+     * 탈퇴
+     */
+    private int secessionSeqno;
+    private String secessionTpCd;
+    private String secessionReason;
 
 }

@@ -54,4 +54,11 @@ public class MemberController {
     public boolean register(@ModelAttribute Member member) {
         return memberService.insert(member);
     }
+
+    @PostMapping("/secession")
+    @ResponseBody
+    public boolean secession(@ModelAttribute Member member) {
+        return memberService.delete(member);
+    }
+
 }
