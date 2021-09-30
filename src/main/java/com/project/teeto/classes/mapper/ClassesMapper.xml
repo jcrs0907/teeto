@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.teeto.classes.mapper.ClassesMapper">
+
+    <insert id="insertClass" parameterType="classes">
+       INSERT INTO TB_CLASS_L (
+        CLASS_ID,
+        MENTO_ID,
+        CLASS_CTGR_CD,
+        CLASS_DETAIL_CTGR_CD,
+        CLASS_NM,
+        CLASS_FILE_SEQNO,
+        CLASS_TITLE,
+        CLASS_DSTN,
+        CLASS_STRT_DATE,
+        CLASS_STRT_TIME,
+        CLASS_DRTN_TIME,
+        CLASS_CURRENT_MTE,
+        CLASS_MAX_MTE,
+        CLASS_PLACE,
+        CLASS_CHARGE,
+        CRE_DTTM
+
+       ) VALUES(
+        #{classId},
+        #{mentoId},
+        #{classCtgrCd},
+        #{classDetailCtgrCd},
+        #{classNm},
+        #{classFileSeqno, jdbcType=INTEGER},
+        #{classTitle},
+        #{classDstn},
+        TO_DATE(#{classStrtDate},'YYYY-MM-DD'),
+        #{classStrtTime},
+        #{classDrtnTime},
+        #{classCurrentMte},
+        #{classMaxMte},
+        #{classPlace},
+        #{classCharge},
+        sysdate
+       )
+    </insert>
+ <!--<insert id="insertClassProcess" parameterType="classes">-->
+  <!--INSERT INTO TB_CLASS_PROCESS_L (-->
+        <!--CLASS_PROCESS_SEQNO,-->
+        <!--CLASS_ID,-->
+        <!--CLASS_PROCESS_TITLE,-->
+        <!--CLASS_PROCESS_DESC,-->
+        <!--USE_YN,-->
+        <!--CRE_DTTM-->
+       <!--) VALUES-->
+  <!--<foreach collection="classes" item="item" separator=" , " >-->
+   <!--(-->
+   <!--#{classProcessSeqno},-->
+   <!--#{item.classProcessTitle},-->
+   <!--#{item.classProcessDesc},-->
+   <!--#{useYn},-->
+    <!--sysdate-->
+   <!--)-->
+  <!--</foreach>-->
+ <!--</insert>-->
+ <!--<insert id="insertClassDetail" parameterType="classes">-->
+      <!--INSERT INTO TB_CLASS_DETAIL_L (-->
+       <!--CLASS_DETAIL_SEQNO,-->
+       <!--CLASS_DETAIL_TITLE,-->
+       <!--CLASS_DETAIL_FILE_SEQNO,-->
+       <!--USE_YN,-->
+       <!--CRE_DTTM-->
+      <!--) VALUES-->
+     <!--<foreach collection="classes" item="item" separator=" , " >-->
+      <!--(-->
+      <!--#{classDetailSeqno},-->
+      <!--#{classDetailTitle},-->
+      <!--#{classDetailFileSeqno},-->
+      <!--#{useYn},-->
+      <!--sysdate-->
+      <!--)-->
+     <!--</foreach>-->
+ <!--</insert>-->
+</mapper>
