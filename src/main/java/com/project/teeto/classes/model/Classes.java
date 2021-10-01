@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 public class Classes {
     //클래스 신청하기
-    //클래스 카테고리에 카테고리 데이터 넣기
     //TB_CLASS
     private String classId;
     private String mentoId;
@@ -47,8 +46,6 @@ public class Classes {
 
     //클래스 프로세스 리스트 생성
     private List<Classes> classesProcessList;
-
-
 
     //클래스 디테일 리스트 생성
     private List<Classes> classesDetailList;

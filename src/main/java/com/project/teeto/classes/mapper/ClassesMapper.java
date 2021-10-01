@@ -7,7 +7,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface ClassesMapper {
-
     void insertClass(Classes classes);
+    String selClassId();
+
+    void insertClassProcess(Classes classes);
+    void insertClassDetail(Classes classes);
+
 
 }

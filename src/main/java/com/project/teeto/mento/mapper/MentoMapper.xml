@@ -6,6 +6,9 @@
     <!--멤버 아이디를 가지고와서 해당 아이디에 닉네임, 전화번호, 소개(선택), 은행, 계좌 추가-->
     <insert id="insert"
             parameterType="mento">
+        <selectKey keyProperty="mentoId" resultType="String" order="BEFORE">
+            SELECT FN_PK_GEN('TO') FROM DUAL
+        </selectKey>
        INSERT INTO TB_MENTO_I (
             MENTO_ID,MEM_ID, MENTO_NM, MENTO_TEL, MENTO_DSTN, MENTO_BANK, MENTO_ACCOUNT, CRE_DTTM)
         VALUES (#{mentoId},#{memId}, #{mentoNm}, #{mentoTel}, #{mentoDSTN, jdbcType=VARCHAR}, #{mentoBank}, #{mentoAccount} , sysdate)

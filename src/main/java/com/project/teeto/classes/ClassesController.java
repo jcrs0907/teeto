@@ -19,4 +19,6 @@ public class ClassesController {
     public boolean apply(@ModelAttribute Classes classes) {
         return classesService.insert(classes);
     }
+
+
 }

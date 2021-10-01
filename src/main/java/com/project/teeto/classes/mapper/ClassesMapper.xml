@@ -40,41 +40,44 @@
         sysdate
        )
     </insert>
- <!--<insert id="insertClassProcess" parameterType="classes">-->
-  <!--INSERT INTO TB_CLASS_PROCESS_L (-->
-        <!--CLASS_PROCESS_SEQNO,-->
-        <!--CLASS_ID,-->
-        <!--CLASS_PROCESS_TITLE,-->
-        <!--CLASS_PROCESS_DESC,-->
-        <!--USE_YN,-->
-        <!--CRE_DTTM-->
-       <!--) VALUES-->
-  <!--<foreach collection="classes" item="item" separator=" , " >-->
-   <!--(-->
-   <!--#{classProcessSeqno},-->
-   <!--#{item.classProcessTitle},-->
-   <!--#{item.classProcessDesc},-->
-   <!--#{useYn},-->
-    <!--sysdate-->
-   <!--)-->
-  <!--</foreach>-->
- <!--</insert>-->
- <!--<insert id="insertClassDetail" parameterType="classes">-->
-      <!--INSERT INTO TB_CLASS_DETAIL_L (-->
-       <!--CLASS_DETAIL_SEQNO,-->
-       <!--CLASS_DETAIL_TITLE,-->
-       <!--CLASS_DETAIL_FILE_SEQNO,-->
-       <!--USE_YN,-->
-       <!--CRE_DTTM-->
-      <!--) VALUES-->
-     <!--<foreach collection="classes" item="item" separator=" , " >-->
-      <!--(-->
-      <!--#{classDetailSeqno},-->
-      <!--#{classDetailTitle},-->
-      <!--#{classDetailFileSeqno},-->
-      <!--#{useYn},-->
-      <!--sysdate-->
-      <!--)-->
-     <!--</foreach>-->
- <!--</insert>-->
+    <select id="selClassId" resultType="String">
+   SELECT FN_PK_GEN('CS') FROM DUAL
+    </select>
+ <insert id="insertClassProcess" parameterType="classes">
+     <selectKey keyProperty="classProcessSeqno" resultType="integer" order="BEFORE">
+         SELECT TB_CLASS_P_SEQ.nextval FROM DUAL
+     </selectKey>
+    INSERT INTO TB_CLASS_PROCESS_L (
+        CLASS_PROCESS_SEQNO,
+        CLASS_ID,
+        CLASS_PROCESS_TITLE,
+        CLASS_PROCESS_DESC,
+        CRE_DTTM
+       ) VALUES(
+   #{classProcessSeqno},
+   #{classId},
+   #{classProcessTitle},
+   #{classProcessDesc},
+    sysdate
+   )
+ </insert>
+ <insert id="insertClassDetail" parameterType="classes">
+     <selectKey keyProperty="classDetailSeqno" resultType="integer" order="BEFORE">
+         SELECT TB_CLASS_D_SEQ.nextval FROM DUAL
+     </selectKey>
+      INSERT INTO TB_CLASS_DETAIL_L (
+       CLASS_DETAIL_SEQNO,
+       CLASS_ID,
+       CLASS_DETAIL_TITLE,
+       CLASS_DETAIL_FILE_SEQNO,
+       CRE_DTTM
+      )VALUES(
+      #{classDetailSeqno},
+      #{classId},
+      #{classDetailTitle},
+      #{classDetailFileSeqno},
+      sysdate
+      )
+ </insert>
+
 </mapper>
