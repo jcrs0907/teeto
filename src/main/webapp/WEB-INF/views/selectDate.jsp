@@ -6,6 +6,15 @@
     <title>$Title$</title>
 </head>
 <body>
-asdfasdf
+<c:forEach var="c" items="${classList}">
+    <tr>
+            ${c.classId}
+            ${c.mentoId}
+            ${c.classCtgrCd}
+            ${c.classDetailCtgrCd}
+            ${c.classNm}
+            ${c.classFileSeqno}
+    </tr>
+</c:forEach>
 </body>
 </html>

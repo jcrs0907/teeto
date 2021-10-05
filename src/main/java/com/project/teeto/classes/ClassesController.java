@@ -21,14 +21,13 @@ public class ClassesController {
     }
 
     @GetMapping("/dateSelect/{startDate}/{endDate}")
-    @ResponseBody
     public String selectDateClassList(
             @PathVariable String startDate,
             @PathVariable String endDate,
             Model model) {
 
         model.addAttribute("classList",classesService.selectDateClass(startDate,endDate));
-        return "faq";
+        return "selectDate";
     }
 
 }
