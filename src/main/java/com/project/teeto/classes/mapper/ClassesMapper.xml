@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.teeto.classes.mapper.ClassesMapper">
-<!--insert: 클래스 신청하-->
+<!--insert: 클래스 신청하기-->
     <insert id="insertClass" parameterType="classes" >
        INSERT INTO TB_CLASS_L (
         CLASS_ID,
@@ -88,12 +88,12 @@ SELECT
        ,C.CLASS_CTGR_CD AS classCtgrCd
        ,C.CLASS_DETAIL_CTGR_CD AS classDetailCtgrCd
        ,C.CLASS_NM AS classNm
-       ,CLASS_FILE_SEQNO AS classFileSeqno
+       ,C.CLASS_FILE_SEQNO AS classFileSeqno
         FROM TB_CLASS_L C
         WHERE
-        CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE('#{classStrtDate}', 'YYYYMMDD')
+        CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')
         AND
-        CLASS_STRT_DATE <![CDATA[ <=]]>  TO_DATE('#{searchEndDate}')
+        CLASS_STRT_DATE <![CDATA[ <=]]>  TO_DATE(#{searchEndDate}, 'YYYYMMDD')
         ORDER BY CLASS_STRT_DATE DESC
 </select>
 </mapper>

@@ -53,8 +53,8 @@ public class ClassesService {
 
 
     public List<Classes> selectDateClass(String startDate, String endDate) {
-
-        classes.setClassStrtDate(startDate);
+        Classes classes = new Classes();
+        classes.setSearchStartDate(startDate);
         classes.setSearchEndDate(endDate);
         List<Classes> classList = classesMapper.selectDateClass(classes);
         return classList;

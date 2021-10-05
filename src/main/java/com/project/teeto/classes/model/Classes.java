@@ -52,5 +52,6 @@ public class Classes {
     private List<Classes> classesDetailList;
 
     //클래스 날짜별 검색
+    private String searchStartDate;
     private String searchEndDate;
 }

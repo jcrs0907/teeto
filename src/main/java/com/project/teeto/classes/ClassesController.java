@@ -28,7 +28,7 @@ public class ClassesController {
             Model model) {
 
         model.addAttribute("classList",classesService.selectDateClass(startDate,endDate));
-        return "selectDate";
+        return "faq";
     }
 
 }
