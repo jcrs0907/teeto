@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
 import java.util.List;
+import java.util.Date;
 
 @Alias("classes")
 @Getter
@@ -49,4 +50,7 @@ public class Classes {
 
     //클래스 디테일 리스트 생성
     private List<Classes> classesDetailList;
+
+    //클래스 날짜별 검색
+    private String searchEndDate;
 }

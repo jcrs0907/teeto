@@ -4,8 +4,10 @@ import com.project.teeto.classes.mapper.ClassesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.teeto.classes.model.Classes;
+import java.text.SimpleDateFormat;
 
 import java.util.List;
+import java.util.Date;
 
 
 @Service
@@ -47,6 +49,15 @@ public class ClassesService {
 
         //클래스 상세 테이블
         return result;
+    }
+
+
+    public List<Classes> selectDateClass(String startDate, String endDate) {
+
+        classes.setClassStrtDate(startDate);
+        classes.setSearchEndDate(endDate);
+        List<Classes> classList = classesMapper.selectDateClass(classes);
+        return classList;
     }
 
 }
