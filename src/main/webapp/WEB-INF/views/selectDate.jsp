@@ -9,11 +9,11 @@
 <c:forEach var="c" items="${classList}">
     <tr>
             ${c.classId}
-            ${c.mentoId}
-            ${c.classCtgrCd}
-            ${c.classDetailCtgrCd}
+            ${c.mentoNm}
+            ${c.classCtgrCdNm}
+            ${c.classHrgkCtgrCdNm}
             ${c.classNm}
-            ${c.classFileSeqno}
+            ${c.likeCnt}
     </tr>
 </c:forEach>
 </body>

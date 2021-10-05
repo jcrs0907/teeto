@@ -43,6 +43,7 @@ public class Classes {
     //TB_CLASS_CATEGORY_L
     private String classHgrkCtgrCd;
     private String classCtgrCdNm;
+    private String classHrgkCtgrCdNm;
     private String srtSeq;
 
     //클래스 프로세스 리스트 생성
@@ -54,4 +55,7 @@ public class Classes {
     //클래스 날짜별 검색
     private String searchStartDate;
     private String searchEndDate;
+    private String mentoNm;
+    private String likeCnt;
+
 }
