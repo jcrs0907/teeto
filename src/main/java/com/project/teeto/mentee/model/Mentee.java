@@ -8,9 +8,10 @@ import org.apache.ibatis.type.Alias;
 @Getter
 @Setter
 public class Mentee {
-
+    private int classLikeSeqno;
     private String memId;
     private String menteeId;
     private String menteeNm;
+    private String classId;
 
 }

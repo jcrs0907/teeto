@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface MenteeMapper {
 
     void insert(Mentee mentee);
+    void likeClass(Mentee mentee);
 }

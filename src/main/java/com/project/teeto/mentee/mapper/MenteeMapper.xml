@@ -20,4 +20,22 @@
            , sysdate
         )
     </insert>
+
+    <insert id="likeClass" parameterType="mentee">
+        <selectKey keyProperty="classLikeSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_MENTEE_CLASS_LIKE_L_SEQ.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO
+        TB_MENTEE_CLASS_LIKE_L (
+        CLASS_LIKE_SEQNO
+        , MENTEE_ID
+        , CLASS_ID
+        , CRE_DTTM
+        ) VALUES (
+         #{classLikeSeqno}
+        , #{menteeId}
+        , #{classId}
+        , sysdate
+        )
+    </insert>
 </mapper>
