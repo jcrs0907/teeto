@@ -17,8 +17,11 @@ public interface ClassesMapper {
     void insertClassDetail(Classes classes);
     String selClassId();
 
-    //클래스 목록 출력
+    //클래스 날짜별 목록 출력
     List<Classes> selectDateClass(Classes classes);
+
+    //클래스 찜별 목록 출력
+    List<Classes> selectLikeClass();
 
 
 }

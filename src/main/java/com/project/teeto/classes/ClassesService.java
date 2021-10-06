@@ -45,13 +45,12 @@ public class ClassesService {
             classesMapper.insertClassDetail(cl);
         }
 
-
-
         //클래스 상세 테이블
         return result;
     }
 
 
+    //날짜별 검색
     public List<Classes> selectDateClass(String startDate, String endDate) {
         Classes classes = new Classes();
         classes.setSearchStartDate(startDate);
@@ -59,5 +58,13 @@ public class ClassesService {
         List<Classes> classList = classesMapper.selectDateClass(classes);
         return classList;
     }
+
+    //인기있는 클래스
+    public List<Classes> selectLikeClass(){
+        List<Classes> likeClassList = classesMapper.selectLikeClass();
+        return likeClassList;
+    }
+
+    //카테고리별 클래스
 
 }
