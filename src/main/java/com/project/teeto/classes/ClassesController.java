@@ -40,5 +40,10 @@ public class ClassesController {
     }
 
     //클래스 카테고리 검색하기
+    @GetMapping("/categorySelect/{categoryCd}")
+    public String selectCategoryClassList(@PathVariable String categoryCd, Model model) {
+        model.addAttribute("categoryClassList",classesService.selectCategoryClass(categoryCd));
+        return "selectCategory";
+    }
 
 }

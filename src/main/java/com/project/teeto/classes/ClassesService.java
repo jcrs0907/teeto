@@ -66,5 +66,10 @@ public class ClassesService {
     }
 
     //카테고리별 클래스
+    public List<Classes> selectCategoryClass(String categoryCd){
+        List<Classes> categoryClassList = classesMapper.selectCategoryClass(categoryCd);
+        return categoryClassList;
+    }
+
 
 }

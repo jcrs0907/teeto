@@ -1,7 +1,6 @@
 package com.project.teeto.classes.mapper;
 
 import com.project.teeto.classes.model.Classes;
-import com.project.teeto.faq.model.Faq;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,5 +22,7 @@ public interface ClassesMapper {
     //클래스 찜별 목록 출력
     List<Classes> selectLikeClass();
 
+    //클래스 카테고리별 목록 출력
+    List<Classes> selectCategoryClass(String categoryCd);
 
 }
