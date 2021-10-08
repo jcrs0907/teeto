@@ -81,4 +81,14 @@ public class AuthController {
         }
     }
 
+    /**
+     * 비밀번호 체크
+     * @param auth
+     * @return
+     */
+    @PostMapping("/checkPwd")
+    @ResponseBody
+    public boolean checkPwd(@ModelAttribute Auth auth) {
+        return authService.checkPwd(auth);
+    }
 }

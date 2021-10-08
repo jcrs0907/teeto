@@ -94,4 +94,15 @@
         AND L.LOGIN_ID = #{loginId}
         AND M.USE_YN = 'Y'
     </select>
+
+    <select id="selectPassword"
+            parameterType="String"
+            resultType="String">
+        SELECT /* select - AuthMapper.xml : 211008 @eunseo */
+               PASSWORD AS password
+        FROM TB_LOGIN_I
+        WHERE 1=1
+        AND USE_YN = 'Y'
+        AND MEM_ID = #{memId}
+    </select>
 </mapper>

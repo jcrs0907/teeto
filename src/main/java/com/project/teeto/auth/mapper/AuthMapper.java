@@ -15,4 +15,6 @@ public interface AuthMapper {
     void insertLoginInfo(Auth auth);
 
     Auth login(Auth auth);
+
+    String selectPassword(String memId);
 }

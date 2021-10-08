@@ -138,4 +138,21 @@ public class AuthService {
         }
         return member;
     }
+
+    /**
+     * 비밀번호 체크
+     * @param auth
+     * @return
+     */
+    public boolean checkPwd(Auth auth) {
+        boolean result = false;
+        String pwd = authMapper.selectPassword(auth.getMemId());
+        if(pwd != null && !pwd.equals("")) {
+            if(pwdService.matchPassword(auth.getPassword(), pwd)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
 }
