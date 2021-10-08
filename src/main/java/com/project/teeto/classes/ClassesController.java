@@ -46,4 +46,12 @@ public class ClassesController {
         return "selectCategory";
     }
 
+    //클래스 수정
+    @PostMapping(value = "/update", produces = {"application/json;charset=utf-8"})
+    @ResponseBody
+    public boolean update(@ModelAttribute Classes classes) {
+        return classesService.update(classes);
+    }
+
+
 }

@@ -25,4 +25,10 @@ public interface ClassesMapper {
     //클래스 카테고리별 목록 출력
     List<Classes> selectCategoryClass(String categoryCd);
 
+    //클래스 수정하기
+    void updateClass(Classes classes);
+    void updateClassProcess(Classes classes);
+    void updateClassDetail(Classes classes);
+
+
 }

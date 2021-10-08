@@ -15,7 +15,6 @@
         CLASS_STRT_DATE,
         CLASS_STRT_TIME,
         CLASS_DRTN_TIME,
-        CLASS_CURRENT_MTE,
         CLASS_MAX_MTE,
         CLASS_PLACE,
         CLASS_CHARGE,
@@ -33,7 +32,6 @@
         TO_DATE(#{classStrtDate},'YYYY-MM-DD'),
         #{classStrtTime},
         #{classDrtnTime},
-        #{classCurrentMte},
         #{classMaxMte},
         #{classPlace},
         #{classCharge},
@@ -137,4 +135,57 @@
     AND C.CLASS_CTGR_CD = #{classCtgrCd}
     ORDER BY C.CRE_DTTM DESC
 </select>
+
+<update id="updateClass" parameterType="classes">
+UPDATE TB_CLASS_L
+    set
+        CLASS_CTGR_CD=#{classCtgrCd},
+        CLASS_DETAIL_CTGR_CD=#{classDetailCtgrCd},
+        CLASS_NM=#{classNm},
+        CLASS_FILE_SEQNO=#{classFileSeqno, jdbcType=INTEGER},
+        CLASS_TITLE=#{classTitle},
+        CLASS_DSTN=#{classDstn},
+        CLASS_STRT_DATE=#{classStrtDate},
+        CLASS_STRT_TIME=TO_DATE(#{classStrtDate},'YYYY-MM-DD'),
+        CLASS_DRTN_TIME=#{classDrtnTime},
+        CLASS_MAX_MTE=#{classMaxMte},
+        CLASS_PLACE=#{classPlace},
+        CLASS_CHARGE=#{classCharge},
+        UPT_DTTM=#{uptDttm, jdbcType=DATE}
+       where CLASS_ID=#{classId}
+
+</update>
+<update id="updateClassDetail" parameterType="classes">
+UPDATE TB_CLASS_DETAIL_L
+ set
+    <if test='classDetailTitle !=null  and !classDetailTitle.equals(" ")'>
+        CLASS_DETAIL_TITLE
+        =
+        #{classDetailTitle},
+    </if>
+    <if test='classDetailFileSeqno !=null'>
+        CLASS_DETAIL_FILE_SEQNO
+        =
+        #{classDetailFileSeqno},
+    </if>
+    UPT_DTTM=#{uptDttm}
+    WHERE CLASS_ID=#{classId}
+</update>
+<update id="updateClassProcess" parameterType="classes">
+UPDATE TB_CLASS_PROCESS_L
+ set
+    <if test='classProcessTitle !=null  and !classProcessTitle.equals(" ")'>
+        CLASS_PROCESS_TITLE
+        =
+        #{classProcessTitle},
+    </if>
+    <if test='classProcessDesc !=null  and !classProcessDesc.equals(" ")'>
+        CLASS_PROCESS_DESC =
+        #{classProcessDesc},
+    </if>
+    UPT_DTTM =
+    #{uptDttm}
+    WHERE CLASS_ID=#{classId}
+
+</update>
 </mapper>

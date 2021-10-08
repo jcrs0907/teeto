@@ -3,6 +3,7 @@ package com.project.teeto.classes.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Date;
@@ -18,25 +19,28 @@ public class Classes {
     private String classCtgrCd;
     private String classDetailCtgrCd;
     private String classNm;
-    private int classFileSeqno;
+    private Integer classFileSeqno;
     private String classTitle;
     private String classDstn;
     private String classStrtDate;
     private String classStrtTime;
     private String classDrtnTime;
-    private String classCurrentMte;
-    private String classMaxMte;
+    private Integer classCurrentMte;
+    private Integer classMaxMte;
     private String classPlace;
     private String classCharge;
     private String classEndYn;
+    private MultipartFile classFile;
+    private Date creDttm;
+    private Date uptDttm;
 
     //TB_CLASS_PROCESS_L
-    private int classProcessSeqno;
+    private Integer classProcessSeqno;
     private String classProcessTitle;
     private String classProcessDesc;
 
     //TB_CLASS_DETAIL_L
-    private int classDetailSeqno;
+    private Integer classDetailSeqno;
     private String classDetailTitle;
     private String classDetailFileSeqno;
 
@@ -57,5 +61,11 @@ public class Classes {
     private String searchEndDate;
     private String mentoNm;
     private String likeCnt;
+
+    //클래스 프로세스 업데이트 여부
+    private String classProcessUpdateYn;
+
+    //클래스 디테일 업데이트 여부
+    private String classDetailUpdateYn;
 
 }
