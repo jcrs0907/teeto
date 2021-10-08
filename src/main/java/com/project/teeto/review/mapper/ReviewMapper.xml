@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.teeto.review.mapper.ReviewMapper">
+
+    <insert id="insert"
+            parameterType="review">
+        <selectKey keyProperty="rvwSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_REVIEW_L_SEQ.nextval FROM DUAL
+        </selectKey>
+       INSERT INTO /* select - ReviewMapper.xml : 211005 @eunseo */
+        TB_REVIEW_L (
+            RVW_SEQNO
+           ,MENTEE_ID
+           ,CLASS_ID
+           ,RVW_TITLE
+           ,RVW_CTT
+           ,RVW_SCOR
+           ,CRE_DTTM
+        ) VALUES (
+            #{rvwSeqno}
+           ,#{menteeId}
+           ,#{classId}
+           ,#{rvwTitle}
+           ,#{rvwCtt}
+           ,#{rvwScor}
+           ,SYSDATE
+        )
+    </insert>
+
+    <select id="select"
+            parameterType="String"
+            resultType="review">
+        SELECT /* select - ReviewMapper.xml : 211005 @eunseo */
+               R.RVW_SEQNO AS rvwSeqno
+              ,TMI.MENTEE_NM AS menteeNm
+              ,R.RVW_TITLE AS rvwTitle
+              ,R.RVW_CTT AS rvwCtt
+              ,R.RVW_SCOR AS rvwScor
+              ,R.REPLY_YN AS replyYn
+        FROM TB_REVIEW_L R
+        LEFT OUTER JOIN TB_MENTEE_I TMI ON R.MENTEE_ID = TMI.MENTEE_ID
+        WHERE CLASS_ID = #{classId}
+    </select>
+
+    <update id="update"
+            parameterType="review">
+        UPDATE TB_REVIEW_L /* update - ReviewMapper.xml : 211006 @eunseo */
+        SET  RVW_TITLE = #{rvwTitle}
+            ,RVW_CTT = #{rvwCtt}
+            ,RVW_SCOR = #{rvwScor}
+            ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND RVW_SEQNO = #{rvwSeqno}
+    </update>
+
+    <update id="delete"
+            parameterType="int">
+        UPDATE TB_REVIEW_L /* update - ReviewMapper.xml : 211006 @eunseo */
+        SET USE_YN = 'N'
+           ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND RVW_SEQNO = #{rvwSeqno}
+    </update>
+
+    <update id="updateReplyYn"
+            parameterType="review">
+        UPDATE TB_REVIEW_L /* update - ReviewMapper.xml : 211007 @eunseo */
+        SET REPLY_YN = #{replyYn}
+           ,UPT_DTTM = SYSDATE
+        WHERE RVW_SEQNO = #{rvwSeqno}
+    </update>
+</mapper>

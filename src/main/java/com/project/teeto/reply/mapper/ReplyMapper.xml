@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.teeto.reply.mapper.ReplyMapper">
+
+    <select id="select"
+            parameterType="int"
+            resultType="reply">
+        SELECT /* select - ReplyMapper.xml : 211006 @eunseo */
+               T.MENTO_NM AS mentoNm
+              ,T.MENTO_ID AS mentoId
+              ,R.REPLY_SEQNO AS replySeqno
+              ,R.REPLY_CTT AS replyCtt
+              ,TO_CHAR(R.CRE_DTTM) AS creDttm
+        FROM TB_REPLY_L R
+        LEFT OUTER JOIN TB_MENTO_I T ON R.MENTO_ID = T.MENTO_ID
+        WHERE RVW_SEQNO = #{rvwSeqno}
+    </select>
+
+    <insert id="insert"
+            parameterType="reply">
+        <selectKey keyProperty="replySeqno" resultType="integer" order="BEFORE">
+        SELECT TB_REPLY_L_SEQ.nextval FROM DUAL
+        </selectKey>
+       INSERT INTO /* insert - ReplyMapper.xml : 211006 @eunseo */
+        TB_REPLY_L (
+            REPLY_SEQNO
+           ,RVW_SEQNO
+           ,MENTO_ID
+           ,REPLY_CTT
+           ,CRE_DTTM
+        ) VALUES (
+            #{replySeqno}
+           ,#{rvwSeqno}
+           ,#{mentoId}
+           ,#{replyCtt}
+           ,SYSDATE
+        )
+    </insert>
+
+    <update id="update"
+            parameterType="reply">
+        UPDATE TB_REPLY_L /* update - ReplyMapper.xml : 211006 @eunseo */
+        SET REPLY_CTT = #{replyCtt}
+           ,UPT_DTTM = SYSDATE
+        WHERE REPLY_SEQNO = #{replySeqno}
+    </update>
+
+    <delete id="delete"
+            parameterType="int">
+        UPDATE TB_REPLY_L /* update - ReplyMapper.xml : 211006 @eunseo */
+        SET USE_YN = 'N'
+           ,UPT_DTTM = SYSDATE
+        WHERE REPLY_SEQNO = #{replySeqno}
+    </delete>
+
+</mapper>
