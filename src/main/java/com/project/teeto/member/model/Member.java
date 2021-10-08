@@ -29,12 +29,13 @@ public class Member {
      */
     private String loginId;
     private String password;
+    private String chgPassword;
 
 
     /**
      * 탈퇴
      */
-    private int secessionSeqno;
+    private Integer secessionSeqno;
     private String secessionTpCd;
     private String secessionReason;
 

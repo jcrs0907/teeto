@@ -19,4 +19,6 @@ public interface MemberMapper {
     void insertSecInfo(Member member);
 
     void delete(Member member);
+
+    int updatePassword(Member member);
 }

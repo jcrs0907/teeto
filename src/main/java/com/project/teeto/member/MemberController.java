@@ -55,10 +55,26 @@ public class MemberController {
         return memberService.insert(member);
     }
 
+    /**
+     * 탈퇴
+     * @param member
+     * @return
+     */
     @PostMapping("/secession")
     @ResponseBody
     public boolean secession(@ModelAttribute Member member) {
         return memberService.delete(member);
     }
 
+
+    /**
+     * 비밀번호 변경
+     * @param member
+     * @return
+     */
+    @PostMapping("/changePassword")
+    @ResponseBody
+    public boolean changePassword(@ModelAttribute Member member) {
+        return memberService.changePassword(member);
+    }
 }

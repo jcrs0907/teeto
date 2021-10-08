@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 @Setter
 public class Auth {
 
-    private int apvReqSeqno;
+    private Integer apvReqSeqno;
     private String apvReqTpCd;
     private String apvReqTpVal;
     private String certNo;

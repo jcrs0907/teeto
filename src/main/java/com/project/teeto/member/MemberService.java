@@ -93,6 +93,11 @@ public class MemberService {
     }
 
 
+    /**
+     * 탈퇴
+     * @param member
+     * @return
+     */
     public boolean delete(Member member) {
         boolean result = false;
         String pwd = "";
@@ -109,6 +114,25 @@ public class MemberService {
             result = true;
         }
 
+        return result;
+    }
+
+
+    /**
+     * 비밀번호 변경
+     * @param member
+     * @return
+     */
+    public boolean changePassword(Member member) {
+        boolean result = false;
+        int cnt = 0;
+
+        String pwd = pwdService.encodePassword(member.getChgPassword());
+        member.setPassword(pwd);
+        cnt = memberMapper.updatePassword(member);
+        if(cnt ==1) {
+            result = true;
+        }
         return result;
     }
 }

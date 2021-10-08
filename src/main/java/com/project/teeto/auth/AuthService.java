@@ -98,9 +98,6 @@ public class AuthService {
         auth.setCheckApvTime(time.getTime()/1000 +"");
 
         Auth authRslt = authMapper.select(auth);
-
-        System.out.println(authRslt.getApvReqSeqno());
-        System.out.println(authRslt.getCertNo());
         if (auth.getCheckCertNo() == null || !auth.getCheckCertNo().equals(authRslt.getCertNo())) {
             result = false;
         }
@@ -144,7 +141,7 @@ public class AuthService {
      * @param auth
      * @return
      */
-    public boolean checkPwd(Auth auth) {
+    public boolean checkPassword(Auth auth) {
         boolean result = false;
         String pwd = authMapper.selectPassword(auth.getMemId());
         if(pwd != null && !pwd.equals("")) {

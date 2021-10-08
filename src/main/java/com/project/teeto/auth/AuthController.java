@@ -29,7 +29,7 @@ public class AuthController {
      * @param email
      * @return
      */
-    @PostMapping(value = "/sendMail", produces = {"application/json;charset=utf-8"})
+    @PostMapping("/sendMail")
     @ResponseBody
     public String sendAuthMail(String email) {
         //TODO 문자발송시 메소드변경, 분기처리
@@ -44,7 +44,7 @@ public class AuthController {
      * @param auth
      * @return
      */
-    @PostMapping(value = "/checkCertNo", produces = {"application/json;charset=utf-8"})
+    @PostMapping("/checkCertNo")
     @ResponseBody
     public boolean checkCertNo(@ModelAttribute Auth auth) {
         boolean result = false;
@@ -86,9 +86,9 @@ public class AuthController {
      * @param auth
      * @return
      */
-    @PostMapping("/checkPwd")
+    @PostMapping("/checkPassword")
     @ResponseBody
     public boolean checkPwd(@ModelAttribute Auth auth) {
-        return authService.checkPwd(auth);
+        return authService.checkPassword(auth);
     }
 }
