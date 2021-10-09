@@ -62,10 +62,10 @@ public class Classes {
     private String mentoNm;
     private String likeCnt;
 
-    //클래스 프로세스 업데이트 여부
-    private String classProcessUpdateYn;
+    //클래스 프로세스 삭제 여부
+    private String classProcessDeleteYn= "N";
 
     //클래스 디테일 업데이트 여부
-    private String classDetailUpdateYn;
+    private String classDetailDeleteYn= "N";
 
 }

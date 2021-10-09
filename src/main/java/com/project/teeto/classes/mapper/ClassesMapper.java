@@ -30,5 +30,9 @@ public interface ClassesMapper {
     void updateClassProcess(Classes classes);
     void updateClassDetail(Classes classes);
 
+    //클래스 삭제하기
+    void deleteClassProcess(Classes classes);
+    void deleteClassDetail(Classes classes);
+
 
 }

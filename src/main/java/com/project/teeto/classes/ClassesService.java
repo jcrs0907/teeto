@@ -86,43 +86,68 @@ public class ClassesService {
         //파일 값이 변경 되었을 경우
         //파일 Update 시퀀스 set
         //매퍼 안에서 분기 처리(<if>)
-
-
         classesProcessList = classes.getClassesProcessList();
         classesDetailList = classes.getClassesDetailList();
 
+        try {
+        //classesDetailList가 존재할 경우
+        if(classesDetailList != null){
+            for(Classes cl : classesDetailList) {
+                cl.setClassId(classes.getClassId());
+                String classDetailDeleteYn = cl.getClassDetailDeleteYn();
 
-        for(Classes cl : classesProcessList) {
+                if(classDetailDeleteYn.equals("Y")) {
+                    classesMapper.deleteClassDetail(cl);
+                }
 
-            System.out.println("classesProcessList"+classesProcessList);
+                if((cl.getClassDetailTitle() != null && !cl.getClassDetailTitle().equals("")) ||
+                        cl.getClassFile() != null ){
+
+                    if(cl.getClassFile() != null){
+                        //파일 Update 시퀀스 set
+                    }
+
+
+                    if(cl.getClassDetailSeqno() != null){
+                        classesMapper.updateClassDetail(cl);
+                    }else{
+                        classesMapper.insertClassDetail(cl);
+                    }
+
+                }
+            }
         }
 
-        for(Classes cl : classesDetailList) {
-            System.out.println("classesDetailList"+classesDetailList);
+//        //classesProcessList가 존재할 경우
+        if(classesProcessList != null){
+            for(Classes cl : classesProcessList) {
+                cl.setClassId(classes.getClassId());
+                String classProcessDeleteYn = cl.getClassProcessDeleteYn();
 
+                if(classProcessDeleteYn.equals("Y")){
+                    classesMapper.deleteClassProcess(cl);
+                }
+                System.out.println("getClassProcessTitle"+cl.getClassProcessTitle());
+                System.out.println("getClassProcessSeqno"+cl.getClassProcessSeqno());
+                if((cl.getClassProcessTitle() != null && !cl.getClassProcessTitle().equals(""))
+                        || cl.getClassProcessDesc() != null && !cl.getClassProcessDesc().equals("")){
+
+                    if(cl.getClassProcessSeqno() != null){
+                        classesMapper.updateClassProcess(cl);
+                    }else{
+                        classesMapper.insertClassProcess(cl);
+                    }
+
+                }
+            }
         }
-
-//        if((classes.getClassDetailTitle() != null && !classes.getClassDetailTitle().equals("")) ||
-//                classes.getClassFile() != null ){
 //
-//            if(classes.getClassFile() != null){
-//                //파일 Update 시퀀스 set
-//            }
-//
-//            classesMapper.updateClassDetail(classes);
-//        }
-
-
-        //Detail title이나 description이 변경 되었을 경우
-        //타이틀이나 설명문 null, "" 빈값 체크 필수
-//        if((classes.getClassProcessTitle() != null && !classes.getClassProcessTitle().equals(""))
-//        || classes.getClassProcessDesc() != null && !classes.getClassProcessDesc().equals("")){
-//
-//            classesMapper.updateClassProcess(classes);
-//        }
-
-        classesMapper.updateClass(classes);
+//        classesMapper.updateClass(classes);
         result = true;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 
