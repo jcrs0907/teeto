@@ -53,5 +53,12 @@ public class ClassesController {
         return classesService.update(classes);
     }
 
+    //클래스 삭제
+    @PostMapping(value = "/delete", produces = {"application/json;charset=utf-8"})
+    @ResponseBody
+    public boolean delete(@ModelAttribute Classes classes) {
+        return classesService.delete(classes);
+    }
+
 
 }

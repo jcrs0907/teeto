@@ -1,13 +1,12 @@
 package com.project.teeto.classes;
 
 import com.project.teeto.classes.mapper.ClassesMapper;
+import com.project.teeto.mentee.MenteeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.teeto.classes.model.Classes;
-import java.text.SimpleDateFormat;
 
 import java.util.List;
-import java.util.Date;
 
 
 @Service
@@ -15,9 +14,12 @@ public class ClassesService {
     @Autowired
     ClassesMapper classesMapper;
 
+
     //클래스 등록하기
     public boolean insert(Classes classes){
         boolean result = false;
+        try {
+
 
         //클래스 id
         String classId = "";
@@ -45,7 +47,10 @@ public class ClassesService {
             cl.setClassId(classes.getClassId());
             classesMapper.insertClassDetail(cl);
         }
-
+            result = true;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         //클래스 상세 테이블
         return result;
     }
@@ -127,8 +132,7 @@ public class ClassesService {
                 if(classProcessDeleteYn.equals("Y")){
                     classesMapper.deleteClassProcess(cl);
                 }
-                System.out.println("getClassProcessTitle"+cl.getClassProcessTitle());
-                System.out.println("getClassProcessSeqno"+cl.getClassProcessSeqno());
+
                 if((cl.getClassProcessTitle() != null && !cl.getClassProcessTitle().equals(""))
                         || cl.getClassProcessDesc() != null && !cl.getClassProcessDesc().equals("")){
 
@@ -148,6 +152,20 @@ public class ClassesService {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    //클래스 삭제하기
+    public boolean delete(Classes classes){
+        boolean result = false;
+
+        classesMapper.deleteClassProcess(classes);
+        classesMapper.deleteClassDetail(classes);
+        classesMapper.deleteClass(classes);
+        //멘티 찜 클래스 목록 삭제
+        classesMapper.deleteLikeClass(classes);
+
+        result = true;
         return result;
     }
 

@@ -83,20 +83,22 @@
     SELECT
     C.CLASS_ID AS classId
     ,C.CLASS_NM AS classNm
+    ,C.CLASS_DSTN AS classDstn
     ,M.MENTO_ID AS mentoId
     ,M.MENTO_NM AS mentoNm
     ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
     ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
     --,(SELECT COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE CLASS_ID = TMCLL.CLASS_ID ) AS likeCnt
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID) AS likeCnt
-    ,
+    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
     FROM TB_CLASS_L C
     LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
     WHERE 1=1
+    AND C.USE_YN = 'Y'
     AND CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')
     AND CLASS_STRT_DATE <![CDATA[<=]]>   TO_DATE(#{searchEndDate}, 'YYYYMMDD')
+
     ORDER BY CLASS_STRT_DATE DESC
 </select>
 
@@ -104,17 +106,18 @@
      SELECT
     C.CLASS_ID AS classId
     ,C.CLASS_NM AS classNm
+    ,C.CLASS_DSTN AS classDstn
     ,M.MENTO_ID AS mentoId
     ,M.MENTO_NM AS mentoNm
     ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
     ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID) AS likeCnt
+    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
     FROM TB_CLASS_L C
     LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
     WHERE  ROWNUM <![CDATA[<=]]> 5
-
+    and C.USE_YN = 'Y'
     ORDER BY likeCnt DESC
 </select>
 
@@ -122,11 +125,12 @@
     SELECT
     C.CLASS_ID AS classId
     ,C.CLASS_NM AS classNm
+    ,C.CLASS_DSTN AS classDstn
     ,M.MENTO_ID AS mentoId
     ,M.MENTO_NM AS mentoNm
     ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
     ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID) AS likeCnt
+    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
     FROM TB_CLASS_L C
     LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
@@ -149,7 +153,7 @@ UPDATE TB_CLASS_L
         CLASS_MAX_MTE=#{classMaxMte},
         CLASS_PLACE=#{classPlace},
         CLASS_CHARGE=#{classCharge},
-        UPT_DTTM=#{uptDttm, jdbcType=DATE}
+        UPT_DTTM=sysdate
        where CLASS_ID=#{classId}
 </update>
 <update id="updateClassDetail" parameterType="classes">
@@ -193,12 +197,43 @@ UPDATE TB_CLASS_L
 </update>
 
 <delete id="deleteClassProcess" parameterType="classes">
-DELETE FROM TB_CLASS_PROCESS_L
-WHERE CLASS_PROCESS_SEQNO = #{classProcessSeqno}
+UPDATE TB_CLASS_PROCESS_L
+  SET
+USE_YN = 'N'
+WHERE
+<if test='classProcessSeqno !=null'>
+     CLASS_PROCESS_SEQNO = #{classProcessSeqno}
+    and
+</if>
+  CLASS_ID = #{classId}
 </delete>
 
 <delete id="deleteClassDetail" parameterType="classes">
-DELETE FROM TB_CLASS_DETAIL_L
-WHERE CLASS_DETAIL_SEQNO = #{classDetailSeqno}
+UPDATE TB_CLASS_DETAIL_L
+SET
+USE_YN = 'N'
+WHERE
+<if test='classDetailSeqno !=null'>
+    CLASS_DETAIL_SEQNO = #{classDetailSeqno}
+    and
+</if>
+CLASS_ID = #{classId}
 </delete>
+
+<update id="deleteLikeClass" parameterType="classes">
+    UPDATE TB_MENTEE_CLASS_LIKE_L
+    SET
+    USE_YN = 'N'
+    WHERE
+    CLASS_ID = #{classId}
+</update>
+
+    <update id="deleteClass" parameterType="classes">
+    UPDATE TB_CLASS_L
+    SET
+    USE_YN = 'N'
+    WHERE
+    CLASS_ID = #{classId}
+</update>
+
 </mapper>

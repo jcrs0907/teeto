@@ -13,6 +13,7 @@
             ${c.classCtgrCdNm}
             ${c.classHrgkCtgrCdNm}
             ${c.classNm}
+            ${c.classDstn}
             ${c.likeCnt}
     </tr>
 </c:forEach>

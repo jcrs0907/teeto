@@ -1,6 +1,7 @@
 package com.project.teeto.classes.mapper;
 
 import com.project.teeto.classes.model.Classes;
+import com.project.teeto.mentee.model.Mentee;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,6 +34,8 @@ public interface ClassesMapper {
     //클래스 삭제하기
     void deleteClassProcess(Classes classes);
     void deleteClassDetail(Classes classes);
+    void deleteClass(Classes classes);
+    void deleteLikeClass(Classes classes);
 
 
 }
