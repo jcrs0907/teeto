@@ -14,29 +14,54 @@ public class MentoService {
     @Autowired
     MentoMapper mentoMapper;
 
+    /**
+     * 닉네임 중복체크
+     * @param mentoNm
+     * @return
+     */
+    public boolean checkNmUse(String mentoNm){
+        boolean result = false;
+
+        int count = mentoMapper.checkNm(mentoNm);
+        if(count == 0) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * 멘토 생성
+     * @param mento
+     * @return
+     */
     @Transactional
     public boolean insert(Mento mento) {
         boolean result = false;
 
-        //멘토 아이디 필요
-        //mento.setMentoId("");
         int count = mentoMapper.insert(mento);
         if(count == 1) {
+            mentoMapper.updateMemberTpCd(mento);
             result = true;
-            mentoMapper.updateTPCD(mento);
         }
-
         return result;
     }
 
-    public boolean checkNm(String mentoNm){
+    /**
+     * 멘토 수정
+     * @param mento
+     * @return
+     */
+    @Transactional
+    public boolean update(Mento mento) {
         boolean result = false;
+        int cnt = 0;
 
-        int count = mentoMapper.checkNm(mentoNm);
-        if(count == 1) {
+        cnt = mentoMapper.update(mento);
+        if(cnt == 1) {
             result = true;
         }
-
-        return result;
+        return  result;
     }
+
+
 }

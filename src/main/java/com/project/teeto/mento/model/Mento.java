@@ -19,7 +19,7 @@ public class Mento {
     private String memId;
     private String mentoTel;
     private String mentoNm;
-    private String mentoDSTN;
+    private String mentoDstn;
     private String mentoBank;
     private String mentoAccount;
 

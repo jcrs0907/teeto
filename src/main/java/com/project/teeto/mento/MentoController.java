@@ -20,15 +20,36 @@ public class MentoController {
         return "mentoApplyForm";
     }
 
-    @PostMapping(value = "/apply", produces = {"application/json;charset=utf-8"})
+    /**
+     * 닉네임 중복체크
+     * @param mentoNm
+     * @return
+     */
+    @GetMapping("/checkNmUse")
+    @ResponseBody
+    public boolean checkNmUse(String mentoNm){
+        return mentoService.checkNmUse(mentoNm);
+    }
+
+    /**
+     * 멘토 신청(생성)
+     * @param mento
+     * @return
+     */
+    @PostMapping()
     @ResponseBody
     public boolean insert(@ModelAttribute Mento mento) {
         return mentoService.insert(mento);
     }
 
-    @GetMapping("/checkNm")
+    /**
+     * 멘토 수정
+     * @param mento
+     * @return
+     */
+    @PatchMapping()
     @ResponseBody
-    public boolean checkNm(String mentoNm){
-        return mentoService.checkNm(mentoNm);
+    public boolean update(@ModelAttribute Mento mento) {
+        return mentoService.update(mento);
     }
 }

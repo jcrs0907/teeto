@@ -25,13 +25,13 @@
         #{memId},
          #{mentoNm},
          #{mentoTel},
-         #{mentoDSTN, jdbcType=VARCHAR},
+         #{mentoDstn, jdbcType=VARCHAR},
          #{mentoBank},
           #{mentoAccount} ,
            sysdate)
     </insert>
 
-    <update id="updateTPCD" parameterType="mento">
+    <update id="updateMemberTpCd" parameterType="mento">
      UPDATE TB_MEMBER_L
         SET
        MEM_TP_CD = 'MT02',
@@ -42,6 +42,36 @@
 
     <!--멘토 닉네임 중복 체크-->
     <select id="checkNm" parameterType="String" resultType="int">
-       SELECT COUNT(*) FROM TB_MENTO_I WHERE MENTO_NM = #{mentoNm}
+       SELECT
+              COUNT(*)
+       FROM TB_MENTO_I
+       WHERE 1=1
+       AND USE_YN = 'Y'
+       AND MENTO_NM = #{mentoNm}
     </select>
+
+    <update id="update"
+            parameterType="mento">
+        UPDATE TB_MENTO_I /* update - MentoMapper.xml : 211011 @eunseo */
+        SET
+        <if test='mentoTel !=null  and !mentoTel.equals("")'>
+            MENTO_TEL = #{mentoTel},
+        </if>
+        <if test='mentoNm !=null  and !mentoNm.equals("")'>
+            MENTO_NM = #{mentoNm},
+        </if>
+        <if test='mentoDstn !=null  and !mentoDstn.equals("")'>
+            MENTO_DSTN = #{mentoDstn},
+        </if>
+        <if test='mentoBank !=null  and !mentoBank.equals("")'>
+            MENTO_BANK = #{mentoBank},
+        </if>
+        <if test='mentoAccount !=null  and !mentoAccount.equals("")'>
+            MENTO_ACCOUNT = #{mentoAccount},
+        </if>
+            UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND USE_YN = 'Y'
+        AND MENTO_ID = #{mentoId}
+    </update>
 </mapper>
