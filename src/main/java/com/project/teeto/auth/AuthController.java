@@ -25,18 +25,14 @@ public class AuthController {
 
 
     /**
-     * ajax 메일 발송
-     * @param email
+     * 메일, 문자 인증번호 발송
+     * @param auth
      * @return
      */
-    @PostMapping("/sendMail")
+    @PostMapping("/sendAuthCode")
     @ResponseBody
-    public String sendAuthMail(String email) {
-        //TODO 문자발송시 메소드변경, 분기처리
-        String result = "";
-        authService.sendAuthMail(email);
-        result = "{\"process\" : \"send mail success\"}";
-        return result;
+    public boolean sendAuthCode(Auth auth) {
+        return authService.sendAuthCode(auth);
     }
 
     /**

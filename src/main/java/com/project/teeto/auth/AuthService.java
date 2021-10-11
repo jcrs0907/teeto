@@ -6,6 +6,7 @@ import com.project.teeto.auth.model.Auth;
 import com.project.teeto.mail.MailService;
 import com.project.teeto.member.model.Member;
 import com.project.teeto.pwd.PwdService;
+import com.project.teeto.sms.SmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import java.util.Calendar;
 import java.util.Random;
 
 import static com.project.teeto.constant.AppConstant.AUTH_TP_CD_EMAIL;
+import static com.project.teeto.constant.AppConstant.AUTH_TP_CD_PHONE;
+
 import static java.lang.System.currentTimeMillis;
 
 @Slf4j
@@ -30,6 +33,9 @@ public class AuthService {
 
     @Autowired
     PwdService pwdService;
+
+    @Autowired
+    SmsService smsService;
 
     /**
      * 랜덤 인증번호
@@ -52,13 +58,12 @@ public class AuthService {
 
 
     /**
-     * 메일발송, Auth TB 저장
-     * @param email
+     * 메일/문자 발송, Auth TB 저장
+     * @param auth
      */
     @Transactional
-    public void sendAuthMail(String email) {
-
-        Auth auth = new Auth();
+    public boolean sendAuthCode(Auth auth) {
+        boolean result = false;
         String authCode = excuteGenerate();
 
         /**
@@ -72,15 +77,21 @@ public class AuthService {
         calendar.add(Calendar.SECOND, sec);
         Timestamp later = new Timestamp(calendar.getTime().getTime()); //유효시간
 
-        auth.setApvReqTpCd(AUTH_TP_CD_EMAIL);
-        auth.setApvReqTpVal(email);
         auth.setCertNo(authCode);
         auth.setUnixTimeApvStrtDttm(original.getTime()/1000 + "");
         auth.setUnixTimeApvEndDttm(later.getTime()/1000 + "");
 
-        mailService.sendAuthMail(email, authCode);
+        if(auth.getApvReqTpCd() != null && !auth.getApvReqTpCd().equals("")) {
+            if(auth.getApvReqTpCd().equals(AUTH_TP_CD_EMAIL)) {
+                mailService.sendAuthMail(auth.getApvReqTpVal(), authCode);
+            }
+            if(auth.getApvReqTpCd().equals(AUTH_TP_CD_PHONE)) {
+                smsService.sendAuthSms(auth.getApvReqTpVal(), authCode);
+            }
+            result = true;
+        }
         authMapper.insert(auth);
-
+        return result;
     }
 
     /**

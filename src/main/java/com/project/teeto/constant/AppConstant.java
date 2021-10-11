@@ -14,8 +14,17 @@ public interface AppConstant {
     String MAIL_SMTP_AUTH = "true";
 
     /**
+     * SMS
+     */
+    String SMS_API_KEY = "NCSTR4SI7RNIFX8J";
+    String SMS_API_SECRET = "IMIBZG3HUNRSLBGTTPVEEC44WNLKBQW4";
+    String SMS_FROM_NUMBER = "01055325573";
+    String SMS_TYPE_SMS = "SMS";
+
+    /**
      * 인증타입코드
      */
     String AUTH_TP_CD_PHONE = "APRQ01";
     String AUTH_TP_CD_EMAIL = "APRQ02";
+
 }

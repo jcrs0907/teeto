@@ -21,4 +21,6 @@ public interface MemberMapper {
     void delete(Member member);
 
     int updatePassword(Member member);
+
+    int update(Member member);
 }

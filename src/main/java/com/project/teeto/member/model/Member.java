@@ -3,6 +3,7 @@ package com.project.teeto.member.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
@@ -18,7 +19,7 @@ public class Member {
     private String memNm;
     private String memEmail;
     private String memTel;
-    private File memImgFile;
+    private MultipartFile memProfileFile;
     private String memProfileFileSeqno;
     private String memTpCd;
     private String nickName;

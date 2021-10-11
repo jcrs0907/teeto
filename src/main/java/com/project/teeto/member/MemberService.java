@@ -73,6 +73,11 @@ public class MemberService {
         String memId = "";
         String pwd = "";
         try {
+            //프로필 파일이 있을 경우
+            if(member.getMemProfileFile() != null) {
+                //파일insert, setMembProfileSeqno
+            }
+
             //회원ID
             memId = memberMapper.selJoinMemId();
             member.setMemId(memId);
@@ -133,6 +138,27 @@ public class MemberService {
         if(cnt ==1) {
             result = true;
         }
+        return result;
+    }
+
+    /**
+     * 회원 수정
+     * @param member
+     * @return
+     */
+    public boolean update(Member member) {
+        boolean result = false;
+        int cnt = 0;
+
+        //프로필 파일이 있을 경우
+        if(member.getMemProfileFile() != null) {
+            //파일insert, setMembProfileSeqno
+        }
+        cnt = memberMapper.update(member);
+        if(cnt == 1) {
+            result = true;
+        }
+
         return result;
     }
 }

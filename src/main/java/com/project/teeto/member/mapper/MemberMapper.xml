@@ -98,9 +98,25 @@
 
     <update id="updatePassword"
             parameterType="member">
-        UPDATE TB_LOGIN_I/* update - MemberMapper.xml : 211008 @eunseo */
+        UPDATE TB_LOGIN_I /* update - MemberMapper.xml : 211008 @eunseo */
         SET PASSWORD = #{password}
            ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND USE_YN = 'Y'
+        AND MEM_ID = #{memId}
+    </update>
+
+    <update id="update"
+            parameterType="member">
+        UPDATE TB_MEMBER_L /* update - MemberMapper.xml : 211011 @eunseo */
+        SET
+        <if test='memProfileFileSeqno !=null'>
+            MEM_PROFILE_FILE_SEQNO = #{memProfileFileSeqno},
+        </if>
+        <if test='memTel !=null and memTel != "" '>
+            MEM_TEL = #{memTel},
+        </if>
+            UPT_DTTM = SYSDATE
         WHERE 1=1
         AND USE_YN = 'Y'
         AND MEM_ID = #{memId}

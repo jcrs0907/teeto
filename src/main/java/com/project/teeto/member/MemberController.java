@@ -49,7 +49,7 @@ public class MemberController {
      * @param member
      * @return
      */
-    @PostMapping(value = "/register", produces = {"application/json;charset=utf-8"})
+    @PostMapping()
     @ResponseBody
     public boolean register(@ModelAttribute Member member) {
         return memberService.insert(member);
@@ -76,5 +76,16 @@ public class MemberController {
     @ResponseBody
     public boolean changePassword(@ModelAttribute Member member) {
         return memberService.changePassword(member);
+    }
+
+    /**
+     * 회원 수정
+     * @param member
+     * @return
+     */
+    @PatchMapping()
+    @ResponseBody
+    public boolean update(@ModelAttribute Member member) {
+        return memberService.update(member);
     }
 }
