@@ -10,10 +10,35 @@
             SELECT FN_PK_GEN('TO') FROM DUAL
         </selectKey>
        INSERT INTO TB_MENTO_I (
-            MENTO_ID,MEM_ID, MENTO_NM, MENTO_TEL, MENTO_DSTN, MENTO_BANK, MENTO_ACCOUNT, CRE_DTTM)
-        VALUES (#{mentoId},#{memId}, #{mentoNm}, #{mentoTel}, #{mentoDSTN, jdbcType=VARCHAR}, #{mentoBank}, #{mentoAccount} , sysdate)
+        MENTO_ID,
+        MEM_ID,
+         MENTO_NM,
+          MENTO_TEL,
+          MENTO_DSTN,
+           MENTO_BANK,
+            MENTO_ACCOUNT,
+             CRE_DTTM
+         )
+        VALUES
+        (
+        #{mentoId},
+        #{memId},
+         #{mentoNm},
+         #{mentoTel},
+         #{mentoDSTN, jdbcType=VARCHAR},
+         #{mentoBank},
+          #{mentoAccount} ,
+           sysdate)
     </insert>
 
+    <update id="updateTPCD" parameterType="mento">
+     UPDATE TB_MEMBER_L
+        SET
+       MEM_TP_CD = 'MT02',
+       UPT_DTTM = sysdate
+     WHERE
+     MEM_ID=#{memId}
+    </update>
 
     <!--멘토 닉네임 중복 체크-->
     <select id="checkNm" parameterType="String" resultType="int">

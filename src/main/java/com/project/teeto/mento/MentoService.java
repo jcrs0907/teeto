@@ -23,6 +23,7 @@ public class MentoService {
         int count = mentoMapper.insert(mento);
         if(count == 1) {
             result = true;
+            mentoMapper.updateTPCD(mento);
         }
 
         return result;
