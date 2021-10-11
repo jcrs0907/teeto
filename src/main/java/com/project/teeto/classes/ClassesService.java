@@ -141,8 +141,8 @@ public class ClassesService {
                 }
             }
         }
-//
-//        classesMapper.updateClass(classes);
+
+        classesMapper.updateClass(classes);
         result = true;
         }catch (Exception e) {
             e.printStackTrace();
