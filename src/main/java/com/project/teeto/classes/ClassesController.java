@@ -60,5 +60,16 @@ public class ClassesController {
         return classesService.delete(classes);
     }
 
+    //클래스 상세 페이지
+    @GetMapping("/detail/{classId}/{mentoId}")
+    public String detail(
+            @PathVariable String classId,
+            @PathVariable String mentoId,
+            Model model){
+
+        model.addAttribute("classDetail", classesService.classDetail(classId, mentoId));
+
+        return "classDetail";
+    }
 
 }

@@ -228,12 +228,16 @@ CLASS_ID = #{classId}
     CLASS_ID = #{classId}
 </update>
 
-    <update id="deleteClass" parameterType="classes">
+<update id="deleteClass" parameterType="classes">
     UPDATE TB_CLASS_L
     SET
     USE_YN = 'N'
     WHERE
     CLASS_ID = #{classId}
 </update>
+
+<select id="selectClassDetail" parameterType="classes">
+
+</select>
 
 </mapper>
