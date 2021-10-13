@@ -172,8 +172,8 @@ public class ClassesService {
     //클래스 상세 출력
     public Classes classDetail(String classId){
         Classes classes = new Classes();
-        List<Classes> list1 = null;
-        List<Classes> list2 = null;
+        List<Classes> detailList = null;
+        List<Classes> processList = null;
         try {
             classes.setClassId(classId);
 
@@ -181,11 +181,11 @@ public class ClassesService {
 
                 classes = classesMapper.selectClassAll(classId);
 
-                list1 = classesMapper.selectClassDetail(classId);
-                list2 = classesMapper.selectClassProcess(classId);
+            detailList = classesMapper.selectClassDetail(classId);
+            processList = classesMapper.selectClassProcess(classId);
 
-                classes.setClassesDetailList(list1);
-                classes.setClassesDetailList(list2);
+                classes.setClassesDetailList(detailList);
+                classes.setClassesProcessList(processList);
         }catch (Exception e) {
             e.printStackTrace();
         }

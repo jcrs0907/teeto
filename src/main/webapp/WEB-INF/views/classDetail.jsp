@@ -9,8 +9,6 @@
 <div>
     <p>${classDetail.classNm}</p>
     <p>${classDetail.classTitle}</p>
-    <p>${classDetail.classNm}</p>
-    <p>${classDetail.classTitle}</p>
     <p>${classDetail.classDstn}</p>
     <p>${classDetail.classStrtDate}</p>
     <p>${classDetail.classStrtTime}</p>
@@ -33,7 +31,8 @@
             <p>${detail.classDetailFileSeqno}</p>
         </c:forEach>
     </div>
-    zzzzz
+
+
     <div>
         <c:forEach var="process" items="${classDetail.classesProcessList}">
             <p>${process.classProcessTitle}</p>
