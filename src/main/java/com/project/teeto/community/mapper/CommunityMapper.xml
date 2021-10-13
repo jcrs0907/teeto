@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.teeto.community.mapper.CommunityMapper">
+
+    <insert id="insert"
+            parameterType="community">
+      <selectKey keyProperty="cmntSeqno" resultType="integer" order="BEFORE">
+          SELECT TB_COMMUNITY_L_SEQ.nextval FROM DUAL
+      </selectKey> /* insert - CommunityMapper.xml : 211013 @eunseo */
+      INSERT INTO TB_COMMUNITY_L (
+           CMNT_SEQNO
+          ,CMNT_TP_CD
+          ,MEM_ID
+          ,MENTEE_ID
+          ,MENTO_ID
+          ,CMNT_TITLE
+          ,CMNT_CTT
+          ,CMNT_FILE_SEQNO
+          ,CRE_DTTM
+      ) VALUES (
+           #{cmntSeqno}
+          ,#{cmntTpCd}
+          ,#{memId}
+          ,#{menteeId, jdbcType=VARCHAR}
+          ,#{mentoId, jdbcType=VARCHAR}
+          ,#{cmntTitle}
+          ,#{cmntCtt}
+          ,#{cmntFileSeqno, jdbcType=INTEGER}
+          ,SYSDATE
+      )
+    </insert>
+
+    <select id="getList"
+            parameterType="String"
+            resultType="community">
+        SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
+               C.CMNT_SEQNO AS cmntSeqno
+              ,C.CMNT_TP_CD AS cmntTpCd
+              ,CD.CD_NM AS cmntTpCdNm
+              ,CASE WHEN CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+                    ELSE T.MENTO_NM
+               END AS nickName
+              ,C.CMNT_TITLE AS cmntTitle
+              ,C.CMNT_FILE_SEQNO AS cmntFileSeqno
+              ,C.CMNT_VIEW_CNT AS cmntViewCnt
+              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+        FROM TB_COMMUNITY_L C
+        LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
+        LEFT OUTER JOIN TB_MENTEE_I TMI on C.MENTEE_ID = TMI.MENTEE_ID
+        LEFT OUTER JOIN TB_MENTO_I T on C.MENTO_ID = T.MENTO_ID
+        WHERE 1=1
+        AND C.USE_YN = 'Y'
+        AND C.CMNT_TP_CD = #{cmntTpCd}
+        ORDER BY C.CRE_DTTM DESC
+    </select>
+
+    <select id="getMyList"
+            parameterType="community"
+            resultType="community">
+        SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
+               C.CMNT_SEQNO AS cmntSeqno
+              ,C.CMNT_TP_CD AS cmntTpCd
+              ,CD.CD_NM AS cmntTpCdNm
+              ,CASE WHEN CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+                    ELSE T.MENTO_NM
+               END AS nickName
+              ,C.CMNT_TITLE AS cmntTitle
+              ,C.CMNT_FILE_SEQNO AS cmntFileSeqno
+              ,C.CMNT_VIEW_CNT AS cmntViewCnt
+              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+        FROM TB_COMMUNITY_L C
+        LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
+        LEFT OUTER JOIN TB_MENTEE_I TMI on C.MENTEE_ID = TMI.MENTEE_ID
+        LEFT OUTER JOIN TB_MENTO_I T on C.MENTO_ID = T.MENTO_ID
+        WHERE 1=1
+        AND C.USE_YN = 'Y'
+        AND C.CMNT_TP_CD = #{cmntTpCd}
+        AND C.MEM_ID = #{memId}
+        ORDER BY C.CRE_DTTM DESC
+    </select>
+</mapper>
