@@ -50,6 +50,8 @@ public class Classes {
     private String classHrgkCtgrCdNm;
     private String srtSeq;
 
+    private String mentoDstn;
+
     //클래스 프로세스 리스트 생성
     private List<Classes> classesProcessList;
 

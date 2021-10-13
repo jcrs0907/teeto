@@ -61,12 +61,13 @@ public class ClassesController {
     }
 
     //클래스 상세 페이지
-    @GetMapping("/detail/{classId}/{mentoId}")
+    @GetMapping("/detail/{classId}")
     public String detail(
             @PathVariable String classId,
-            @PathVariable String mentoId,
             Model model){
-        model.addAttribute("classDetailList", classesService.classDetail(classId, mentoId));
+
+
+        model.addAttribute("classDetail", classesService.classDetail(classId));
         return "classDetail";
     }
 

@@ -170,34 +170,27 @@ public class ClassesService {
     }
 
     //클래스 상세 출력
-    public Classes classDetail(String classId, String mentoId){
-        List<Classes> classDetail = null;
-        Classes classes = null;
-        //클래스 프로세스 Arr
-        List<Classes> classesProcessList = null;
-        //클래스 상세 Arr
-        List<Classes> classesDetailList = null;
-
+    public Classes classDetail(String classId){
+        Classes classes = new Classes();
+        List<Classes> list1 = null;
+        List<Classes> list2 = null;
         try {
-        //classId를 가지고가서 클래스, 멘토 정보 가져옴
+            classes.setClassId(classId);
 
-        classes.setClassId(classId);
-        classes.setMentoId(mentoId);
+            System.out.println(classes.getClassId());
 
-       classDetail = classesMapper.selectClassAll(classes);
+                classes = classesMapper.selectClassAll(classId);
 
+                list1 = classesMapper.selectClassDetail(classId);
+                list2 = classesMapper.selectClassProcess(classId);
 
-
-        classesDetailList = classesMapper.selectClassDetail(classes);
-        classesProcessList = classesMapper.selectClassProcess(classes);
-
-        classes.setClassesProcessList(classesDetailList);
-        classes.setClassesProcessList(classesProcessList);
-
-
+                classes.setClassesDetailList(list1);
+                classes.setClassesDetailList(list2);
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+
         return classes;
     }
 

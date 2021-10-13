@@ -236,10 +236,9 @@ CLASS_ID = #{classId}
     CLASS_ID = #{classId}
 </update>
 
-<select id="selectClassAll" parameterType="classes">
+<select id="selectClassAll" parameterType="String" resultType="classes">
   SELECT
-    C.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
+    C.CLASS_NM AS classNm
     ,C.CLASS_TITLE AS classTitle
     ,C.CLASS_DSTN AS classDstn
     ,C.CLASS_STRT_DATE AS classStrtDate
@@ -258,24 +257,24 @@ CLASS_ID = #{classId}
     LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    WHERE CLASS_ID = #{classId}
-    and C.USE_YN = 'Y';
+    WHERE C.CLASS_ID = #{classId}
+    and C.USE_YN = 'Y'
 </select>
-<select id="selectClassProcess" parameterType="classes">
+<select id="selectClassDetail" parameterType="String" resultType="classes">
   SELECT
    C.CLASS_DETAIL_TITLE AS classDetailTitle
    ,C.CLASS_DETAIL_FILE_SEQNO AS classDetailFileSeqno
    FROM TB_CLASS_DETAIL_L C
-    WHERE CLASS_ID = #{classId}
+   WHERE C.CLASS_ID = #{classId}
     and C.USE_YN = 'Y'
     ORDER BY C.CLASS_DETAIL_SEQNO
 </select>
-<select id="selectClassDetail" parameterType="classes">
+<select id="selectClassProcess" parameterType="String" resultType="classes">
  SELECT
    C.CLASS_PROCESS_TITLE AS classProcessTitle
    ,C.CLASS_PROCESS_DESC AS classProcessDesc
    FROM TB_CLASS_PROCESS_L C
-    WHERE CLASS_ID = #{classId}
+    WHERE C.CLASS_ID = #{classId}
     and C.USE_YN = 'Y'
     ORDER BY C.CLASS_PROCESS_SEQNO
 </select>
