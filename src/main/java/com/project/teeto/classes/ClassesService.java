@@ -175,17 +175,13 @@ public class ClassesService {
         List<Classes> detailList = null;
         List<Classes> processList = null;
         try {
-            classes.setClassId(classId);
 
-            System.out.println(classes.getClassId());
-
-                classes = classesMapper.selectClassAll(classId);
-
+            classes = classesMapper.selectClassAll(classId);
             detailList = classesMapper.selectClassDetail(classId);
             processList = classesMapper.selectClassProcess(classId);
+            classes.setClassesDetailList(detailList);
+            classes.setClassesProcessList(processList);
 
-                classes.setClassesDetailList(detailList);
-                classes.setClassesProcessList(processList);
         }catch (Exception e) {
             e.printStackTrace();
         }

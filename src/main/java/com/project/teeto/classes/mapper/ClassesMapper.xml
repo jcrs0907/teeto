@@ -238,7 +238,8 @@ CLASS_ID = #{classId}
 
 <select id="selectClassAll" parameterType="String" resultType="classes">
   SELECT
-    C.CLASS_NM AS classNm
+    C.CLASS_ID AS classId
+    ,C.CLASS_NM AS classNm
     ,C.CLASS_TITLE AS classTitle
     ,C.CLASS_DSTN AS classDstn
     ,C.CLASS_STRT_DATE AS classStrtDate

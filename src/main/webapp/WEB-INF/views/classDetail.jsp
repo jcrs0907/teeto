@@ -7,6 +7,7 @@
 </head>
 <body>
 <div>
+    <p>${classDetail.classId}</p>
     <p>${classDetail.classNm}</p>
     <p>${classDetail.classTitle}</p>
     <p>${classDetail.classDstn}</p>
