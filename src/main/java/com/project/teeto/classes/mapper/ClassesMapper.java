@@ -38,7 +38,7 @@ public interface ClassesMapper {
     void deleteLikeClass(Classes classes);
 
     //클래스 상세
+    List<Classes> selectClassAll(Classes classes);
     List<Classes> selectClassDetail(Classes classes);
-
-
+    List<Classes> selectClassProcess(Classes classes);
 }

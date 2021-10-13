@@ -170,15 +170,35 @@ public class ClassesService {
     }
 
     //클래스 상세 출력
-    public List<Classes> classDetail(String classId, String mentoId){
-        List<Classes> classDetailList = null;
-        Classes classes = new Classes();
+    public Classes classDetail(String classId, String mentoId){
+        List<Classes> classDetail = null;
+        Classes classes = null;
+        //클래스 프로세스 Arr
+        List<Classes> classesProcessList = null;
+        //클래스 상세 Arr
+        List<Classes> classesDetailList = null;
+
+        try {
+        //classId를 가지고가서 클래스, 멘토 정보 가져옴
 
         classes.setClassId(classId);
         classes.setMentoId(mentoId);
-        classDetailList = classesMapper.selectClassDetail(classes);
 
-        return classDetailList;
+       classDetail = classesMapper.selectClassAll(classes);
+
+
+
+        classesDetailList = classesMapper.selectClassDetail(classes);
+        classesProcessList = classesMapper.selectClassProcess(classes);
+
+        classes.setClassesProcessList(classesDetailList);
+        classes.setClassesProcessList(classesProcessList);
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return classes;
     }
 
 

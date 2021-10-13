@@ -66,9 +66,7 @@ public class ClassesController {
             @PathVariable String classId,
             @PathVariable String mentoId,
             Model model){
-
-        model.addAttribute("classDetail", classesService.classDetail(classId, mentoId));
-
+        model.addAttribute("classDetailList", classesService.classDetail(classId, mentoId));
         return "classDetail";
     }
 
