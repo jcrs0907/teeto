@@ -27,4 +27,6 @@ public interface CommunityMapper {
     int updateComment(Community community);
 
     int deleteComment(int cmntCmmtSeqno);
+
+    List<Community> getCommentList(int cmntSeqno);
 }

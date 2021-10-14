@@ -53,7 +53,7 @@ public class CommunityController {
      * @param cmntSeqno
      * @return
      */
-    @GetMapping("/{cmntSeqno}")
+    @GetMapping("/detail/{cmntSeqno}")
     @ResponseBody
     public Community getDetail(@PathVariable int cmntSeqno) {
         return communityService.getDetail(cmntSeqno);

@@ -37,17 +37,16 @@
                C.CMNT_SEQNO AS cmntSeqno
               ,C.CMNT_TP_CD AS cmntTpCd
               ,CD.CD_NM AS cmntTpCdNm
-              ,CASE WHEN CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+              ,CASE WHEN C.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
                     ELSE T.MENTO_NM
                END AS nickName
               ,C.CMNT_TITLE AS cmntTitle
-              ,C.CMNT_FILE_SEQNO AS cmntFileSeqno
               ,C.CMNT_VIEW_CNT AS cmntViewCnt
               ,TO_CHAR(C.CRE_DTTM) AS creDttm
         FROM TB_COMMUNITY_L C
         LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
-        LEFT OUTER JOIN TB_MENTEE_I TMI on C.MENTEE_ID = TMI.MENTEE_ID
-        LEFT OUTER JOIN TB_MENTO_I T on C.MENTO_ID = T.MENTO_ID
+        LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
+        LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
         WHERE 1=1
         AND C.USE_YN = 'Y'
         AND C.CMNT_TP_CD = #{cmntTpCd}
@@ -61,17 +60,16 @@
                C.CMNT_SEQNO AS cmntSeqno
               ,C.CMNT_TP_CD AS cmntTpCd
               ,CD.CD_NM AS cmntTpCdNm
-              ,CASE WHEN CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+              ,CASE WHEN C.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
                     ELSE T.MENTO_NM
                END AS nickName
               ,C.CMNT_TITLE AS cmntTitle
-              ,C.CMNT_FILE_SEQNO AS cmntFileSeqno
               ,C.CMNT_VIEW_CNT AS cmntViewCnt
               ,TO_CHAR(C.CRE_DTTM) AS creDttm
         FROM TB_COMMUNITY_L C
         LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
-        LEFT OUTER JOIN TB_MENTEE_I TMI on C.MENTEE_ID = TMI.MENTEE_ID
-        LEFT OUTER JOIN TB_MENTO_I T on C.MENTO_ID = T.MENTO_ID
+        LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
+        LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
         WHERE 1=1
         AND C.USE_YN = 'Y'
         AND C.CMNT_TP_CD = #{cmntTpCd}
@@ -82,8 +80,49 @@
     <select id="getDetail"
             parameterType="int"
             resultType="community">
-        SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
+        SELECT /* select - CommunityMapper.xml : 211014 @eunseo */
+               C.CMNT_SEQNO AS cmntSeqno
+              ,C.CMNT_TP_CD AS cmntTpCd
+              ,CD.CD_NM AS cmntTpCdNm
+              ,CASE WHEN C.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+                    ELSE T.MENTO_NM
+               END AS nickName
+              ,C.CMNT_TITLE AS cmntTitle
+              ,C.CMNT_CTT AS cmntCtt
+              ,F.FILE_SEQNO AS cmntFileSeqno
+              ,F.FILE_PATH AS cmntImgFilePath
+              ,C.CMNT_VIEW_CNT AS cmntViewCnt
+              ,TO_CHAR(C.CRE_DTTM) AS creDttm
         FROM TB_COMMUNITY_L C
+        LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
+        LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
+        LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
+        LEFT OUTER JOIN TB_FILE_M F ON C.CMNT_FILE_SEQNO = F.FILE_SEQNO
+        WHERE 1=1
+        AND C.USE_YN = 'Y'
+        AND C.CMNT_SEQNO = #{cmntSeqno}
+    </select>
+
+    <select id="getCommentList"
+            parameterType="int"
+            resultType="community">
+        SELECT /* select - CommunityMapper.xml : 211014 @eunseo */
+               C.CMNT_CMMT_SEQNO AS cmntCmmtSeqno
+              ,CASE WHEN CC.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+                    ELSE T.MENTO_NM
+               END AS nickName
+              ,C.MENTEE_ID AS menteeId
+              ,C.MENTO_ID AS mentoId
+              ,C.CMNT_CMMT_CTT AS cmntCmmtCtt
+              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+        FROM TB_COMMUNITY_COMMENT_L C
+        LEFT OUTER JOIN TB_COMMUNITY_L CC ON C.CMNT_SEQNO = CC.CMNT_SEQNO
+        LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
+        LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
+        WHERE 1=1
+        AND C.USE_YN = 'Y'
+        AND C.CMNT_SEQNO = #{cmntSeqno}
+        ORDER BY C.CRE_DTTM DESC
     </select>
 
     <update id="update"

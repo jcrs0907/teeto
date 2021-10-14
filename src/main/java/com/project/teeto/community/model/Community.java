@@ -30,11 +30,15 @@ public class Community {
     private String cmntImgFilePath;
     private String cmntFileDeleteYn;
 
+    private Integer cmntCnt;
+    private Integer cmntCmmtCnt;
+
     private Integer cmntCmmtSeqno;
     private String cmntCmmtCtt;
 
     private Integer myCommunityCnt;
     private List<Community> communityList;
     private List<Community> myCommunityList;
+    private List<Community> commentList;
 
 }

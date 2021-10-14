@@ -88,8 +88,16 @@ public class CommunityService {
      */
     public Community getDetail(int cmntSeqno) {
         Community community = null;
+        List<Community> commentList = null;
+        int cmmtCnt = 0;
 
         community = communityMapper.getDetail(cmntSeqno);
+        commentList = communityMapper.getCommentList(cmntSeqno);
+        if(commentList != null) {
+            community.setCommentList(commentList);
+            cmmtCnt = commentList.size();
+            community.setCmntCmmtCnt(cmmtCnt);
+        }
 
         return community;
     }
