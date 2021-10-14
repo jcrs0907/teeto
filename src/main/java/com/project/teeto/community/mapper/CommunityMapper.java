@@ -13,4 +13,12 @@ public interface CommunityMapper {
     List<Community> getList(String cmntTpCd);
 
     List<Community> getMyList(Community community);
+
+    Community getDetail(int cmntSeqno);
+
+    int update(Community community);
+
+    int delete(Community community);
+
+    void deleteAllComment(int cmntSeqno);
 }

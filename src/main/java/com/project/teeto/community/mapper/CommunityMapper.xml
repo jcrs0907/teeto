@@ -78,4 +78,51 @@
         AND C.MEM_ID = #{memId}
         ORDER BY C.CRE_DTTM DESC
     </select>
+
+    <select id="getDetail"
+            parameterType="int"
+            resultType="community">
+        SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
+        FROM TB_COMMUNITY_L C
+    </select>
+
+    <update id="update"
+            parameterType="community">
+        UPDATE TB_COMMUNITY_L /* update - CommunityMapper.xml : 211014 @eunseo */
+        SET
+        <if test='cmntTitle != null and !cmntTitle.equals("")'>
+            CMNT_TITLE = #{cmntTitle},
+        </if>
+        <if test='cmntCtt != null and !cmntCtt.equals("")'>
+            CMNT_CTT = #{cmntCtt},
+        </if>
+        <if test='cmntFileSeqno != null'>
+            CMNT_FILE_SEQNO = #{cmntFileSeqno},
+        </if>
+            UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND USE_YN = 'Y'
+        AND CMNT_SEQNO = #{cmntSeqno}
+    </update>
+    
+    <update id="delete"
+            parameterType="community">
+        UPDATE TB_COMMUNITY_L /* update - CommunityMapper.xml : 211014 @eunseo */
+        SET
+            USE_YN = 'N'
+           ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND CMNT_SEQNO = #{cmntSeqno}
+    </update>
+
+    <update id="deleteAllComment"
+            parameterType="int">
+        UPDATE TB_COMMUNITY_COMMENT_L /* update - CommunityMapper.xml : 211014 @eunseo */
+        SET
+            USE_YN = 'N'
+           ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND CMNT_SEQNO = #{cmntSeqno}
+    </update>
+
 </mapper>

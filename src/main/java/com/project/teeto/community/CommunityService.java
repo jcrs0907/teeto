@@ -61,4 +61,62 @@ public class CommunityService {
         return communityRes;
     }
 
+    /**
+     * 커뮤니티 상세
+     * @param cmntSeqno
+     * @return
+     */
+    public Community getDetail(int cmntSeqno) {
+        Community community = null;
+
+        community = communityMapper.getDetail(cmntSeqno);
+
+        return community;
+    }
+
+    /**
+     * 커뮤니티 수정
+     * @param community
+     * @return
+     */
+    public boolean update(Community community) {
+        boolean result = false;
+        int cnt = 0;
+
+        if(community.getCmntImgFile() != null) {
+            //파일 업데이트, seqno set
+        }
+
+        if(community.getCmntFileDeleteYn().equals("Y")) {
+            //파일 삭제 ,seqno delete
+        }
+
+        cnt = communityMapper.update(community);
+        if(cnt == 1) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    /**
+     * 커뮤니티 삭제
+     * @param community
+     * @return
+     */
+    public boolean delete(Community community) {
+        boolean result = false;
+        int cnt = 0;
+
+        if(community.getCmntFileSeqno() != null) {
+            //파일 삭제
+        }
+        cnt = communityMapper.delete(community);
+        if(cnt == 1) {
+            communityMapper.deleteAllComment(community.getCmntSeqno());
+            result = true;
+        }
+
+        return result;
+    }
 }

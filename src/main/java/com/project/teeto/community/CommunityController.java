@@ -19,6 +19,7 @@ public class CommunityController {
     @Autowired
     CommunityService communityService;
 
+
     /**
      * 커뮤니티 글쓰기(등록)
      * @param community
@@ -32,6 +33,7 @@ public class CommunityController {
         return communityService.insert(community);
     }
 
+
     /**
      * 커뮤니티 목록
      * @param cmntTpCd
@@ -44,5 +46,41 @@ public class CommunityController {
         HttpSession session = req.getSession();
         Auth auth = (Auth)session.getAttribute("member");
         return communityService.getList(cmntTpCd, auth);
+    }
+
+
+    /**
+     * 커뮤니티 상세
+     * @param cmntSeqno
+     * @return
+     */
+    @GetMapping("/{cmntSeqno}")
+    @ResponseBody
+    public Community getDetail(@PathVariable int cmntSeqno) {
+        return communityService.getDetail(cmntSeqno);
+    }
+
+
+    /**
+     * 커뮤니티 수정
+     * @param community
+     * @return
+     */
+    @PatchMapping("/{cmntSeqno}")
+    @ResponseBody
+    public boolean update(Community community) {
+        return communityService.update(community);
+    }
+
+
+    /**
+     * 커뮤니티 삭제
+     * @param community
+     * @return
+     */
+    @PostMapping("/{cmntSeqno}")
+    @ResponseBody
+    public boolean delete(Community community) {
+        return communityService.delete(community);
     }
 }

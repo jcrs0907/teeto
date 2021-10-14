@@ -20,11 +20,15 @@ public class Community {
     private String mentoId;
     private String cmntTitle;
     private String cmntCtt;
-    private MultipartFile cmntImgFile;
     private Integer cmntFileSeqno;
     private Integer cmntViewCnt;
-    private String nickName;
     private String creDttm;
+
+    private String nickName;
+    private MultipartFile cmntImgFile;
+    private String cmntImgFileName;
+    private String cmntImgFilePath;
+    private String cmntFileDeleteYn;
 
     private Integer cmntCmmtSeqno;
     private String cmntCmmtCtt;
