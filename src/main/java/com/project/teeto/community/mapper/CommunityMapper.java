@@ -21,4 +21,10 @@ public interface CommunityMapper {
     int delete(Community community);
 
     void deleteAllComment(int cmntSeqno);
+
+    int insertComment(Community community);
+
+    int updateComment(Community community);
+
+    int deleteComment(int cmntCmmtSeqno);
 }

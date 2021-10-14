@@ -125,4 +125,48 @@
         AND CMNT_SEQNO = #{cmntSeqno}
     </update>
 
+    <insert id="insertComment"
+            parameterType="community">
+        <selectKey keyProperty="cmntCmmtSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_COMMUNITY_COMMENT_L_SEQ.nextval FROM DUAL
+        </selectKey> /* insert - CommunityMapper.xml : 211014 @eunseo */
+        INSERT INTO TB_COMMUNITY_COMMENT_L (
+             CMNT_CMMT_SEQNO
+            ,CMNT_SEQNO
+            ,MEM_ID
+            ,MENTEE_ID
+            ,MENTO_ID
+            ,CMNT_CMMT_CTT
+            ,CRE_DTTM
+        ) VALUES (
+            #{cmntCmmtSeqno}
+            ,#{cmntSeqno}
+            ,#{memId}
+            ,#{menteeId, jdbcType=VARCHAR}
+            ,#{mentoId, jdbcType=VARCHAR}
+            ,#{cmntCmmtCtt}
+            ,SYSDATE
+        )
+    </insert>
+
+    <update id="updateComment"
+            parameterType="community">
+        UPDATE TB_COMMUNITY_COMMENT_L /* update - CommunityMapper.xml : 211014 @eunseo */
+        SET
+            CMNT_CMMT_CTT = #{cmntCmmtCtt}
+           ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND CMNT_CMMT_SEQNO = #{cmntCmmtSeqno}
+    </update>
+
+    <update id="deleteComment"
+            parameterType="int">
+        UPDATE TB_COMMUNITY_COMMENT_L /* update - CommunityMapper.xml : 211014 @eunseo */
+        SET
+            USE_YN = 'N'
+           ,UPT_DTTM = SYSDATE
+        WHERE 1=1
+        AND CMNT_CMMT_SEQNO = #{cmntCmmtSeqno}
+    </update>
+
 </mapper>

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.project.teeto.constant.AppConstant.CMMT_TP_CD_INFO;
+import static com.project.teeto.constant.AppConstant.CMMT_TP_CD_STUDY;
+
 @Slf4j
 @Service
 public class CommunityService {
@@ -16,15 +19,32 @@ public class CommunityService {
     @Autowired
     CommunityMapper communityMapper;
 
+
+    /**
+     * 커뮤니티 타입에 따라 멘티 / 멘토 구분후 ID저장
+     * @param community
+     * @param auth
+     */
+    public void setMemTypeId(Community community, Auth auth) {
+        if(community.getCmntTpCd().equals(CMMT_TP_CD_STUDY)) {
+            community.setMenteeId(auth.getMenteeId());
+        }
+        if(community.getCmntTpCd().equals(CMMT_TP_CD_INFO)) {
+            community.setMentoId(auth.getMentoId());
+        }
+        community.setMemId(auth.getMemId());
+    }
+
     /**
      * 커뮤니티 등록
      * @param community
      * @return
      */
-    public boolean insert(Community community) {
+    public boolean insert(Community community, Auth auth) {
         boolean result = false;
         int cnt = 0;
 
+        setMemTypeId(community, auth);
         cnt = communityMapper.insert(community);
         if(cnt == 1) {
             result = true;
@@ -118,5 +138,53 @@ public class CommunityService {
         }
 
         return result;
+    }
+
+    /**
+     * 댓글 등록
+     * @param community
+     * @param auth
+     * @return
+     */
+    public boolean insertComment(Community community, Auth auth) {
+        boolean result = false;
+        int cnt = 0;
+
+        setMemTypeId(community, auth);
+        cnt = communityMapper.insertComment(community);
+        if( cnt == 1) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * 커뮤니티 댓글 수정
+     * @param community
+     * @return
+     */
+    public boolean updateComment(Community community) {
+        boolean result = false;
+        int cnt = 0;
+        cnt = communityMapper.updateComment(community);
+        if(cnt == 1) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * 커뮤니티 댓글 삭제
+     * @param cmntCmmtSeqno
+     * @return
+     */
+    public boolean deleteComment(int cmntCmmtSeqno) {
+        int cnt = 0;
+        cnt = communityMapper.deleteComment(cmntCmmtSeqno);
+        if(cnt == 1) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }

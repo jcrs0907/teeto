@@ -26,5 +26,7 @@ public class Auth {
     private String memTpCd;
     private String loginId;
     private String password;
+    private String menteeId;
+    private String mentoId;
 
 }

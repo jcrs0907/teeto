@@ -18,6 +18,7 @@ import java.util.Random;
 
 import static com.project.teeto.constant.AppConstant.AUTH_TP_CD_EMAIL;
 import static com.project.teeto.constant.AppConstant.AUTH_TP_CD_PHONE;
+import static com.project.teeto.constant.AppConstant.MEM_TP_CD_MENTO;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -137,12 +138,17 @@ public class AuthService {
     public Auth login(Auth auth) {
         Auth member = new Auth();
         Auth login = new Auth();
+        String mentoId = "";
+
         login = authMapper.login(auth);
 
         if(pwdService.matchPassword(auth.getPassword(),login.getPassword())) {
             member = login;
-            member.setMemId(login.getMemId());
-            member.setMemTpCd(login.getMemTpCd());
+            //멘토일 시
+            if(login.getMemTpCd().equals(MEM_TP_CD_MENTO)) {
+                mentoId = authMapper.getMentoId(login.getMemId());
+                member.setMentoId(mentoId);
+            }
         }
         return member;
     }

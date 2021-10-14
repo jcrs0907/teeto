@@ -22,9 +22,20 @@ public interface AppConstant {
     String SMS_TYPE_SMS = "SMS";
 
     /**
-     * 인증타입코드
+     * 인증 타입코드
      */
     String AUTH_TP_CD_PHONE = "APRQ01";
     String AUTH_TP_CD_EMAIL = "APRQ02";
 
+    /**
+     * 커뮤니티 타입코드
+     */
+    String CMMT_TP_CD_STUDY = "CM01";
+    String CMMT_TP_CD_INFO = "CM02";
+
+    /**
+     * 회원 타입코드
+     */
+    String MEM_TP_CD_MENTEE = "MT01";
+    String MEM_TP_CD_MENTO = "MT02";
 }

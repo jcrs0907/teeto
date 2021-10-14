@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -27,10 +26,10 @@ public class CommunityController {
      */
     @PostMapping()
     @ResponseBody
-    public boolean insert(@ModelAttribute Community community) {
-        //TODO
-        //커뮤니티 타입에 따라 request에서 menteeId, mentoId 구분하여 set
-        return communityService.insert(community);
+    public boolean insert(Community community ,HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        Auth auth = (Auth)session.getAttribute("member");
+        return communityService.insert(community, auth);
     }
 
 
@@ -82,5 +81,44 @@ public class CommunityController {
     @ResponseBody
     public boolean delete(Community community) {
         return communityService.delete(community);
+    }
+
+
+    /**
+     * 커뮤니티 댓글 등록
+     * @param community
+     * @param req
+     * @return
+     */
+    @PostMapping("/comment")
+    @ResponseBody
+    public boolean insertComment(Community community, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        Auth auth = (Auth)session.getAttribute("member");
+        return communityService.insertComment(community, auth);
+    }
+
+
+    /**
+     * 커뮤니티 댓글 수정
+     * @param community
+     * @return
+     */
+    @PatchMapping("/comment/{cmntCmmtSeqno}")
+    @ResponseBody
+    public boolean updateComment(Community community) {
+        return communityService.updateComment(community);
+    }
+
+
+    /**
+     * 커뮤니티 댓글 삭제
+     * @param cmntCmmtSeqno
+     * @return
+     */
+    @DeleteMapping("/comment/{cmntCmmtSeqno}")
+    @ResponseBody
+    public boolean deleteComment(@PathVariable int cmntCmmtSeqno) {
+        return communityService.deleteComment(cmntCmmtSeqno);
     }
 }

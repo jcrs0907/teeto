@@ -17,4 +17,6 @@ public interface AuthMapper {
     Auth login(Auth auth);
 
     String selectPassword(String memId);
+
+    String getMentoId(String memId);
 }
