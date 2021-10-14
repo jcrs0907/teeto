@@ -19,6 +19,11 @@ public class MenteeController {
         return menteeService.likeClass(mentee);
     }
 
-
-
+    //멘티 클래스 찜 해제
+    @DeleteMapping(value="/deleteClass", produces = {"application/json;charset=utf-8"})
+    @ResponseBody
+    public boolean delete(@ModelAttribute Mentee mentee) {
+        return menteeService.deleteClass(mentee);
+    }
 }
+

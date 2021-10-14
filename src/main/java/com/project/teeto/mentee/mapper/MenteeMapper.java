@@ -8,4 +8,5 @@ public interface MenteeMapper {
 
     void insert(Mentee mentee);
     void likeClass(Mentee mentee);
+    void deleteClass(Mentee mentee);
 }

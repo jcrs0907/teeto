@@ -38,4 +38,15 @@
         , sysdate
         )
     </insert>
+
+    <update id="deleteClass" parameterType="mentee">
+        UPDATE
+        TB_MENTEE_CLASS_LIKE_L
+        SET
+        USE_YN = 'N'
+        WHERE
+        MENTEE_ID = #{menteeId}
+        and CLASS_ID = #{classId}
+    </update>
+
 </mapper>

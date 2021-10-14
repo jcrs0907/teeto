@@ -40,5 +40,21 @@ public class MenteeService {
         return result;
     }
 
+    //멘티 좋아요 해제
+    public boolean deleteClass(Mentee mentee){
+        boolean result = false;
+        System.out.println(mentee.getMenteeId());
+        System.out.println(mentee.getClassId());
+        try{
+            menteeMapper.deleteClass(mentee);
+            result = true;
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 
 }
