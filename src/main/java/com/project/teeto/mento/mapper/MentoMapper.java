@@ -13,4 +13,6 @@ public interface MentoMapper {
     int checkNm(String mentoNm);
 
     int update(Mento mento);
+
+    Mento getDetail(String mentoId);
 }

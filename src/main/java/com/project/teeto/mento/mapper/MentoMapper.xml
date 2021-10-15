@@ -74,4 +74,20 @@
         AND USE_YN = 'Y'
         AND MENTO_ID = #{mentoId}
     </update>
+
+    <select id="getDetail"
+            parameterType="String"
+            resultType="mento">
+        SELECT /* update - MentoMapper.xml : 211015 @eunseo */
+               MENTO_ID AS mentoId
+              ,MENTO_NM AS mentoNm
+              ,MENTO_TEL AS mentoTel
+              ,MENTO_DSTN AS mentoDstn
+              ,MENTO_BANK AS mentoBank
+              ,MENTO_ACCOUNT AS mentoAccount
+        FROM TB_MENTO_I
+        WHERE 1=1
+        AND USE_YN = 'Y'
+        AND MENTO_ID = #{mentoId}
+    </select>
 </mapper>

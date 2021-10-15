@@ -63,5 +63,9 @@ public class MentoService {
         return  result;
     }
 
-
+    public Mento getDetail(String mentoId) {
+        Mento mento = null;
+        mento = mentoMapper.getDetail(mentoId);
+        return mento;
+    }
 }
