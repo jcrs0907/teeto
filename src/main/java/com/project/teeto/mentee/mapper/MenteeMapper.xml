@@ -49,4 +49,46 @@
         and CLASS_ID = #{classId}
     </update>
 
+    <insert id="insertPayment" parameterType="mentee">
+        <selectKey keyProperty="paymentSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_PAYMENT_L_SEQ.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO
+        TB_PAYMENT_L (
+        PAYMENT_SEQNO
+        ,MENTEE_ID
+        ,CLASS_ID
+        ,PAYMENT_TP_CD
+        ,PAYMENT_PRICE
+        , CRE_DTTM
+        ) VALUES (
+        #{paymentSeqno}
+        ,#{menteeId}
+        ,#{classId}
+        ,#{paymentTpCd}
+        ,#{paymentPrice}
+        ,sysdate
+        )
+    </insert>
+
+    <insert id="insertClasses" parameterType="mentee">
+        <selectKey keyProperty="paymentSeqno" resultType="integer" order="BEFORE">
+            SELECT TB_PAYMENT_L_SEQ.CURRVAL FROM DUAL
+        </selectKey>
+        INSERT INTO
+        TB_MENTEE_CLASS_L (
+        CLASS_ID
+        ,MENTEE_ID
+        ,CLASS_APPL_DATE
+        ,PAYMENT_SEQNO
+        ,CRE_DTTM
+        ) VALUES (
+        #{classId}
+        ,#{menteeId}
+        ,sysdate
+        ,#{paymentSeqno}
+        , sysdate
+        )
+    </insert>
+
 </mapper>

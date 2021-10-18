@@ -1,5 +1,6 @@
 package com.project.teeto.classes;
 
+import com.project.teeto.auth.model.Auth;
 import com.project.teeto.classes.mapper.ClassesMapper;
 import com.project.teeto.mentee.MenteeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +9,18 @@ import com.project.teeto.classes.model.Classes;
 
 import java.util.List;
 
+import static com.project.teeto.constant.AppConstant.*;
+
 
 @Service
 public class ClassesService {
     @Autowired
     ClassesMapper classesMapper;
 
-
     //클래스 등록하기
     public boolean insert(Classes classes){
         boolean result = false;
         try {
-
-
         //클래스 id
         String classId = "";
         classId = classesMapper.selClassId();
@@ -55,29 +55,7 @@ public class ClassesService {
         return result;
     }
 
-
-    //날짜별 검색
-    public List<Classes> selectDateClass(String startDate, String endDate) {
-        Classes classes = new Classes();
-        classes.setSearchStartDate(startDate);
-        classes.setSearchEndDate(endDate);
-        List<Classes> classList = classesMapper.selectDateClass(classes);
-        return classList;
-    }
-
-    //인기있는 클래스
-    public List<Classes> selectLikeClass(){
-        List<Classes> likeClassList = classesMapper.selectLikeClass();
-        return likeClassList;
-    }
-
-    //카테고리별 클래스
-    public List<Classes> selectCategoryClass(String categoryCd){
-        List<Classes> categoryClassList = classesMapper.selectCategoryClass(categoryCd);
-        return categoryClassList;
-    }
-
-    //클래스 수정하기
+    //클래스 수정
     public boolean update(Classes classes){
         boolean result = false;
         Classes classes1 = new Classes();
@@ -186,9 +164,31 @@ public class ClassesService {
             e.printStackTrace();
         }
 
-
         return classes;
     }
 
+    //클래스 검색
+    public List<Classes> selectClasses(Classes classes, Auth auth){
+        List<Classes> list = null;
+        //클래스 객체에 저장된 코드
+        String classSearchCd = classes.getClassesSearchTpCd();
 
+        if(classes.getClassesSearchMCd() != null && classes.getClassesSearchMCd().equals(MEM_TP_CD_MENTEE)){
+            classes.setMenteeId(auth.getMenteeId());
+        }
+
+        if(classes.getClassesSearchMCd() != null && classes.getClassesSearchMCd().equals(MEM_TP_CD_MENTO)){
+            classes.setMentoId(auth.getMentoId());
+
+        }
+        if(classSearchCd.equals(CLASS_SEARCH_TP_CD_DATE)){
+            if(classes.getSearchEndDate() == null || classes.getSearchEndDate().equals("")){
+                classes.setSearchEndDate(classes.getSearchStartDate());
+            }
+        }
+
+        list = classesMapper.selectClassesSearch(classes);
+
+        return list;
+    }
 }

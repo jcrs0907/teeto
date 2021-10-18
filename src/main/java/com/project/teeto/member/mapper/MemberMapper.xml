@@ -121,4 +121,6 @@
         AND USE_YN = 'Y'
         AND MEM_ID = #{memId}
     </update>
+
+
 </mapper>

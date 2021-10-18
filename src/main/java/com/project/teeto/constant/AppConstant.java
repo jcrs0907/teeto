@@ -38,4 +38,20 @@ public interface AppConstant {
      */
     String MEM_TP_CD_MENTEE = "MT01";
     String MEM_TP_CD_MENTO = "MT02";
+
+    /**
+     * 클래스 검색 타입코드
+     */
+    String CLASS_SEARCH_TP_CD_DATE = "CS01";
+    String CLASS_SEARCH_TP_CD_CATEGORY = "CS02";
+    String CLASS_SEARCH_TP_CD_LIKE = "CS03";
+    String CLASS_SEARCH_TP_CD_MN = "CS04";
+    String CLASS_SEARCH_TP_CD_CN = "CS05";
+    //시작 종료의 경우 세션에 있는 멘티, 멘토 아이 가져다가 사용하기
+    String CLASS_SEARCH_TP_CD_START = "CS06";
+    String CLASS_SEARCH_TP_CD_END = "CS07";
+
+
+
+
 }

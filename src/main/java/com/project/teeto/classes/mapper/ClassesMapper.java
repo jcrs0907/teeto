@@ -30,6 +30,7 @@ public interface ClassesMapper {
     void updateClass(Classes classes);
     void updateClassProcess(Classes classes);
     void updateClassDetail(Classes classes);
+    void updateClassesCount(Classes classes);
 
     //클래스 삭제하기
     void deleteClassProcess(Classes classes);
@@ -41,4 +42,11 @@ public interface ClassesMapper {
     Classes selectClassAll(String classId);
     List<Classes> selectClassDetail(String classId);
     List<Classes> selectClassProcess(String classId);
+
+    //멘티 찜한 클래스 출력
+    List<Classes> selectMenteeClass(Classes classes);
+
+    //클래스 목록 반환
+    List<Classes> selectClassesSearch(Classes classes);
+
 }

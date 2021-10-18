@@ -79,66 +79,66 @@
       )
  </insert>
 
-<select id="selectDateClass"  parameterType="classes" resultType="classes">
-    SELECT
-    C.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
-    ,C.CLASS_DSTN AS classDstn
-    ,M.MENTO_ID AS mentoId
-    ,M.MENTO_NM AS mentoNm
-    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
-    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    --,(SELECT COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE CLASS_ID = TMCLL.CLASS_ID ) AS likeCnt
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    FROM TB_CLASS_L C
-    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    WHERE 1=1
-    AND C.USE_YN = 'Y'
-    AND CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')
-    AND CLASS_STRT_DATE <![CDATA[<=]]>   TO_DATE(#{searchEndDate}, 'YYYYMMDD')
+<!--<select id="selectDateClass"  parameterType="classes" resultType="classes">-->
+<!--    SELECT-->
+<!--    C.CLASS_ID AS classId-->
+<!--    ,C.CLASS_NM AS classNm-->
+<!--    ,C.CLASS_DSTN AS classDstn-->
+<!--    ,M.MENTO_ID AS mentoId-->
+<!--    ,M.MENTO_NM AS mentoNm-->
+<!--    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm-->
+<!--    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm-->
+<!--    &#45;&#45;,(SELECT COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE CLASS_ID = TMCLL.CLASS_ID ) AS likeCnt-->
+<!--    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt-->
+<!--    FROM TB_CLASS_L C-->
+<!--    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID-->
+<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD-->
+<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD-->
+<!--    WHERE 1=1-->
+<!--    AND C.USE_YN = 'Y'-->
+<!--    AND CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')-->
+<!--    AND CLASS_STRT_DATE <![CDATA[<=]]>   TO_DATE(#{searchEndDate}, 'YYYYMMDD')-->
 
-    ORDER BY CLASS_STRT_DATE DESC
-</select>
+<!--    ORDER BY CLASS_STRT_DATE DESC-->
+<!--</select>-->
 
-<select id="selectLikeClass" parameterType="classes" resultType="classes">
-     SELECT
-    C.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
-    ,C.CLASS_DSTN AS classDstn
-    ,M.MENTO_ID AS mentoId
-    ,M.MENTO_NM AS mentoNm
-    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
-    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    FROM TB_CLASS_L C
-    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    WHERE  ROWNUM <![CDATA[<=]]> 5
-    and C.USE_YN = 'Y'
-    ORDER BY likeCnt DESC
-</select>
+<!--<select id="selectLikeClass" parameterType="classes" resultType="classes">-->
+<!--     SELECT-->
+<!--    C.CLASS_ID AS classId-->
+<!--    ,C.CLASS_NM AS classNm-->
+<!--    ,C.CLASS_DSTN AS classDstn-->
+<!--    ,M.MENTO_ID AS mentoId-->
+<!--    ,M.MENTO_NM AS mentoNm-->
+<!--    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm-->
+<!--    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm-->
+<!--    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt-->
+<!--    FROM TB_CLASS_L C-->
+<!--    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID-->
+<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD-->
+<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD-->
+<!--    WHERE  ROWNUM <![CDATA[<=]]> 5-->
+<!--    and C.USE_YN = 'Y'-->
+<!--    ORDER BY likeCnt DESC-->
+<!--</select>-->
 
-<select id="selectCategoryClass" parameterType="String" resultType="classes">
-    SELECT
-    C.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
-    ,C.CLASS_DSTN AS classDstn
-    ,M.MENTO_ID AS mentoId
-    ,M.MENTO_NM AS mentoNm
-    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
-    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    FROM TB_CLASS_L C
-    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    WHERE 1=1
-    AND C.CLASS_CTGR_CD = #{classCtgrCd}
-    ORDER BY C.CRE_DTTM DESC
-</select>
+<!--<select id="selectCategoryClass" parameterType="String" resultType="classes">-->
+<!--    SELECT-->
+<!--    C.CLASS_ID AS classId-->
+<!--    ,C.CLASS_NM AS classNm-->
+<!--    ,C.CLASS_DSTN AS classDstn-->
+<!--    ,M.MENTO_ID AS mentoId-->
+<!--    ,M.MENTO_NM AS mentoNm-->
+<!--    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm-->
+<!--    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm-->
+<!--    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt-->
+<!--    FROM TB_CLASS_L C-->
+<!--    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID-->
+<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD-->
+<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD-->
+<!--    WHERE 1=1-->
+<!--    AND C.CLASS_CTGR_CD = #{classCtgrCd}-->
+<!--    ORDER BY C.CRE_DTTM DESC-->
+<!--</select>-->
 
 <update id="updateClass" parameterType="classes">
 UPDATE TB_CLASS_L
@@ -194,6 +194,18 @@ UPDATE TB_CLASS_L
      CLASS_ID=#{classId}
       AND
        CLASS_PROCESS_SEQNO=#{classProcessSeqno}
+</update>
+<update id="updateClassesCount" parameterType="classes">
+    UPDATE TB_CLASS_L
+    set
+        UPT_DTTM=sysdate,
+    CLASS_CURRENT_MTE = (
+    SELECT nvl(CLASS_CURRENT_MTE,0)+1
+    FROM
+    TB_CLASS_L
+    WHERE CLASS_ID=#{classId}
+    )
+    WHERE CLASS_ID=#{classId}
 </update>
 
 <delete id="deleteClassProcess" parameterType="classes">
@@ -280,6 +292,93 @@ CLASS_ID = #{classId}
     ORDER BY C.CLASS_PROCESS_SEQNO
 </select>
 
+<select id="selectMenteeClass" parameterType="Classes" resultType="classes">
+   SELECT
+  	C.CLASS_ID AS classId
+    ,C.CLASS_NM AS classNm
+    ,C.CLASS_DSTN AS classDstn
+    ,C.CLASS_STRT_DATE AS classStrtDate
+    ,M.MENTO_ID AS mentoId
+    ,M.MENTO_NM AS mentoNm
+    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
+    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
+    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
+    ,tmcll.MENTEE_ID AS menteeId
+    FROM TB_CLASS_L C
+    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
+    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
+    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
+    LEFT OUTER JOIN TB_MENTEE_CLASS_LIKE_L tmcll ON tmcll.MENTEE_ID = #{menteeId}
+    WHERE C.USE_YN = 'Y'
+    AND tmcll.CLASS_ID = C.CLASS_ID
+</select>
 
-
+<select id="selectClassesSearch" parameterType="classes" resultType="classes">
+SELECT
+  	C.CLASS_ID AS classId
+    ,C.CLASS_NM AS classNm
+    ,C.CLASS_DSTN AS classDstn
+    ,C.CLASS_STRT_DATE AS classStrtDate
+    ,C.CLASS_FILE_SEQNO AS classFileSeqno
+    ,M.MENTO_ID AS mentoId
+    ,M.MENTO_NM AS mentoNm
+    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
+    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
+    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
+    <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
+    ,tmcl.MENTEE_ID AS menteeId
+    </if>
+ FROM TB_CLASS_L C
+    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
+    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
+    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
+    <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
+    LEFT OUTER JOIN TB_MENTEE_CLASS_L tmcl ON tmcl.MENTEE_ID = #{menteeId}
+    </if>
+  WHERE C.USE_YN = 'Y'
+    <choose>
+        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS01")'>
+            <if test='searchStartDate !=null  and !searchStartDate.equals("")'>
+                AND C.CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')
+            </if>
+            <if test='searchEndDate !=null  and !searchEndDate.equals("")'>
+                AND C.CLASS_STRT_DATE <![CDATA[<=]]>   TO_DATE(#{searchEndDate}, 'YYYYMMDD')
+            </if>
+        </when>
+        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS02")'>
+            <if test='classCtgrCd != null and !classCtgrCd.equals("")'>
+                AND C.CLASS_CTGR_CD = #{classCtgrCd}
+            </if>
+            <if test='classDetailCtgrCd != null and !classDetailCtgrCd.equals("")'>
+                AND C.CLASS_DETAIL_CTGR_CD = #{classDetailCtgrCd}
+            </if>
+        </when>
+        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS04")'>
+            AND M.MENTO_NM LIKE '%${searchText}%'
+        </when>
+        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS05")'>
+            AND C.CLASS_NM LIKE '%${searchText}%'
+        </when>
+        <when test='(classesSearchTpCd != null and classesSearchTpCd.equals("CS06"))
+            or (classesSearchTpCd != null and classesSearchTpCd.equals("CS07"))'>
+              <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS06")'>
+                  AND TO_DATE(TO_CHAR(C.CLASS_STRT_DATE,'YYYY-MM-DD')
+                   || C.CLASS_STRT_TIME,'YYYY-MM-DD hh24:mi:ss')   <![CDATA[>]]>
+                  SYSDATE
+              </if>
+              <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS07")'>
+                  AND TO_DATE(TO_CHAR(C.CLASS_STRT_DATE,'YYYY-MM-DD')
+                  || C.CLASS_STRT_TIME,'YYYY-MM-DD hh24:mi:ss')  <![CDATA[<]]>
+                  SYSDATE - C.CLASS_DRTN_TIME/(24*60)
+              </if>
+            <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
+                AND C.CLASS_ID = tmcl.CLASS_ID
+            </if>
+            <if test='classesSearchMCd != null and classesSearchMCd.equals("MT02")'>
+                AND C.MENTO_ID = #{mentoId}
+            </if>
+        </when>
+    </choose>
+    ORDER BY C.CRE_DTTM DESC
+</select>
 </mapper>
