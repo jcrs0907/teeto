@@ -12,10 +12,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class Classes {
-    //클래스 신청하기
-    //TB_CLASS
+
+    private String memId;
     private String classId;
     private String mentoId;
+    private String menteeId;
     private String classCtgrCd;
     private String classDetailCtgrCd;
     private String classNm;
@@ -69,5 +70,13 @@ public class Classes {
 
     //클래스 디테일 업데이트 여부
     private String classDetailDeleteYn= "N";
+
+    //클래스 검색
+    private String classesSearchTpCd;
+    private String classesSearchMCd;
+    private String searchText;
+
+    //클래스 수정
+    private String classCountYn = "N";
 
 }
