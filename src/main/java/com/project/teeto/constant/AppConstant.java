@@ -22,6 +22,13 @@ public interface AppConstant {
     String SMS_TYPE_SMS = "SMS";
 
     /**
+     * 파일
+     */
+    //회원
+    String MEM_FILE_PATH = "./file/member";
+    String MEM_FILE_GROUP_CD = "ME";
+
+    /**
      * 인증 타입코드
      */
     String AUTH_TP_CD_PHONE = "APRQ01";

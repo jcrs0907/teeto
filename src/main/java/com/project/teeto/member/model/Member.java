@@ -20,9 +20,12 @@ public class Member {
     private String memEmail;
     private String memTel;
     private MultipartFile memProfileFile;
-    private String memProfileFileSeqno;
+    private Integer memProfileFileSeqno;
+    private String memProfileFileName;
+    private String memProfileFilePath;
     private String memTpCd;
     private String nickName;
+    private String creDttm;
 
 
     /**

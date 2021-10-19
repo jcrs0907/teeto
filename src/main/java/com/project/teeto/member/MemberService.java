@@ -1,6 +1,7 @@
 package com.project.teeto.member;
 
 import com.project.teeto.auth.AuthService;
+import com.project.teeto.file.FileService;
 import com.project.teeto.member.mapper.MemberMapper;
 import com.project.teeto.member.model.Member;
 import com.project.teeto.mentee.MenteeService;
@@ -9,6 +10,10 @@ import com.project.teeto.terms.TermsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import static com.project.teeto.constant.AppConstant.MEM_FILE_GROUP_CD;
+import static com.project.teeto.constant.AppConstant.MEM_FILE_PATH;
 
 @Service
 public class MemberService {
@@ -27,6 +32,9 @@ public class MemberService {
 
     @Autowired
     PwdService pwdService;
+
+    @Autowired
+    FileService fileService;
 
     /**
      * 이메일 중복체크
@@ -75,7 +83,7 @@ public class MemberService {
         try {
             //프로필 파일이 있을 경우
             if(member.getMemProfileFile() != null) {
-                //파일insert, setMembProfileSeqno
+                member.setMemProfileFileSeqno(insertImage(member.getMemProfileFile()));
             }
 
             //회원ID
@@ -141,6 +149,19 @@ public class MemberService {
         return result;
     }
 
+
+    /**
+     * 회원 상세
+     * @param memId
+     * @return
+     */
+    public Member getDetail(String memId) {
+        Member member = null;
+        member = memberMapper.getDetail(memId);
+        return member;
+    }
+
+
     /**
      * 회원 수정
      * @param member
@@ -160,5 +181,14 @@ public class MemberService {
         }
 
         return result;
+    }
+
+
+    /**
+     * 파일 관련
+     */
+    //이미지 등록 후 fileSeqno 반환
+    public Integer insertImage(MultipartFile file) {
+        return fileService.insert(file, MEM_FILE_PATH, MEM_FILE_GROUP_CD);
     }
 }

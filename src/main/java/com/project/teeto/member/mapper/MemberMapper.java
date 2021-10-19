@@ -22,5 +22,7 @@ public interface MemberMapper {
 
     int updatePassword(Member member);
 
+    Member getDetail(String memId);
+
     int update(Member member);
 }

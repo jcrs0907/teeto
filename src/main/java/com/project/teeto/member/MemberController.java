@@ -1,10 +1,14 @@
 package com.project.teeto.member;
 
+import com.project.teeto.auth.model.Auth;
 import com.project.teeto.member.model.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -77,6 +81,21 @@ public class MemberController {
     public boolean changePassword(@ModelAttribute Member member) {
         return memberService.changePassword(member);
     }
+
+
+    /**
+     * 회원 상세
+     * @param req
+     * @return
+     */
+    @GetMapping()
+    @ResponseBody
+    public Member getDetail(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        Auth auth = (Auth)session.getAttribute("member");
+        return memberService.getDetail(auth.getMemId());
+    }
+
 
     /**
      * 회원 수정

@@ -106,6 +106,26 @@
         AND MEM_ID = #{memId}
     </update>
 
+    <select id="getDetail"
+            parameterType="String"
+            resultType="member">
+        SELECT /* select - MemberMapper.xml : 211018 @eunseo */
+               M.MEM_NM AS memNm
+              ,M.MEM_EMAIL AS memEmail
+              ,M.MEM_TEL AS memTel
+              ,M.MEM_PROFILE_FILE_SEQNO AS memProfileFileSeqno
+              ,M.MEM_TP_CD AS memTpCd
+              ,M.CRE_DTTM AS creDttm
+              ,F.FILE_NM AS memProfileFileName
+              ,F.FILE_PATH AS memProfileFilePath
+        FROM TB_MEMBER_L M
+        LEFT OUTER JOIN TB_FILE_M F ON M.MEM_PROFILE_FILE_SEQNO = F.FILE_SEQNO
+        WHERE 1=1
+        AND M.USE_YN = 'Y'
+        AND F.USE_YN = 'Y'
+        AND M.MEM_ID = #{memId}
+    </select>
+
     <update id="update"
             parameterType="member">
         UPDATE TB_MEMBER_L /* update - MemberMapper.xml : 211011 @eunseo */
