@@ -29,31 +29,6 @@ public class ClassesController {
         return classesService.insert(classes);
     }
 
-//    //클래스 날짜별 검색하기
-//    @GetMapping("/dateSelect/{startDate}/{endDate}")
-//    public String selectDateClassList(
-//            @PathVariable String startDate,
-//            @PathVariable String endDate,
-//            Model model) {
-//
-//        model.addAttribute("classList",classesService.selectDateClass(startDate,endDate));
-//        return "selectDate";
-//    }
-//
-//    //클래스 인기순 검색하기
-//    @GetMapping("/likeSelect")
-//    public String selectLikeClassList(Model model) {
-//        model.addAttribute("likeClassList",classesService.selectLikeClass());
-//        return "selectLike";
-//    }
-//
-//    //클래스 카테고리 검색하기
-//    @GetMapping("/categorySelect/{categoryCd}")
-//    public String selectCategoryClassList(@PathVariable String categoryCd, Model model) {
-//        model.addAttribute("categoryClassList",classesService.selectCategoryClass(categoryCd));
-//        return "selectCategory";
-//    }
-
     //클래스 수정
     @PostMapping(value = "/update", produces = {"application/json;charset=utf-8"})
     @ResponseBody

@@ -292,9 +292,10 @@ CLASS_ID = #{classId}
     ORDER BY C.CLASS_PROCESS_SEQNO
 </select>
 
-<select id="selectMenteeClass" parameterType="Classes" resultType="classes">
+<select id="selectMenteeLikeClass" parameterType="Classes" resultType="classes">
    SELECT
-  	C.CLASS_ID AS classId
+     ML.MENTEE_ID AS menteeId
+  	 ,ML.CLASS_ID AS classId
     ,C.CLASS_NM AS classNm
     ,C.CLASS_DSTN AS classDstn
     ,C.CLASS_STRT_DATE AS classStrtDate
@@ -303,14 +304,13 @@ CLASS_ID = #{classId}
     ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
     ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
     ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    ,tmcll.MENTEE_ID AS menteeId
-    FROM TB_CLASS_L C
-    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
+    FROM TB_MENTEE_CLASS_LIKE_L ML
+    LEFT OUTER JOIN TB_CLASS_L C ON C.CLASS_ID = ML.CLASS_ID
+    LEFT OUTER JOIN TB_MENTO_I M ON M.MENTO_ID = C.MENTO_ID
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
     LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_MENTEE_CLASS_LIKE_L tmcll ON tmcll.MENTEE_ID = #{menteeId}
-    WHERE C.USE_YN = 'Y'
-    AND tmcll.CLASS_ID = C.CLASS_ID
+    WHERE ML.USE_YN = 'Y'
+    AND ML.MENTEE_ID = #{menteeId}
 </select>
 
 <select id="selectClassesSearch" parameterType="classes" resultType="classes">
