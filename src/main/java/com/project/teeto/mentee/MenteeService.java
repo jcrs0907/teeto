@@ -92,11 +92,12 @@ public class MenteeService {
         List<Classes> list = null;
         Classes classes = new Classes();
 
-        if(classes.getClassesSearchMCd() != null && classes.getClassesSearchMCd().equals(MEM_TP_CD_MENTEE)){
+        if(mentee.getMemberTypeCode() != null && mentee.getMemberTypeCode().equals(MEM_TP_CD_MENTEE)){
             classes.setMenteeId(auth.getMenteeId());
         }
 
-        list = classesMapper.selectMenteeClass(classes);
+        list = classesMapper.selectMenteeLikeClass(classes);
+
         return list;
     }
 

@@ -44,7 +44,7 @@ public interface ClassesMapper {
     List<Classes> selectClassProcess(String classId);
 
     //멘티 찜한 클래스 출력
-    List<Classes> selectMenteeClass(Classes classes);
+    List<Classes> selectMenteeLikeClass(Classes classes);
 
     //클래스 목록 반환
     List<Classes> selectClassesSearch(Classes classes);
