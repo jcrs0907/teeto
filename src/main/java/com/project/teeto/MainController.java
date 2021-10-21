@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @GetMapping
-    public String main(Model model) {
+    public String main() {
         return "index";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 
 }

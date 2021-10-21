@@ -21,17 +21,10 @@ public class TilesConfig {
     }
 
     @Bean(name = "viewResolver")
-//    public TilesViewResolver tilesViewResolver() {
-//        TilesViewResolver resolver = new TilesViewResolver();
-//        resolver.setViewClass(TilesView.class);
-//        resolver.setOrder(1);//뷰 우선순위
-//
-//        return resolver;
-//    }
-
     public UrlBasedViewResolver tilesViewResolver(){
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
         resolver.setViewClass(TilesView.class);
+        //        resolver.setOrder(1);//뷰 우선순위
         return resolver;
     }
 }

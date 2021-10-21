@@ -5,12 +5,19 @@
 <tiles-definitions>
     <!-- 메뉴 표시 -->
     <definition name="base" template="/WEB-INF/views/index.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/common/head.jsp"/>
         <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
         <put-attribute name="content"/>
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
     </definition>
 
     <definition name="index" extends="base">
-        <put-attribute name="content" value="ㄴㅇㅀ" />
+        <put-attribute name="content" value="/WEB-INF/views/main/main.jsp" />
     </definition>
+
+    <definition name="login" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/member/login.jsp" />
+    </definition>
+
+
 </tiles-definitions>

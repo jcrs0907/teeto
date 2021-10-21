@@ -1,3 +1,45 @@
+/* 여백 초기화 */
+body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,select,table,td,textarea,th,ul,figure,figcaption,pre{margin:0;padding:0}
+
+/* 테투리 초기화 */
+fieldset,img{border:0 none}
+
+/* 리스트 스타일 초기화 */
+dl,ul,ol,menu,li{list-style:none}
+
+/* quotes 초기화 */
+blockquote, q{quotes: none}
+blockquote:before, blockquote:after,q:before, q:after{content:'';content:none}
+
+/* 정렬 초기화 */
+input,select,textarea,button{vertical-align:middle; box-sizing:border-box; border-style: none;-webkit-appearance: none; -webkit-border-radius: 0;}
+
+/* 버튼 초기화 */
+button{border:0 none;background-color:transparent;cursor:pointer}
+/* a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+*:focus {outline: none !important;} */
+
+/* 제목 폰트 초기화 */
+h1,h2,h3,h4,h5,h6 {font-size: 12px; font-weight:normal;}
+
+/* 링크 초기화 */
+a{color:#222;text-decoration:none}
+a:hover{text-decoration:none}
+/*a:active{background-color:transparent}*/
+
+/* 폰트 스타일 초기화 */
+address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:400}
+
+/* 반응형 이미지 */
+img, video {width: 100%;}
+
+/*img, a*/
+a, img{display: inline-block; vertical-align: middle;}
+
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -23,6 +65,8 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
     font-family: 'Noto Sans KR', sans-serif;
+    color: #161931;
+    font-weight: 400;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
