@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.project.teeto.constant.AppConstant.CLASS_SEARCH_TP_CD_DATE;
-//CLASS_SEARCH_TP_CD_CATEGORY
-//CLASS_SEARCH_TP_CD_LIKE
-
 import java.util.List;
 
 @Controller
