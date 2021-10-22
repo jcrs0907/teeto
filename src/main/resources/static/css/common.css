@@ -12,7 +12,7 @@ li, input, textarea, a, button{font-size: 2vw;}
 main{padding: 200px 0 500px 0; background: beige}
 /*header*/
 /*box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%); background-color: rgba(249,251,252,.95); */
-.header{ position: fixed;top: 0;left: 0;width: 100%; z-index: 90;     transition: .3s;}
+.header{ position: fixed;top: 0;left: 0;width: 100%; z-index: 90;transition: .3s;}
 .header button,
 .header a:not(.logo){flex:0 0 auto; font-size: 16px;}
 .header{height: 65px; display: flex; align-items: center; padding: 0 12px; box-sizing: border-box; width: 100%;font-size: 1.5vw; }
