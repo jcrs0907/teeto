@@ -1,6 +1,58 @@
+body{ word-break:  keep-all;}
+
+/*navbar(header) scroll*/
+.navbar.scroll{box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%); background-color: rgb(255 255 255 / 95%); transition: .3s;}
+
+/*class category background color*/
+/*
+DS		디자인
+DV		개발
+CK		요리
+MS		음악
+EC		운동
+PT		사진, 영상
+MN		수익창출
+*/
+.cate-bg-ds{background-image: linear-gradient(294deg,#8400ff,#a25df4)}
+.cate-bg-dv{background-image: linear-gradient(294deg,#ae1de9,#c256ee)}
+.cate-bg-ck{background-image:linear-gradient(294deg,#2468dd,#2c76f7) }
+.cate-bg-ms{background-image: linear-gradient(294deg,rgba(255,182,0,.99),#fbc731);}
+.cate-bg-ec{background-image: linear-gradient(0deg,#3cbaa5,#4ac7ac);}
+.cate-bg-pt{background-image: linear-gradient(294deg,#8400ff,#a25df4)}
+.cate-bg-mn{background-image: linear-gradient(294deg,#ae1de9,#c256ee)}
+
+.cate-badge-shape{padding: 0.3rem 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 1.0rem;
+    color: #fff;
+    font-size: 0.7rem;}
+.cate-badge-ds{background-color: #6227c1}
+.cate-badge-dv{background-color: #ac2bdf}
+
 /*content*/
-.logo{font-size: 24px; letter-spacing: 0.5px; font-weight: 600;}
+.logo{font-size: 24px; letter-spacing: 0.5px; font-weight: 800;}
 main{padding: 200px 0 500px 0; background: beige}
+
+/*class*/
+.class-columns{flex-wrap: wrap; display: flex}
+.class-columns .class-column{ min-width: 25%;max-width: 25%;}
+.class-card{overflow: hidden}
+.class-card:hover{cursor: pointer;}
+.class-card .class-icon{transform-origin: left;width: 4.4rem;height: 4.4rem;padding: 0.7rem;background-color: #fff; -webkit-border-radius: 50%; -moz-border-radius: 50%;
+    border-radius: 50%; box-shadow: 0 2px 7px 0 rgb(0 0 0 / 11%); border: 1px solid #dde0ea; overflow: hidden; position: absolute; z-index:1; left:15px; top:15px;}
+.class-card .class-card-header{height: 3.3rem;z-index: 0;position: relative;padding: 0.8rem 0.6rem 0.8rem 1rem; text-align: right; box-sizing: border-box;
+display: flex; align-items: center; justify-content: end;}
+.class-card .class-card-content{padding:2.8rem 1rem 1.2rem 1.6rem;}
+.class-card .like-btn{width: 32px; height: 32px; width: 32px; height: 32px; background-color: rgba(0,0,0,0.0); border: 0; padding: 0;
+    display: flex; align-items: center; justify-content: center; border-radius: 50px; margin-left:10px;}
+.class-card .class-title{overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; height: 50px;}
+.class-card .like-btn:hover,
+.class-card .like-btn:active{background-color: rgba(248, 248, 248, 0.2);text-decoration-line: none; cursor: pointer;}
+.class-card .like-btn.clicked svg path{fill: #fd3049}
+.class-card ion-icon {font-size: 16px;}
 
 /*footer*/
 .footer{padding: 0 12px 24px 0; box-sizing: border-box; width: 100%;    border-top: 1px solid #eee; padding-top: 12px;}
@@ -11,8 +63,15 @@ main{padding: 200px 0 500px 0; background: beige}
 .footer-menu .sns:last-child{margin-right: 0;}
 .footer-menu .sns svg{width: 28px; height: 28px;}
 .footer-menu .sns svg path{fill: #161931;}
-
 .footer-menu a,
 .footer .site-info li{flex:0 0 auto; font-size: 14px; }
 .footer .site-info li{margin-bottom: 12px;opacity: 0.6;}
+
+@media screen and (max-width: 1024px){
+    .class-columns .class-column{min-width: 50%}
+}
+
+@media screen and (max-width: 600px){
+    .class-columns .class-column{min-width: 100%}
+}
 

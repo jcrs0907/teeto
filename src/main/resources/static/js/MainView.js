@@ -6,51 +6,50 @@ MainView.setup = function (el) {
     this.init(el)
     this.header = el;
     this.navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    window.addEventListener('scroll', this.headerScrollEvent());
+
+
     this.bindEvents()
     return this
 }
 
 MainView.bindEvents = function () {
+    this.onNavScroll(this.header);
+
     //navbar Burgers
     if (this.navbarBurgers.length > 0) {
-        this.navbarBurgers.forEach( el => {
-            el.addEventListener('click', () => {
-                const target = el.dataset.target;
-                const $target = document.getElementById(target);
-
-                el.classList.toggle('is-active');
-                $target.classList.toggle('is-active');
-            });
-        });
+        this.navbarBurgers.forEach( element => this.onNavToggle(element));
     }
 
-    // //window scroll
-    // let last_known_scroll_position = 0;
-    // let ticking = false;
-    //
-    // function doSomething(scroll_pos) {
-    //     // scroll 위치에 대한 작업을 하세요
-    //
-    // }
-    //
-    // window.addEventListener('scroll', function(e) {
-    //
-    // });
+
+}
+MainView.onNavScroll = function(element){
+    let last_known_scroll_position = 0;
+    let ticking = false;
+    let header = this.header;
+    window.addEventListener('scroll', function() {
+        last_known_scroll_position = window.scrollY;
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                if(last_known_scroll_position != 0){
+                    header.classList.add("scroll");
+                }else{
+                    header.classList.remove("scroll");
+                }
+                ticking = false;
+            });
+        }
+        ticking = true;
+    });
 }
 
-MainView.headerScrollEvent = function(last_known_scroll_position = 0, ticking = false){
-    last_known_scroll_position = window.scrollY;
+MainView.onNavToggle = function(element){
+    element.addEventListener('click', () => {
+        const target = element.dataset.target;
+        const $target = document.getElementById(target);
 
-    if (!ticking) {
-        window.requestAnimationFrame(function() {
-            console.log("z")
-            ticking = false;
-        });
-
-
-        ticking = true;
-    }
+        element.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+    });
 }
 
 export default MainView

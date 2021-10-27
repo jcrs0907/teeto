@@ -1,29 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<section class="hero is-fullheight">
-    <!-- Hero head: will stick at the top -->
-
-
-    <!-- Hero content: will be in the middle -->
+<section class="section hero is-fullheight">
     <div class="hero-body">
-        <div class="container is-max-desktop">
-            <div class="columns is-variable is-4 is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+        <div class="container is-max-widescreen">
+            <%--is-variable is-4 is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd--%>
+            <div class="columns ">
                 <div class="column">
-<%--                    <p class="title is-1 is-spaced">Title 1</p>--%>
-<%--                    <p class="subtitle is-3">Subtitle 3</p>--%>
-
-<%--                    <p class="title is-2 is-spaced">Title 2</p>--%>
-<%--                    <p class="subtitle is-4">Subtitle 4</p>--%>
-
-<%--                    <p class="title is-3 is-spaced">Title 3</p>--%>
-<%--                    <p class="subtitle is-5">Subtitle 5</p>--%>
-                    <div class="main-tabs tabs">
+                    <div class="main-tabs tabs mb-6">
                         <ul>
                             <li class="is-active"><a>클래스 이름으로 찾기</a></li>
                             <li><a>멘토 이름으로 찾기</a></li>
                         </ul>
                     </div>
-                    <div class="title is-2 is-spaced">
+                    <div class="is-size-1 has-text-black mb-5 has-text-weight-bold">
                         1분 만에 <br>
                         클래스를 찾아드려요
                     </div>
@@ -33,323 +22,535 @@
 
                     <div class="category-icon-list columns is-multiline is-4 is-mobile">
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                       <ion-icon name="brush-outline"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">디자인</span>
+                            </a>
                         </div>
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                        <ion-icon name="code"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">개발</span>
+                            </a>
                         </div>
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                        <ion-icon name="code"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">요리</span>
+                            </a>
                         </div>
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                        <ion-icon name="code"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">음악</span>
+                            </a>
                         </div>
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                        <ion-icon name="code"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">운동</span>
+                            </a>
                         </div>
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                        <ion-icon name="code"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">사진, 영상</span>
+                            </a>
                         </div>
                         <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
+                            <a class="category-btn button is-white">
+                                 <span class="icon mr-0 ml-0 mb-2">
+                                        <ion-icon name="code"></ion-icon>
+                                    </span>
+                                <span class="is-size-7">수익창출</span>
+                            </a>
                         </div>
-                        <div class="column is-one-quarter has-text-centered">
-                            <button class="button is-large">
-                                <span class="icon is-large">
-                                  z
-                                </span>
-                            </button>
-                        </div>
+                        <%--<div class="column is-one-quarter has-text-centered">--%>
+                            <%--<a class="category-btn button is-white">--%>
+                                 <%--<span class="icon mr-0 ml-0 mb-2">--%>
+                                        <%--<ion-icon name="code"></ion-icon>--%>
+                                    <%--</span>--%>
+                                <%--<span class="is-size-7">그래픽 디자인</span>--%>
+                            <%--</a>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
-                <div class="column">
-
+                <div class="main-bg-area column p-0 is-flex is-justify-content-flex-end is-three-fifths">
+                    <img src="/img/main.png" style="object-fit: contain">
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-<section class="hero-body">
-    <div class="container is-max-widescreen">
-
-        <h3 class="title is-4 is-bold">
-            특정 카테고리
-        </h3>
-
-        <div class="columns is-desktop is-4">
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
+<section class="section">
+    <div class="container is-widescreen">
+        <div class="is-flex is-justify-content-space-between is-align-items-center mb-5">
+            <h3 class="is-size-4 has-text-weight-bold">
+                <span class="cate-badge-ds has-text-white-bis">디자인</span> 카테고리에서 인기있어요! </h3>
+            <a href="/" class="is-size-7 has-text-black is-underlined">더보기</a>
+        </div>
+        <div class="class-columns columns is-desktop is-4">
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
                     </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-header cate-bg-ds">
+                        <span class="cate-badge-shape cate-badge-ds">
+                            그래픽디자인
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
                     </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                              <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
                     </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-header cate-bg-ds">
+                        <span class="cate-badge-shape cate-badge-ds">
+                            그래픽디자인
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
                     </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-header cate-bg-ds">
+                        <span class="cate-badge-shape cate-badge-ds">
+                            그래픽디자인
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
+                    </div>
+                    <div class="class-card-header cate-bg-ds">
+                        <span class="cate-badge-shape cate-badge-ds">
+                            그래픽디자인
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="hero-body">
-    <div class="container is-max-widescreen">
-        <h3 class="title is-4 is-bold">특정 카테고리 </h3>
-        <div class="columns is-desktop is-4">
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
+<section class="section mb-6">
+    <div class="container is-widescreen">
+        <div class="is-flex is-justify-content-space-between is-align-items-center mb-5">
+            <h3 class="is-size-4 has-text-weight-bold">
+                <span class="cate-bg-dv has-text-white-bis">개발</span> 카테고리에서 인기있어요! </h3>
+            <a href="/" class="is-size-7 has-text-black is-underlined">더보기</a>
+        </div>
+        <div class="class-columns columns is-desktop is-4">
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
                     </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-header cate-bg-dv">
+                        <span class="cate-badge-shape cate-badge-dv">
+                            서버 · 백엔드
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
                     </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
                     </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                        </div>
+                    <div class="class-card-header cate-bg-dv">
+                        <span class="cate-badge-shape cate-badge-dv">
+                            서버 · 백엔드
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
+                    </div>
+                    <div class="class-card-header cate-bg-dv">
+                        <span class="cate-badge-shape cate-badge-dv">
+                            서버 · 백엔드
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="class-column column">
+                <div class="class-card card">
+                    <div class="class-icon">
+                    </div>
+                    <div class="class-card-header cate-bg-dv">
+                        <span class="cate-badge-shape cate-badge-dv">
+                            서버 · 백엔드
+                        </span>
+                        <button class="like-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="class-card-content">
+                        <ul>
+                            <li class="mento-nickname is-size-7">
+                                멘토 닉네임
+                            </li>
+                            <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                                클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                            </li>
+                            <li class="class-info is-size-7 mb-1">
+                                <span class="icon-text">
+                                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                  <span> 성남시 수정구</span>
+                                </span>
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="calendar-number-outline"></ion-icon>
+                                    </span>
+                                    <span>2021-03-10 금요일 2시</span>
+                                 </span>
+                            </li>
+                            <li class="class-info is-size-7 has-text-grey-light ">
+                              <span class="icon-text">
+                                   <span class="icon">
+                                        <ion-icon name="person"></ion-icon>
+                                   </span>
+                                    <span>0 / 10</span>
+                              </span>
+                                <span class="icon-text">
+                                  <span class="icon">
+                                      <ion-icon name="heart"></ion-icon>
+                                  </span>
+                                   <span>10</span>
+                              </span>
+                            </li>
+                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
+                                ₩ 37,000
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

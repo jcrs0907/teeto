@@ -67,6 +67,7 @@ time, mark, audio, video {
     font-family: 'Noto Sans KR', sans-serif;
     color: #161931;
     font-weight: 400;
+    word-break:  keep-all;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
