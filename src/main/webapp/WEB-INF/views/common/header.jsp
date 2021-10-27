@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<header id="header" class="header">
+<header class="header" style="display:none">
     <div class="container">
         <a href="/" class="logo">TEETO</a>
         <ul class="header-menu">
@@ -20,9 +20,9 @@
         </ul>
         <ul class="member-menu">
             <li><a href="/login">로그인</a></li>
-            <li style="display:none;">
+            <li>
                 <button data-menu="userMenu" name="userBtn">아이콘</button>
-                <ul data-type="userMemu" class="user-menu">
+                <ul id="userMenu" class="user-menu">
                     <li><a href="">마이페이지</a></li>
                     <li><a href="">로그아웃</a></li>
                 </ul>
@@ -30,3 +30,84 @@
         </ul>
     </div>
 </header>
+<nav  id="header" class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <span class="logo">TEETO</span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">
+                클래스
+            </a>
+
+            <a class="navbar-item">
+                멘토
+            </a>
+            <a class="navbar-item">
+                인기있는 클래스
+            </a>
+            <a class="navbar-item">
+                날짜별 클래스
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-link is-arrowless">
+                    커뮤니티
+                </div>
+
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item">
+                        멘티 정기모임/스터디
+                    </a>
+                    <a class="navbar-item">
+                        멘토 정보 공유
+                    </a>
+<%--                    <a class="navbar-item">--%>
+<%--                        Contact--%>
+<%--                    </a>--%>
+<%--                    <hr class="navbar-divider">--%>
+<%--                    <a class="navbar-item">--%>
+<%--                        Report an issue--%>
+<%--                    </a>--%>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-black">
+                        <strong>멘토 신청하기</strong>
+                    </a>
+                    <a class="button is-white">
+                        로그인
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-link is-arrowless">
+                    아이콘
+                </div>
+
+                <div class="navbar-dropdown is-boxed is-right">
+                    <a class="navbar-item">
+                        마이페이지
+                    </a>
+                    <a class="navbar-item">
+                        로그아웃
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

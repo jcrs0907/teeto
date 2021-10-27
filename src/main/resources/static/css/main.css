@@ -1,0 +1,7 @@
+/*main*/
+.main-tabs.tabs a{}
+.main-tabs.tabs ul{    width: 100%;
+    border-bottom-color: #dbdbdb;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;}
+

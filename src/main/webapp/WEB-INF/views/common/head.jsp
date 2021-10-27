@@ -10,8 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
 <%--style--%>
-<link rel="stylesheet" href="/css/reset.css">
+<%--<link rel="stylesheet" href="/css/reset.css">--%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/main.css">
 <%--js--%>
 <script type="module" src="/js/app.js"></script>

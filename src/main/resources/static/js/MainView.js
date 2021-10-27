@@ -4,37 +4,53 @@ const MainView = Object.create(View);
 
 MainView.setup = function (el) {
     this.init(el)
-    this.communityBtn = el.querySelector('[name=communityBtn]');
-    this.userBtn = el.querySelector('[name=userBtn]');
+    this.header = el;
+    this.navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    window.addEventListener('scroll', this.headerScrollEvent());
     this.bindEvents()
     return this
 }
 
 MainView.bindEvents = function () {
-    this.on('submit', e => e.preventDefault())
-    this.communityBtn.addEventListener('click', e => this.onToggleMenu(e))
-    this.communityBtn.addEventListener('keyup', e => this.onToggleMenu(e))
-    this.userBtn.addEventListener('click', e => this.onToggleMenu(e))
-    this.userBtn.addEventListener('keyup', e => this.onToggleMenu(e))
-}
+    //navbar Burgers
+    if (this.navbarBurgers.length > 0) {
+        this.navbarBurgers.forEach( el => {
+            el.addEventListener('click', () => {
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
 
-MainView.onToggleMenu = function (e) {
-    let target = e.currentTarget;
-    let menu = this.el.querySelector('[id='+e.currentTarget.dataset.menu+']');
-    if(target.className === 'active'){
-        target.className = ''
-        this.showMenu(false, menu);
-
-    }else{
-        target.className = 'active'
-        this.showMenu(true, menu);
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+            });
+        });
     }
 
+    // //window scroll
+    // let last_known_scroll_position = 0;
+    // let ticking = false;
+    //
+    // function doSomething(scroll_pos) {
+    //     // scroll 위치에 대한 작업을 하세요
+    //
+    // }
+    //
+    // window.addEventListener('scroll', function(e) {
+    //
+    // });
 }
 
+MainView.headerScrollEvent = function(last_known_scroll_position = 0, ticking = false){
+    last_known_scroll_position = window.scrollY;
 
-MainView.showMenu = function (show = true, el) {
-    el.style.display = show ? 'block' : 'none'
+    if (!ticking) {
+        window.requestAnimationFrame(function() {
+            console.log("z")
+            ticking = false;
+        });
+
+
+        ticking = true;
+    }
 }
 
 export default MainView
