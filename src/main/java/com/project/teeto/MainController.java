@@ -22,5 +22,16 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
+    @GetMapping("/reset-password/request")
+    public String resetPassword() {
+        return "resetPassword";
+    }
+
+
 
 }

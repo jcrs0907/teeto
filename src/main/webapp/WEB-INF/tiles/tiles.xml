@@ -10,13 +10,21 @@
         <put-attribute name="content"/>
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
     </definition>
-
+    <definition name="loginBase" template="/WEB-INF/views/member/base.jsp">
+        <put-attribute name="head" value="/WEB-INF/views/common/head.jsp"/>
+        <put-attribute name="content"/>
+    </definition>
     <definition name="index" extends="base">
         <put-attribute name="content" value="/WEB-INF/views/main/main.jsp" />
     </definition>
-
-    <definition name="login" extends="base">
+    <definition name="login" extends="loginBase">
         <put-attribute name="content" value="/WEB-INF/views/member/login.jsp" />
+    </definition>
+    <definition name="signup" extends="loginBase">
+        <put-attribute name="content" value="/WEB-INF/views/member/signup.jsp" />
+    </definition>
+    <definition name="resetPassword" extends="loginBase">
+        <put-attribute name="content" value="/WEB-INF/views/member/resetPassword.jsp" />
     </definition>
 
 

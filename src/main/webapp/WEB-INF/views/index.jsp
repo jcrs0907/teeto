@@ -9,7 +9,7 @@
     <%--head 추가할 사항 메타 태그 내용--%>
     <tiles:insertAttribute name="head"/>
 </head>
-<body>
+<body id="body">
 <tiles:insertAttribute name="header" />
 <tiles:insertAttribute name="content" />
 <tiles:insertAttribute name="footer" />

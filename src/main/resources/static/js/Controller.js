@@ -5,6 +5,8 @@ const tag = '[controller]'
 
 export default {
     init() {
-        mainView.setup(document.querySelector('#header'))
+            mainView.setup(document.querySelector('#body'))
+
+
     }
 }

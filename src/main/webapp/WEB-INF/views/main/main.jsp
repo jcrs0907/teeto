@@ -40,7 +40,7 @@
                         <div class="column is-one-quarter has-text-centered">
                             <a class="category-btn button is-white">
                                  <span class="icon mr-0 ml-0 mb-2">
-                                        <ion-icon name="code"></ion-icon>
+                                        <ion-icon name="restaurant-outline"></ion-icon>
                                     </span>
                                 <span class="is-size-7">요리</span>
                             </a>
@@ -48,7 +48,7 @@
                         <div class="column is-one-quarter has-text-centered">
                             <a class="category-btn button is-white">
                                  <span class="icon mr-0 ml-0 mb-2">
-                                        <ion-icon name="code"></ion-icon>
+                                        <ion-icon name="musical-notes-outline"></ion-icon>
                                     </span>
                                 <span class="is-size-7">음악</span>
                             </a>
@@ -56,7 +56,7 @@
                         <div class="column is-one-quarter has-text-centered">
                             <a class="category-btn button is-white">
                                  <span class="icon mr-0 ml-0 mb-2">
-                                        <ion-icon name="code"></ion-icon>
+                                        <ion-icon name="american-football-outline"></ion-icon>
                                     </span>
                                 <span class="is-size-7">운동</span>
                             </a>
@@ -64,7 +64,7 @@
                         <div class="column is-one-quarter has-text-centered">
                             <a class="category-btn button is-white">
                                  <span class="icon mr-0 ml-0 mb-2">
-                                        <ion-icon name="code"></ion-icon>
+                                        <ion-icon name="camera-outline"></ion-icon>
                                     </span>
                                 <span class="is-size-7">사진, 영상</span>
                             </a>
@@ -72,7 +72,7 @@
                         <div class="column is-one-quarter has-text-centered">
                             <a class="category-btn button is-white">
                                  <span class="icon mr-0 ml-0 mb-2">
-                                        <ion-icon name="code"></ion-icon>
+                                        <ion-icon name="card-outline"></ion-icon>
                                     </span>
                                 <span class="is-size-7">수익창출</span>
                             </a>
@@ -99,7 +99,7 @@
     <div class="container is-widescreen">
         <div class="is-flex is-justify-content-space-between is-align-items-center mb-5">
             <h3 class="is-size-4 has-text-weight-bold">
-                <span class="cate-badge-ds has-text-white-bis">디자인</span> 카테고리에서 인기있어요! </h3>
+                디자인 카테고리에서 인기있어요! </h3>
             <a href="/" class="is-size-7 has-text-black is-underlined">더보기</a>
         </div>
         <div class="class-columns columns is-desktop is-4">

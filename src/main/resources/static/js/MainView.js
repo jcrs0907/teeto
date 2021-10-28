@@ -4,17 +4,17 @@ const MainView = Object.create(View);
 
 MainView.setup = function (el) {
     this.init(el)
-    this.header = el;
-    this.navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    if(document.querySelectorAll("#header").length){
+        this.header = document.querySelector("#header");
+        this.navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        this.bindEvents()
+    }
 
-
-    this.bindEvents()
     return this
 }
 
 MainView.bindEvents = function () {
     this.onNavScroll(this.header);
-
     //navbar Burgers
     if (this.navbarBurgers.length > 0) {
         this.navbarBurgers.forEach( element => this.onNavToggle(element));
