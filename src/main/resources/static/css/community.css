@@ -1,0 +1,11 @@
+.community-card .community-title{overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 60px
+;}
+
+.community-card{padding-top: 3.7rem;padding-bottom: 3.45rem; border-bottom: 0.1rem solid hsla(0,0%,59.2%,.3);}
+
+.community-card .user-icon{box-shadow: 0 2px 7px 0 rgb(0 0 0 / 11%);
+    width:32px; height:32px; border-radius:50%;}

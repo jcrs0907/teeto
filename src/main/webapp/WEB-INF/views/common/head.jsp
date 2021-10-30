@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/css/common.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="/css/community.css">
 <%--js--%>
 <%--icon--%>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

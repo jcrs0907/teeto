@@ -10,6 +10,7 @@
         <put-attribute name="content"/>
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
     </definition>
+    <!--member-->
     <definition name="loginBase" template="/WEB-INF/views/member/base.jsp">
         <put-attribute name="head" value="/WEB-INF/views/common/head.jsp"/>
         <put-attribute name="content"/>
@@ -25,6 +26,10 @@
     </definition>
     <definition name="resetPassword" extends="loginBase">
         <put-attribute name="content" value="/WEB-INF/views/member/resetPassword.jsp" />
+    </definition>
+    <!--community-->
+    <definition name="communityList" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/community/communityList.jsp" />
     </definition>
 
 
