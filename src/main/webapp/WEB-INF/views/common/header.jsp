@@ -40,10 +40,10 @@
                 </div>
 
                 <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item">
+                    <a href="/community/list" class="navbar-item">
                         멘티 정기모임/스터디
                     </a>
-                    <a class="navbar-item">
+                    <a href="/community/list" class="navbar-item">
                         멘토 정보 공유
                     </a>
                 </div>
@@ -69,10 +69,10 @@
             <div class="navbar-item is-hidden-mobile is-hidden-tablet-only">
                 <div class="buttons">
                     <a class="button is-black">
-                        <strong>멘토 신청하기</strong>
+                        멘토 신청하기
                     </a>
                     <a class="button is-black">
-                        <strong>클래스 신청하기</strong>
+                        클래스 신청하기
                     </a>
                     <a href="/login" class="button is-white">
                         로그인

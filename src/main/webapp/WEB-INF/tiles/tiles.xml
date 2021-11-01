@@ -31,6 +31,15 @@
     <definition name="communityList" extends="base">
         <put-attribute name="content" value="/WEB-INF/views/community/communityList.jsp" />
     </definition>
-
+    <definition name="communityWrite" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/community/communityWrite.jsp" />
+    </definition>
+    <definition name="communityDetail" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/community/communityDetail.jsp" />
+    </definition>
+    <!--FAQ-->
+    <definition name="faq" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/faq/faq.jsp" />
+    </definition>
 
 </tiles-definitions>

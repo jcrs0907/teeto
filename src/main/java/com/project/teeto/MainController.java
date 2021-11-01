@@ -32,12 +32,19 @@ public class MainController {
         return "resetPassword";
     }
 
-    @GetMapping("/communityList")
+    @GetMapping("/community/list")
     public String communityList() {
         return "communityList";
     }
 
+    @GetMapping("/community/write")
+    public String communityWrite() {
+        return "communityWrite";
+    }
 
-
+    @GetMapping("/community/detail")
+    public String communityDetail() {
+        return "communityDetail";
+    }
 
 }

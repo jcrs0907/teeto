@@ -36,6 +36,8 @@ MN		수익창출
 .logo{font-size: 24px; letter-spacing: 0.5px; font-weight: 800; color:#0a0a0a;}
 .login-logo{font-size:40px;}
 main{padding: 200px 0 500px 0; background: beige}
+.user-icon{box-shadow: 0 2px 7px 0 rgb(0 0 0 / 11%);border-radius:50%;}
+.image-full{object-fit: contain}
 
 /*class*/
 .class-columns{flex-wrap: wrap; display: flex}
@@ -56,16 +58,16 @@ display: flex; align-items: center; justify-content: end;}
 .class-card ion-icon {font-size: 16px;}
 
 /*footer*/
-.footer{padding: 0 12px 24px 0; box-sizing: border-box; width: 100%;    border-top: 1px solid #eee; padding-top: 12px;}
+.footer{padding: .5rem .75rem; box-sizing: border-box; width: 100%;    border-top: 1px solid #eee; padding-top: 12px;}
 .footer .logo-wrap{padding: 12px 0 20px 0;}
-.footer-menu{display: flex; align-items: center; }
+.footer-menu{display: flex;align-items: center;/* flex-wrap: wrap; */}
 .footer-menu > li{margin-right: 16px;}
 .footer-menu .sns:not(:last-child){margin-left: auto; margin-right: 20px;}
 .footer-menu .sns:last-child{margin-right: 0;}
 .footer-menu .sns svg{width: 28px; height: 28px;}
 .footer-menu .sns svg path{fill: #161931;}
 .footer-menu a,
-.footer .site-info li{flex:0 0 auto; font-size: 14px; }
+.footer .site-info li{flex:0 0 auto;font-size: 14px;color: #0a0a0a;}
 .footer .site-info li{margin-bottom: 12px;opacity: 0.6;}
 
 @media screen and (max-width: 1024px){
