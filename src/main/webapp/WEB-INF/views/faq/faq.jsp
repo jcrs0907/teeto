@@ -1,12 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-    .faq-cate-list .faq-link-btn{width: 100%;}
-    .faq-item{overflow: hidden; transition: .3s;}
-    .faq-item:not(.open) .faq-content{display: none;}
-    .faq-item.open ion-icon{transform: rotate(180deg)}
-</style>
+<link rel="stylesheet" type ="text/css" href="/css/faq.css">
 <section class="hero is-dark is-large">
     <div class="hero-body">
         <div class="container has-text-centered">

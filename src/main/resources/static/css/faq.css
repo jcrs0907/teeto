@@ -1,0 +1,4 @@
+.faq-cate-list .faq-link-btn{width: 100%;}
+.faq-item{overflow: hidden; transition: .3s;}
+.faq-item:not(.open) .faq-content{display: none;}
+.faq-item.open ion-icon{transform: rotate(180deg)}

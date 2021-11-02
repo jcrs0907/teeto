@@ -1,6 +1,7 @@
 body{ word-break:  keep-all;}
 
 /*navbar(header) scroll*/
+.navbar{min-height:3rem;}
 .navbar.scroll{box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%); background-color: rgb(255 255 255 / 95%); transition: .3s;}
 .navbar.scroll .navbar-menu{background-color: rgb(255 255 255 / 95%);}
 /*class category background color*/
@@ -58,7 +59,7 @@ display: flex; align-items: center; justify-content: end;}
 .class-card ion-icon {font-size: 16px;}
 
 /*footer*/
-.footer{padding: .5rem .75rem; box-sizing: border-box; width: 100%;    border-top: 1px solid #eee; padding-top: 12px;}
+.footer{padding: .5rem .75rem; box-sizing: border-box; width: 100%;    border-top: 1px solid #eee; padding-top: 32px;}
 .footer .logo-wrap{padding: 12px 0 20px 0;}
 .footer-menu{display: flex;align-items: center;/* flex-wrap: wrap; */}
 .footer-menu > li{margin-right: 16px;}

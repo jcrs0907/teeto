@@ -41,5 +41,14 @@
     <definition name="faq" extends="base">
         <put-attribute name="content" value="/WEB-INF/views/faq/faq.jsp" />
     </definition>
-
+    <!--mypage-->
+    <definition name="myPage" extends="base">
+        <!--중첩 사-->
+        <put-attribute name="content">
+            <definition template="/WEB-INF/views/member/myPage.jsp">
+                <put-attribute name="myAside" value="/WEB-INF/views/member/myAside.jsp"/>
+                <put-attribute name="myMain" value="/WEB-INF/views/member/myMain.jsp"/>
+            </definition>
+        </put-attribute>
+    </definition>
 </tiles-definitions>
