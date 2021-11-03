@@ -29,7 +29,7 @@ public class AuthController {
      * @param auth
      * @return
      */
-    @PostMapping("/sendAuthCode")
+    @PostMapping("/code")
     @ResponseBody
     public boolean sendAuthCode(Auth auth) {
         return authService.sendAuthCode(auth);
@@ -40,11 +40,11 @@ public class AuthController {
      * @param auth
      * @return
      */
-    @PostMapping("/checkCertNo")
+    @PostMapping("/checkCode")
     @ResponseBody
-    public boolean checkCertNo(@ModelAttribute Auth auth) {
+    public boolean checkAuthCode(Auth auth) {
         boolean result = false;
-        if(authService.checkCertNo(auth)) {
+        if(authService.checkAuthCode(auth)) {
             result = true;
         }
         return result;
@@ -58,6 +58,7 @@ public class AuthController {
         return "login";
     }
 
+
     /**
      * ajax 로그인
      * @param auth
@@ -65,7 +66,7 @@ public class AuthController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public boolean login(@ModelAttribute Auth auth, HttpServletRequest req) {
+    public boolean login(Auth auth, HttpServletRequest req) {
         Auth member = null;
         member = authService.login(auth);
         if(member.getMemId() != null) {
@@ -84,7 +85,8 @@ public class AuthController {
      */
     @PostMapping("/checkPassword")
     @ResponseBody
-    public boolean checkPwd(@ModelAttribute Auth auth) {
+    public boolean checkPassword(Auth auth, HttpServletRequest req) {
+        auth.setMemId(authService.getSession(req).getMemId());
         return authService.checkPassword(auth);
     }
 }

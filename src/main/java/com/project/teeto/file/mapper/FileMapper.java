@@ -8,4 +8,9 @@ import org.springframework.stereotype.Repository;
 public interface FileMapper {
 
     void insert(TeetoFile teetoFile);
+
+    String getPath(Integer seqno);
+
+    void delete(Integer seqno);
+
 }

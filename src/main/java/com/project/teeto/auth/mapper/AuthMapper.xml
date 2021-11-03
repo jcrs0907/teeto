@@ -4,10 +4,7 @@
 
     <insert id="insert"
             parameterType="auth">
-        <selectKey keyProperty="apvReqSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_AUTH_L_SEQ.nextval FROM DUAL
-        </selectKey> /* select - AuthMapper.xml : 210917 @eunseo */
-        INSERT INTO
+        INSERT INTO /* select - AuthMapper.xml : 210917 @eunseo */
           TB_AUTH_L (
              APV_REQ_SEQNO
             ,APV_REQ_TP_CD
@@ -17,13 +14,13 @@
             ,UNIX_TIME_APV_END_DTTM
             ,CRE_DTTM
           ) VALUES (
-             #{apvReqSeqno}
+             nextval('APV_SEQ')
             ,#{apvReqTpCd}
             ,#{apvReqTpVal}
             ,#{certNo}
             ,#{unixTimeApvStrtDttm}
             ,#{unixTimeApvEndDttm}
-            ,SYSDATE
+            ,SYSDATE()
           )
     </insert>
 
@@ -35,7 +32,7 @@
            ,TMST.CERT_NO AS certNo
         FROM(
               SELECT
-                    ROW_NUMBER() OVER(PARTITION BY MST.APV_REQ_TP_VAL ORDER BY MST.CRE_DTTM) AS MST_ROWNUM
+                    ROW_NUMBER() OVER(PARTITION BY MST.APV_REQ_TP_VAL) AS MST_ROWNUM
                    ,MST.APV_REQ_SEQNO
                    ,MST.CERT_NO
               FROM (
@@ -48,10 +45,9 @@
                       WHERE A.APV_REQ_TP_VAL = #{apvReqTpVal}
                       AND A.UNIX_TIME_APV_STRT_DTTM <![CDATA[<]]> #{checkApvTime}
                       AND A.UNIX_TIME_APV_END_DTTM <![CDATA[>]]> #{checkApvTime}
-                      ORDER BY A.CRE_DTTM DESC
+                      ORDER BY A.CRE_DTTM DESC limit 1
                     ) MST
               ) TMST
-        WHERE ROWNUM = 1
     </select>
 
     <update id="update"
@@ -59,7 +55,7 @@
         UPDATE TB_AUTH_L /* update - AuthMapper.xml : 210917 @eunseo */
            SET
                CERT_CHCK_YN = 'Y'
-              ,UPT_DTTM = SYSDATE
+              ,UPT_DTTM = SYSDATE()
         WHERE APV_REQ_SEQNO = #{apvReqSeqno}
     </update>
 
@@ -75,7 +71,7 @@
              #{memId}
             ,#{loginId}
             ,#{password}
-            ,SYSDATE
+            ,SYSDATE()
           )
     </insert>
 

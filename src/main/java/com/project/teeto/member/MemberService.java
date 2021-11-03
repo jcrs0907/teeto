@@ -36,6 +36,7 @@ public class MemberService {
     @Autowired
     FileService fileService;
 
+
     /**
      * 이메일 중복체크
      * @param email
@@ -51,6 +52,7 @@ public class MemberService {
         }
         return result;
     }
+
 
     /**
      * 닉네임 중복체크
@@ -107,23 +109,35 @@ public class MemberService {
 
 
     /**
-     * 탈퇴
+     * 회원 상세
+     * @param memId
+     * @return
+     */
+    public Member getDetail(String memId) {
+        Member member = null;
+        member = memberMapper.getDetail(memId);
+        return member;
+    }
+
+
+    /**
+     * 회원 수정
      * @param member
      * @return
      */
-    public boolean delete(Member member) {
+    public boolean update(Member member) {
         boolean result = false;
-        String pwd = "";
+        int cnt = 0;
 
-        pwd = memberMapper.selMemPwd(member.getMemId());
-
-        //비번체크
-        if(pwdService.matchPassword(member.getPassword(), pwd)) {
-            //TODO 추후 관련 테이블 DB변경 필요
-            //탈퇴정보
-            memberMapper.insertSecInfo(member);
-            //회원
-            memberMapper.delete(member);
+        //프로필 파일이 있을 경우
+        if(member.getMemProfileFile() != null) {
+            if(member.getMemProfileFileSeqno() != null) {
+                fileService.delete(member.getMemProfileFileSeqno());
+            }
+            member.setMemProfileFileSeqno(insertImage(member.getMemProfileFile()));
+        }
+        cnt = memberMapper.update(member);
+        if(cnt == 1) {
             result = true;
         }
 
@@ -151,32 +165,23 @@ public class MemberService {
 
 
     /**
-     * 회원 상세
-     * @param memId
-     * @return
-     */
-    public Member getDetail(String memId) {
-        Member member = null;
-        member = memberMapper.getDetail(memId);
-        return member;
-    }
-
-
-    /**
-     * 회원 수정
+     * 탈퇴
      * @param member
      * @return
      */
-    public boolean update(Member member) {
+    public boolean delete(Member member) {
         boolean result = false;
-        int cnt = 0;
+        String pwd = "";
 
-        //프로필 파일이 있을 경우
-        if(member.getMemProfileFile() != null) {
-            //파일insert, setMembProfileSeqno
-        }
-        cnt = memberMapper.update(member);
-        if(cnt == 1) {
+        pwd = memberMapper.selMemPwd(member.getMemId());
+
+        //비번체크
+        if(pwdService.matchPassword(member.getPassword(), pwd)) {
+            //TODO 추후 관련 테이블 DB변경 필요
+            //탈퇴정보
+            memberMapper.insertSecInfo(member);
+            //회원
+            memberMapper.delete(member);
             result = true;
         }
 

@@ -27,6 +27,12 @@ public interface AppConstant {
     //회원
     String MEM_FILE_PATH = "./file/member";
     String MEM_FILE_GROUP_CD = "ME";
+    //커뮤니티
+    String COMM_FILE_PATH = "./file/community";
+    String COMM_FILE_GROUP_CD = "CM";
+    //클래스
+    String CLASS_FILE_PATH = "./file/classes";
+    String CLASS_FILE_GROUP_CD = "CL";
 
     /**
      * 인증 타입코드
@@ -37,8 +43,8 @@ public interface AppConstant {
     /**
      * 커뮤니티 타입코드
      */
-    String CMMT_TP_CD_STUDY = "CM01";
-    String CMMT_TP_CD_INFO = "CM02";
+    String COMM_TP_CD_STUDY = "CM01";
+    String COMM_TP_CD_INFO = "CM02";
 
     /**
      * 회원 타입코드

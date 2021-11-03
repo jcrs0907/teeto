@@ -40,7 +40,7 @@ public class MentoService {
 
         int count = mentoMapper.insert(mento);
         if(count == 1) {
-            mentoMapper.updateMemberTpCd(mento);
+            mentoMapper.updateMemTpCd(mento);
             result = true;
         }
         return result;
@@ -63,6 +63,11 @@ public class MentoService {
         return  result;
     }
 
+    /**
+     * 멘토 상세
+     * @param mentoId
+     * @return
+     */
     public Mento getDetail(String mentoId) {
         Mento mento = null;
         mento = mentoMapper.getDetail(mentoId);

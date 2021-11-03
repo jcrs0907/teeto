@@ -11,42 +11,39 @@ import java.util.Date;
 @Repository
 
 public interface ClassesMapper {
-    //클래스 신청하기
+
+    /**
+     * 등록(신청)
+     */
+    String selClassId();
     void insertClass(Classes classes);
     void insertClassProcess(Classes classes);
     void insertClassDetail(Classes classes);
-    String selClassId();
 
-    //클래스 날짜별 목록 출력
-    List<Classes> selectDateClass(Classes classes);
-
-    //클래스 찜별 목록 출력
-    List<Classes> selectLikeClass();
-
-    //클래스 카테고리별 목록 출력
-    List<Classes> selectCategoryClass(String categoryCd);
-
-    //클래스 수정하기
+    /**
+     * 수정
+     */
     void updateClass(Classes classes);
     void updateClassProcess(Classes classes);
     void updateClassDetail(Classes classes);
-    void updateClassesCount(Classes classes);
+    void updateCurrentMte(Classes classes);
 
-    //클래스 삭제하기
-    void deleteClassProcess(Classes classes);
-    void deleteClassDetail(Classes classes);
-    void deleteClass(Classes classes);
-    void deleteLikeClass(Classes classes);
+    /**
+     * 삭제
+     */
+    void deleteProcess(Classes classes);
+    void deleteDetail(Classes classes);
+    void delete(Classes classes);
+    void deleteMteLike(Classes classes);
 
-    //클래스 상세
-    Classes selectClassAll(String classId);
-    List<Classes> selectClassDetail(String classId);
-    List<Classes> selectClassProcess(String classId);
+    /**
+     * 상세
+     */
+    Classes getInfo(String classId);
+    List<Classes> getDetailList(String classId);
+    List<Classes> getProcessList(String classId);
 
-    //멘티 찜한 클래스 출력
-    List<Classes> selectMenteeLikeClass(Classes classes);
-
-    //클래스 목록 반환
-    List<Classes> selectClassesSearch(Classes classes);
+    List<Classes> getMteLikeList(Classes classes);      //찜한 목록
+    List<Classes> getList(Classes classes);             //목록(검색)
 
 }

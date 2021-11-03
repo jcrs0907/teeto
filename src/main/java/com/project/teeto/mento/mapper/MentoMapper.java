@@ -8,7 +8,7 @@ public interface MentoMapper {
 
     int insert(Mento mento);
 
-    void updateMemberTpCd(Mento mento);
+    void updateMemTpCd(Mento mento);
 
     int checkNm(String mentoNm);
 

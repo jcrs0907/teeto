@@ -4,52 +4,49 @@
 
     <insert id="insert"
             parameterType="community">
-      <selectKey keyProperty="cmntSeqno" resultType="integer" order="BEFORE">
-          SELECT TB_COMMUNITY_L_SEQ.nextval FROM DUAL
-      </selectKey> /* insert - CommunityMapper.xml : 211013 @eunseo */
-      INSERT INTO TB_COMMUNITY_L (
-           CMNT_SEQNO
-          ,CMNT_TP_CD
-          ,MEM_ID
-          ,MENTEE_ID
-          ,MENTO_ID
-          ,CMNT_TITLE
-          ,CMNT_CTT
-          ,CMNT_FILE_SEQNO
-          ,CRE_DTTM
-      ) VALUES (
-           #{cmntSeqno}
-          ,#{cmntTpCd}
-          ,#{memId}
-          ,#{menteeId, jdbcType=VARCHAR}
-          ,#{mentoId, jdbcType=VARCHAR}
-          ,#{cmntTitle}
-          ,#{cmntCtt}
-          ,#{cmntFileSeqno, jdbcType=INTEGER}
-          ,SYSDATE
-      )
+        INSERT INTO TB_COMMUNITY_L ( /* insert - CommunityMapper.xml : 211013 @eunseo */
+             CMMT_SEQNO
+            ,CMMT_TP_CD
+            ,MEM_ID
+            ,MENTEE_ID
+            ,MENTO_ID
+            ,CMMT_TITLE
+            ,CMMT_CTT
+            ,CMMT_FILE_SEQNO
+            ,CRE_DTTM
+        ) VALUES (
+             nextval('CMMT_SEQ')
+            ,#{cmmtTpCd}
+            ,#{memId}
+            ,#{menteeId, jdbcType=VARCHAR}
+            ,#{mentoId, jdbcType=VARCHAR}
+            ,#{cmmtTitle}
+            ,#{cmmtCtt}
+            ,#{cmmtFileSeqno, jdbcType=INTEGER}
+            ,SYSDATE()
+        )
     </insert>
 
     <select id="getList"
             parameterType="String"
             resultType="community">
         SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
-               C.CMNT_SEQNO AS cmntSeqno
-              ,C.CMNT_TP_CD AS cmntTpCd
-              ,CD.CD_NM AS cmntTpCdNm
-              ,CASE WHEN C.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+               C.CMMT_SEQNO AS cmmtSeqno
+              ,C.CMMT_TP_CD AS cmmtTpCd
+              ,CD.CD_NM AS cmmtTpCdNm
+              ,CASE WHEN C.CMMT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
                     ELSE T.MENTO_NM
                END AS nickName
-              ,C.CMNT_TITLE AS cmntTitle
-              ,C.CMNT_VIEW_CNT AS cmntViewCnt
-              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+              ,C.CMMT_TITLE AS cmmtTitle
+              ,C.CMMT_VIEW_CNT AS cmntViewCnt
+              ,DATE_FORMAT(C.CRE_DTTM, '%Y-%m-%d %H:%i:%s') AS creDttm
         FROM TB_COMMUNITY_L C
-        LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
+        LEFT OUTER JOIN TB_CD_M CD ON C.CMMT_TP_CD = CD.CD
         LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
         LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
         WHERE 1=1
         AND C.USE_YN = 'Y'
-        AND C.CMNT_TP_CD = #{cmntTpCd}
+        AND C.CMMT_TP_CD = #{cmmtTpCd}
         ORDER BY C.CRE_DTTM DESC
     </select>
 
@@ -57,22 +54,22 @@
             parameterType="community"
             resultType="community">
         SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
-               C.CMNT_SEQNO AS cmntSeqno
-              ,C.CMNT_TP_CD AS cmntTpCd
-              ,CD.CD_NM AS cmntTpCdNm
-              ,CASE WHEN C.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+               C.CMMT_SEQNO AS cmmtSeqno
+              ,C.CMMT_TP_CD AS cmmtTpCd
+              ,CD.CD_NM AS cmmtTpCdNm
+              ,CASE WHEN C.CMMT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
                     ELSE T.MENTO_NM
                END AS nickName
-              ,C.CMNT_TITLE AS cmntTitle
-              ,C.CMNT_VIEW_CNT AS cmntViewCnt
-              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+              ,C.CMMT_TITLE AS cmmtTitle
+              ,C.CMMT_VIEW_CNT AS cmmtViewCnt
+              ,DATE_FORMAT(C.CRE_DTTM, '%Y-%m-%d %H:%i:%s') AS creDttm
         FROM TB_COMMUNITY_L C
-        LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
+        LEFT OUTER JOIN TB_CD_M CD ON C.CMMT_TP_CD = CD.CD
         LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
         LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
         WHERE 1=1
         AND C.USE_YN = 'Y'
-        AND C.CMNT_TP_CD = #{cmntTpCd}
+        AND C.CMMT_TP_CD = #{cmmtTpCd}
         AND C.MEM_ID = #{memId}
         ORDER BY C.CRE_DTTM DESC
     </select>
@@ -81,47 +78,47 @@
             parameterType="int"
             resultType="community">
         SELECT /* select - CommunityMapper.xml : 211014 @eunseo */
-               C.CMNT_SEQNO AS cmntSeqno
-              ,C.CMNT_TP_CD AS cmntTpCd
-              ,CD.CD_NM AS cmntTpCdNm
-              ,CASE WHEN C.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+               C.CMMT_SEQNO AS cmmtSeqno
+              ,C.CMMT_TP_CD AS cmmtTpCd
+              ,CD.CD_NM AS cmmtTpCdNm
+              ,CASE WHEN C.CMMT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
                     ELSE T.MENTO_NM
                END AS nickName
-              ,C.CMNT_TITLE AS cmntTitle
-              ,C.CMNT_CTT AS cmntCtt
-              ,F.FILE_SEQNO AS cmntFileSeqno
-              ,F.FILE_PATH AS cmntImgFilePath
-              ,C.CMNT_VIEW_CNT AS cmntViewCnt
-              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+              ,C.CMMT_TITLE AS cmmtTitle
+              ,C.CMMT_CTT AS cmmtCtt
+              ,F.FILE_SEQNO AS cmmtFileSeqno
+              ,F.FILE_PATH AS cmmtImgFilePath
+              ,C.CMMT_VIEW_CNT AS cmmtViewCnt
+              ,DATE_FORMAT(C.CRE_DTTM, '%Y-%m-%d %H:%i:%s') AS creDttm
         FROM TB_COMMUNITY_L C
-        LEFT OUTER JOIN TB_CD_M CD ON C.CMNT_TP_CD = CD.CD
+        LEFT OUTER JOIN TB_CD_M CD ON C.CMMT_TP_CD = CD.CD
         LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
         LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
-        LEFT OUTER JOIN TB_FILE_M F ON C.CMNT_FILE_SEQNO = F.FILE_SEQNO
+        LEFT OUTER JOIN TB_FILE_M F ON C.CMMT_FILE_SEQNO = F.FILE_SEQNO AND F.USE_YN = 'Y'
         WHERE 1=1
         AND C.USE_YN = 'Y'
-        AND C.CMNT_SEQNO = #{cmntSeqno}
+        AND C.CMMT_SEQNO = #{cmmtSeqno}
     </select>
 
     <select id="getCommentList"
             parameterType="int"
             resultType="community">
         SELECT /* select - CommunityMapper.xml : 211014 @eunseo */
-               C.CMNT_CMMT_SEQNO AS cmntCmmtSeqno
-              ,CASE WHEN CC.CMNT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
+               C.CMMT_CMT_SEQNO AS cmmtCmtSeqno
+              ,CASE WHEN CC.CMMT_TP_CD = 'CM01' THEN TMI.MENTEE_NM
                     ELSE T.MENTO_NM
                END AS nickName
               ,C.MENTEE_ID AS menteeId
               ,C.MENTO_ID AS mentoId
-              ,C.CMNT_CMMT_CTT AS cmntCmmtCtt
-              ,TO_CHAR(C.CRE_DTTM) AS creDttm
+              ,C.CMMT_CMT_CTT AS cmmtCmtCtt
+              ,DATE_FORMAT(C.CRE_DTTM, '%Y-%m-%d %H:%i:%s') AS creDttm
         FROM TB_COMMUNITY_COMMENT_L C
-        LEFT OUTER JOIN TB_COMMUNITY_L CC ON C.CMNT_SEQNO = CC.CMNT_SEQNO
+        LEFT OUTER JOIN TB_COMMUNITY_L CC ON C.CMMT_SEQNO = CC.CMMT_SEQNO
         LEFT OUTER JOIN TB_MENTEE_I TMI ON C.MENTEE_ID = TMI.MENTEE_ID
         LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
         WHERE 1=1
         AND C.USE_YN = 'Y'
-        AND C.CMNT_SEQNO = #{cmntSeqno}
+        AND C.CMMT_SEQNO = #{cmmtSeqno}
         ORDER BY C.CRE_DTTM DESC
     </select>
 
@@ -129,29 +126,29 @@
             parameterType="community">
         UPDATE TB_COMMUNITY_L /* update - CommunityMapper.xml : 211014 @eunseo */
         SET
-        <if test='cmntTitle != null and !cmntTitle.equals("")'>
-            CMNT_TITLE = #{cmntTitle},
+        <if test='cmmtTitle != null and !cmmtTitle.equals("")'>
+            CMMT_TITLE = #{cmmtTitle},
         </if>
-        <if test='cmntCtt != null and !cmntCtt.equals("")'>
-            CMNT_CTT = #{cmntCtt},
+        <if test='cmmtCtt != null and !cmmtCtt.equals("")'>
+            CMMT_CTT = #{cmmtCtt},
         </if>
-        <if test='cmntFileSeqno != null'>
-            CMNT_FILE_SEQNO = #{cmntFileSeqno},
+        <if test='cmmtFileSeqno != null'>
+            CMMT_FILE_SEQNO = #{cmmtFileSeqno},
         </if>
-            UPT_DTTM = SYSDATE
+            UPT_DTTM = SYSDATE()
         WHERE 1=1
         AND USE_YN = 'Y'
-        AND CMNT_SEQNO = #{cmntSeqno}
+        AND CMMT_SEQNO = #{cmmtSeqno}
     </update>
-    
+
     <update id="delete"
             parameterType="community">
         UPDATE TB_COMMUNITY_L /* update - CommunityMapper.xml : 211014 @eunseo */
         SET
             USE_YN = 'N'
-           ,UPT_DTTM = SYSDATE
+           ,UPT_DTTM = SYSDATE()
         WHERE 1=1
-        AND CMNT_SEQNO = #{cmntSeqno}
+        AND CMMT_SEQNO = #{cmmtSeqno}
     </update>
 
     <update id="deleteAllComment"
@@ -159,32 +156,29 @@
         UPDATE TB_COMMUNITY_COMMENT_L /* update - CommunityMapper.xml : 211014 @eunseo */
         SET
             USE_YN = 'N'
-           ,UPT_DTTM = SYSDATE
+           ,UPT_DTTM = SYSDATE()
         WHERE 1=1
-        AND CMNT_SEQNO = #{cmntSeqno}
+        AND CMMT_SEQNO = #{cmmtSeqno}
     </update>
 
     <insert id="insertComment"
             parameterType="community">
-        <selectKey keyProperty="cmntCmmtSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_COMMUNITY_COMMENT_L_SEQ.nextval FROM DUAL
-        </selectKey> /* insert - CommunityMapper.xml : 211014 @eunseo */
-        INSERT INTO TB_COMMUNITY_COMMENT_L (
-             CMNT_CMMT_SEQNO
-            ,CMNT_SEQNO
+        INSERT INTO TB_COMMUNITY_COMMENT_L ( /* insert - CommunityMapper.xml : 211014 @eunseo */
+             CMMT_CMT_SEQNO
+            ,CMMT_SEQNO
             ,MEM_ID
             ,MENTEE_ID
             ,MENTO_ID
-            ,CMNT_CMMT_CTT
+            ,CMMT_CMT_CTT
             ,CRE_DTTM
         ) VALUES (
-            #{cmntCmmtSeqno}
-            ,#{cmntSeqno}
+             nextval('CMMT_CMT_SEQ')
+            ,#{cmmtSeqno}
             ,#{memId}
             ,#{menteeId, jdbcType=VARCHAR}
             ,#{mentoId, jdbcType=VARCHAR}
-            ,#{cmntCmmtCtt}
-            ,SYSDATE
+            ,#{cmmtCmtCtt}
+            ,SYSDATE()
         )
     </insert>
 
@@ -192,10 +186,9 @@
             parameterType="community">
         UPDATE TB_COMMUNITY_COMMENT_L /* update - CommunityMapper.xml : 211014 @eunseo */
         SET
-            CMNT_CMMT_CTT = #{cmntCmmtCtt}
-           ,UPT_DTTM = SYSDATE
-        WHERE 1=1
-        AND CMNT_CMMT_SEQNO = #{cmntCmmtSeqno}
+            CMMT_CMT_CTT = #{cmmtCmtCtt}
+           ,UPT_DTTM = SYSDATE()
+        WHERE CMMT_CMT_SEQNO = #{cmmtCmtSeqno}
     </update>
 
     <update id="deleteComment"
@@ -203,9 +196,17 @@
         UPDATE TB_COMMUNITY_COMMENT_L /* update - CommunityMapper.xml : 211014 @eunseo */
         SET
             USE_YN = 'N'
-           ,UPT_DTTM = SYSDATE
-        WHERE 1=1
-        AND CMNT_CMMT_SEQNO = #{cmntCmmtSeqno}
+           ,UPT_DTTM = SYSDATE()
+        WHERE CMMT_CMT_SEQNO = #{cmmtCmtSeqno}
+    </update>
+
+    <update id="deleteFileSeqno"
+            parameterType="community">
+        UPDATE TB_COMMUNITY_L /* update - CommunityMapper.xml : 211102 @eunseo */
+        SET
+            CMMT_FILE_SEQNO = #{cmmtFileSeqno, jdbcType=INTEGER}
+           ,UPT_DTTM = SYSDATE()
+        WHERE CMMT_SEQNO = #{cmmtSeqno}
     </update>
 
 </mapper>

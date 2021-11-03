@@ -10,23 +10,25 @@ public interface CommunityMapper {
 
     int insert(Community community);
 
-    List<Community> getList(String cmntTpCd);
+    List<Community> getList(String cmmtTpCd);
 
     List<Community> getMyList(Community community);
 
-    Community getDetail(int cmntSeqno);
+    Community getDetail(int cmmtSeqno);
 
     int update(Community community);
 
     int delete(Community community);
 
-    void deleteAllComment(int cmntSeqno);
+    void deleteAllComment(int cmmtSeqno);
 
     int insertComment(Community community);
 
     int updateComment(Community community);
 
-    int deleteComment(int cmntCmmtSeqno);
+    int deleteComment(int cmmtCmtSeqno);
 
-    List<Community> getCommentList(int cmntSeqno);
+    List<Community> getCommentList(int cmmtSeqno);
+
+    void deleteFileSeqno(Community community);
 }

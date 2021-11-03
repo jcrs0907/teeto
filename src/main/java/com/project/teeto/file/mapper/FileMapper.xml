@@ -3,9 +3,11 @@
 <mapper namespace="com.project.teeto.file.mapper.FileMapper">
 
     <insert id="insert"
-            parameterType="teetoFile"
-            useGeneratedKeys="true" keyColumn="FILE_SEQNO" keyProperty="seqno">
-        INSERT INTO TB_FILE_M (
+            parameterType="teetoFile">
+        <selectKey keyProperty="seqno" resultType="integer" order="BEFORE">
+            SELECT nextval('FILE_SEQ') FROM DUAL
+        </selectKey>
+        INSERT INTO TB_FILE_M ( /* insert - FileMapper.xml : 211019 @eunseo */
             FILE_SEQNO
            ,FILE_GRP_CD
            ,FILE_NM
@@ -14,12 +16,33 @@
            ,FILE_SIZE
            ,CRE_DTTM
         ) VALUES (
-            TB_FILE_M_SEQ.nextval
+            #{seqno}
           , #{groupCd}
           , #{fileNm}
           , #{extension}
           , #{path}
           , #{size}
-          , SYSDATE)
+          , SYSDATE()
+        )
     </insert>
+
+    <select id="getPath"
+            parameterType="int"
+            resultType="String">
+        SELECT /* select - FileMapper.xml : 211019 @eunseo */
+               FILE_PATH AS path
+        FROM TB_FILE_M
+        WHERE 1=1
+        AND USE_YN = 'Y'
+        AND FILE_SEQNO = #{seqno}
+    </select>
+
+    <update id="delete"
+            parameterType="int">
+        UPDATE TB_FILE_M /* update - FileMapper.xml : 211019 @eunseo */
+        SET USE_YN = 'N'
+           ,UPT_DTTM = SYSDATE()
+        WHERE FILE_SEQNO = #{seqno}
+    </update>
+
 </mapper>

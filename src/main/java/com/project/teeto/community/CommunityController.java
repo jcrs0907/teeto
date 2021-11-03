@@ -1,5 +1,6 @@
 package com.project.teeto.community;
 
+import com.project.teeto.auth.AuthService;
 import com.project.teeto.auth.model.Auth;
 import com.project.teeto.community.model.Community;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,9 @@ public class CommunityController {
     @Autowired
     CommunityService communityService;
 
+    @Autowired
+    AuthService authService;
+
 
     /**
      * 커뮤니티 글쓰기(등록)
@@ -27,36 +31,33 @@ public class CommunityController {
     @PostMapping()
     @ResponseBody
     public boolean insert(Community community ,HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        Auth auth = (Auth)session.getAttribute("member");
-        return communityService.insert(community, auth);
+        log.info(String.format("[Insert Community] Title : %s", community.getCmmtTitle()));
+        return communityService.insert(community, authService.getSession(req));
     }
 
 
     /**
      * 커뮤니티 목록
-     * @param cmntTpCd
+     * @param cmmtTpCd
      * @param req
      * @return
      */
-    @GetMapping("/{cmntTpCd}")
+    @GetMapping("/{cmmtTpCd}")
     @ResponseBody
-    public Community getList(@PathVariable String cmntTpCd, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        Auth auth = (Auth)session.getAttribute("member");
-        return communityService.getList(cmntTpCd, auth);
+    public Community getList(@PathVariable String cmmtTpCd, HttpServletRequest req) {
+        return communityService.getList(cmmtTpCd, authService.getSession(req));
     }
 
 
     /**
      * 커뮤니티 상세
-     * @param cmntSeqno
+     * @param cmmtSeqno
      * @return
      */
-    @GetMapping("/detail/{cmntSeqno}")
+    @GetMapping("/detail/{cmmtSeqno}")
     @ResponseBody
-    public Community getDetail(@PathVariable int cmntSeqno) {
-        return communityService.getDetail(cmntSeqno);
+    public Community getDetail(@PathVariable int cmmtSeqno) {
+        return communityService.getDetail(cmmtSeqno);
     }
 
 
@@ -65,9 +66,10 @@ public class CommunityController {
      * @param community
      * @return
      */
-    @PatchMapping("/{cmntSeqno}")
+    @PatchMapping("/{cmmtSeqno}")
     @ResponseBody
     public boolean update(Community community) {
+        log.info(String.format("[Update Community] Seqno : %s", community.getCmmtSeqno()));
         return communityService.update(community);
     }
 
@@ -77,9 +79,10 @@ public class CommunityController {
      * @param community
      * @return
      */
-    @PostMapping("/{cmntSeqno}")
+    @PostMapping("/{cmmtSeqno}")
     @ResponseBody
     public boolean delete(Community community) {
+        log.info(String.format("[Delete Community] Seqno : %s", community.getCmmtSeqno()));
         return communityService.delete(community);
     }
 
@@ -93,9 +96,8 @@ public class CommunityController {
     @PostMapping("/comment")
     @ResponseBody
     public boolean insertComment(Community community, HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        Auth auth = (Auth)session.getAttribute("member");
-        return communityService.insertComment(community, auth);
+        log.info(String.format("[Insert Comment] CmtCtt : %s", community.getCmmtCmtCtt()));
+        return communityService.insertComment(community, authService.getSession(req));
     }
 
 
@@ -104,21 +106,23 @@ public class CommunityController {
      * @param community
      * @return
      */
-    @PatchMapping("/comment/{cmntCmmtSeqno}")
+    @PatchMapping("/comment/{cmmtCmtSeqno}")
     @ResponseBody
     public boolean updateComment(Community community) {
+        log.info(String.format("[Update Comment] CmtSeqno : %s", community.getCmmtCmtSeqno()));
         return communityService.updateComment(community);
     }
 
 
     /**
      * 커뮤니티 댓글 삭제
-     * @param cmntCmmtSeqno
+     * @param cmmtCmtSeqno
      * @return
      */
-    @DeleteMapping("/comment/{cmntCmmtSeqno}")
+    @DeleteMapping("/comment/{cmmtCmtSeqno}")
     @ResponseBody
-    public boolean deleteComment(@PathVariable int cmntCmmtSeqno) {
-        return communityService.deleteComment(cmntCmmtSeqno);
+    public boolean deleteComment(@PathVariable int cmmtCmtSeqno) {
+        log.info(String.format("[Delete Comment] cmtSeqno : %s", cmmtCmtSeqno));
+        return communityService.deleteComment(cmmtCmtSeqno);
     }
 }

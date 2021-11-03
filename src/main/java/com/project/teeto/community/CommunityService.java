@@ -3,14 +3,18 @@ package com.project.teeto.community;
 import com.project.teeto.auth.model.Auth;
 import com.project.teeto.community.mapper.CommunityMapper;
 import com.project.teeto.community.model.Community;
+import com.project.teeto.file.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-import static com.project.teeto.constant.AppConstant.CMMT_TP_CD_INFO;
-import static com.project.teeto.constant.AppConstant.CMMT_TP_CD_STUDY;
+import static com.project.teeto.constant.AppConstant.COMM_TP_CD_INFO;
+import static com.project.teeto.constant.AppConstant.COMM_TP_CD_STUDY;
+import static com.project.teeto.constant.AppConstant.COMM_FILE_PATH;
+import static com.project.teeto.constant.AppConstant.COMM_FILE_GROUP_CD;
 
 @Slf4j
 @Service
@@ -19,6 +23,9 @@ public class CommunityService {
     @Autowired
     CommunityMapper communityMapper;
 
+    @Autowired
+    FileService fileService;
+
 
     /**
      * 커뮤니티 타입에 따라 멘티 / 멘토 구분후 ID저장
@@ -26,10 +33,10 @@ public class CommunityService {
      * @param auth
      */
     public void setMemTypeId(Community community, Auth auth) {
-        if(community.getCmntTpCd().equals(CMMT_TP_CD_STUDY)) {
+        if(community.getCmmtTpCd().equals(COMM_TP_CD_STUDY)) {
             community.setMenteeId(auth.getMenteeId());
         }
-        if(community.getCmntTpCd().equals(CMMT_TP_CD_INFO)) {
+        if(community.getCmmtTpCd().equals(COMM_TP_CD_INFO)) {
             community.setMentoId(auth.getMentoId());
         }
         community.setMemId(auth.getMemId());
@@ -45,6 +52,9 @@ public class CommunityService {
         int cnt = 0;
 
         setMemTypeId(community, auth);
+        if(community.getCmmtImgFile() != null) {
+            community.setCmmtFileSeqno(insertImage(community.getCmmtImgFile()));
+        }
         cnt = communityMapper.insert(community);
         if(cnt == 1) {
             result = true;
@@ -54,49 +64,49 @@ public class CommunityService {
 
     /**
      * 커뮤니티 목록(코드별), 내 글 목록
-     * @param cmntTpCd
+     * @param cmmtTpCd
      * @param auth
      * @return
      */
-    public Community getList(String cmntTpCd, Auth auth) {
+    public Community getList(String cmmtTpCd, Auth auth) {
         List<Community> communityList = null;
         List<Community> myCommunityList = null;
         Community communityRes = new Community();
         Community communityReq = new Community();
-        int myCmntCnt = 0;
+        int myCmmtCnt = 0;
 
         communityReq.setMemId(auth.getMemId());
-        communityReq.setCmntTpCd(cmntTpCd);
+        communityReq.setCmmtTpCd(cmmtTpCd);
 
-        communityList = communityMapper.getList(cmntTpCd);
+        communityList = communityMapper.getList(cmmtTpCd);
         myCommunityList = communityMapper.getMyList(communityReq);
         if(myCommunityList != null) {
-            myCmntCnt = myCommunityList.size();
+            myCmmtCnt = myCommunityList.size();
         }
 
         communityRes.setCommunityList(communityList);
         communityRes.setMyCommunityList(myCommunityList);
-        communityRes.setMyCommunityCnt(myCmntCnt);
+        communityRes.setMyCommunityCnt(myCmmtCnt);
 
         return communityRes;
     }
 
     /**
      * 커뮤니티 상세
-     * @param cmntSeqno
+     * @param cmmtSeqno
      * @return
      */
-    public Community getDetail(int cmntSeqno) {
+    public Community getDetail(int cmmtSeqno) {
         Community community = null;
         List<Community> commentList = null;
-        int cmmtCnt = 0;
+        int cmtCnt = 0;
 
-        community = communityMapper.getDetail(cmntSeqno);
-        commentList = communityMapper.getCommentList(cmntSeqno);
+        community = communityMapper.getDetail(cmmtSeqno);
+        commentList = communityMapper.getCommentList(cmmtSeqno);
         if(commentList != null) {
             community.setCommentList(commentList);
-            cmmtCnt = commentList.size();
-            community.setCmntCmmtCnt(cmmtCnt);
+            cmtCnt = commentList.size();
+            community.setCmmtCmtCnt(cmtCnt);
         }
 
         return community;
@@ -111,14 +121,16 @@ public class CommunityService {
         boolean result = false;
         int cnt = 0;
 
-        if(community.getCmntImgFile() != null) {
-            //파일 업데이트, seqno set
+        //파일 삭제 여부
+        if(community.getCmmtFileDeleteYn().equals("Y")) {
+            fileService.delete(community.getCmmtFileSeqno());
+            community.setCmmtFileSeqno(null);
+            communityMapper.deleteFileSeqno(community);
         }
-
-        if(community.getCmntFileDeleteYn().equals("Y")) {
-            //파일 삭제 ,seqno delete
+        //파일 들어왔을 때
+        if(community.getCmmtImgFile() != null) {
+            community.setCmmtFileSeqno(insertImage(community.getCmmtImgFile()));
         }
-
         cnt = communityMapper.update(community);
         if(cnt == 1) {
             result = true;
@@ -136,12 +148,12 @@ public class CommunityService {
         boolean result = false;
         int cnt = 0;
 
-        if(community.getCmntFileSeqno() != null) {
-            //파일 삭제
+        if(community.getCmmtFileSeqno() != null) {
+            fileService.delete(community.getCmmtFileSeqno());
         }
         cnt = communityMapper.delete(community);
         if(cnt == 1) {
-            communityMapper.deleteAllComment(community.getCmntSeqno());
+            communityMapper.deleteAllComment(community.getCmmtSeqno());
             result = true;
         }
 
@@ -183,16 +195,24 @@ public class CommunityService {
 
     /**
      * 커뮤니티 댓글 삭제
-     * @param cmntCmmtSeqno
+     * @param cmmtCmtSeqno
      * @return
      */
-    public boolean deleteComment(int cmntCmmtSeqno) {
+    public boolean deleteComment(int cmmtCmtSeqno) {
         int cnt = 0;
-        cnt = communityMapper.deleteComment(cmntCmmtSeqno);
+        cnt = communityMapper.deleteComment(cmmtCmtSeqno);
         if(cnt == 1) {
             return true;
         }else {
             return false;
         }
+    }
+
+    /**
+     * 파일 관련
+     */
+    //이미지 등록 후 seqno반환
+    public Integer insertImage(MultipartFile file) {
+        return fileService.insert(file, COMM_FILE_PATH, COMM_FILE_GROUP_CD);
     }
 }

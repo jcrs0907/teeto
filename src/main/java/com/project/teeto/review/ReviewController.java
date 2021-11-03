@@ -1,11 +1,13 @@
 package com.project.teeto.review;
 
+import com.project.teeto.auth.AuthService;
 import com.project.teeto.review.model.Review;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -16,15 +18,19 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    AuthService authService;
+
     /**
      * 리뷰 등록
      * @param review
      * @return
      */
-    @PostMapping
+    @PostMapping()
     @ResponseBody
-    public boolean insert(@ModelAttribute Review review) {
+    public boolean insert(Review review, HttpServletRequest req) {
         log.info(String.format("[Insert Review] Title : %s", review.getRvwTitle()));
+        review.setMenteeId(authService.getSession(req).getMenteeId());
         return reviewService.insert(review);
     }
 
@@ -47,8 +53,9 @@ public class ReviewController {
      */
     @PatchMapping("/{rvwSeqno}")
     @ResponseBody
-    public boolean update(@ModelAttribute Review review) {
+    public boolean update(Review review, HttpServletRequest req) {
         log.info(String.format("[Update Review] Seqno : %s", review.getRvwTitle()));
+        review.setMenteeId(authService.getSession(req).getMenteeId());
         return reviewService.update(review);
     }
 

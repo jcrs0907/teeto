@@ -1,6 +1,6 @@
 package com.project.teeto.mentee;
 
-import com.project.teeto.auth.model.Auth;
+import com.project.teeto.auth.AuthService;
 import com.project.teeto.classes.model.Classes;
 import com.project.teeto.mentee.model.Mentee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,39 +17,56 @@ public class MenteeController {
     @Autowired
     MenteeService menteeService;
 
-    //멘티 클래스 신청
-    @PostMapping("/class/apply")
+    @Autowired
+    AuthService authService;
+
+    /**
+     * 멘티 클래스 신청
+     * @param mentee
+     * @param req
+     * @return
+     */
+    @PostMapping("/class")
     @ResponseBody
-    public boolean applyClass(@ModelAttribute Mentee mentee,  HttpServletRequest req){
-        HttpSession session = req.getSession();
-        Auth auth = (Auth)session.getAttribute("member");
-        return menteeService.insertClasses(mentee, auth);
+    public boolean applyClass(Mentee mentee, HttpServletRequest req){
+        return menteeService.insertClasses(mentee, authService.getSession(req));
     }
 
-    //멘티 클래스 찜
-    @PostMapping(value = "/class/like", produces = {"application/json;charset=utf-8"})
+    /**
+     * 클래스 찜하기
+     * @param mentee
+     * @param req
+     * @return
+     */
+    @PostMapping("/class/like")
     @ResponseBody
-    public boolean likeClass(@ModelAttribute Mentee mentee) {
+    public boolean likeClass(Mentee mentee, HttpServletRequest req){
+        mentee.setMenteeId(authService.getSession(req).getMenteeId());
         return menteeService.likeClass(mentee);
     }
 
-    //멘티 클래스 찜 해제
-    @DeleteMapping(value="/class/delete", produces = {"application/json;charset=utf-8"})
+    /**
+     * 찜 해제
+     * @param mentee
+     * @param req
+     * @return
+     */
+    @DeleteMapping("/class/delete")
     @ResponseBody
-    public boolean delete(@ModelAttribute Mentee mentee) {
+    public boolean delete(Mentee mentee, HttpServletRequest req) {
+        mentee.setMenteeId(authService.getSession(req).getMenteeId());
         return menteeService.deleteClass(mentee);
     }
 
-    //찜한 클래스 목록 출력
-    @PostMapping("/class/like/list")
+    /**
+     * 찜한 목록
+     * @param req
+     * @return
+     */
+    @GetMapping("/class/like/list")
     @ResponseBody
-    public List<Classes> likeClassList(
-            @ModelAttribute Mentee mentee,
-            HttpServletRequest req
-    ){
-        HttpSession session = req.getSession();
-        Auth auth = (Auth)session.getAttribute("member");
-        return menteeService.selectClass(mentee, auth);
+    public List<Classes> likeClassList(HttpServletRequest req){
+        return menteeService.selectClass(authService.getSession(req));
     }
 
 }

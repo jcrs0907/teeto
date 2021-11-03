@@ -12,33 +12,36 @@ import java.util.List;
 @Setter
 public class Community {
 
-    private Integer cmntSeqno;
-    private String cmntTpCd;
-    private String cmntTpCdNm;
-    private String memId;
-    private String menteeId;
-    private String mentoId;
-    private String cmntTitle;
-    private String cmntCtt;
-    private Integer cmntFileSeqno;
-    private Integer cmntViewCnt;
-    private String creDttm;
+    /**
+     * 커뮤니티
+     */
+    private Integer cmmtSeqno;                  //일련번호
+    private String cmmtTpCd;                    //타입 코드
+    private String cmmtTpCdNm;                  //타입 코드 명
+    private String memId;                       //회원 ID
+    private String menteeId;                    //멘티 ID
+    private String mentoId;                     //멘토 ID
+    private String cmmtTitle;                   //제목
+    private String cmmtCtt;                     //내용
+    private Integer cmmtFileSeqno;              //파일 일련번호
+    private Integer cmmtViewCnt;                //조회 수
+    private String creDttm;                     //생성 일시
 
-    private String nickName;
-    private MultipartFile cmntImgFile;
-    private String cmntImgFileName;
-    private String cmntImgFilePath;
-    private String cmntFileDeleteYn;
+    private String nickName;                    //닉네임
+    private MultipartFile cmmtImgFile;          //이미지 파일
+    private String cmmtImgFileName;             //이미지 파일 명
+    private String cmmtImgFilePath;             //이미지 파일 경로
+    private String cmmtFileDeleteYn = "N";      //파일 삭제 여부
 
-    private Integer cmntCnt;
-    private Integer cmntCmmtCnt;
+    private Integer cmmtCnt;                    //글 수
+    private Integer cmmtCmtCnt;                //댓글 수
 
-    private Integer cmntCmmtSeqno;
-    private String cmntCmmtCtt;
+    private Integer cmmtCmtSeqno;              //댓글 일련번호
+    private String cmmtCmtCtt;                 //댓글 내용
 
-    private Integer myCommunityCnt;
-    private List<Community> communityList;
-    private List<Community> myCommunityList;
-    private List<Community> commentList;
+    private Integer myCommunityCnt;             //내가 쓴 글 수
+    private List<Community> communityList;      //목록
+    private List<Community> myCommunityList;    //내가 쓴 목록
+    private List<Community> commentList;        //댓글 목록
 
 }

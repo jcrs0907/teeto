@@ -1,384 +1,362 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.teeto.classes.mapper.ClassesMapper">
-<!--insert: 클래스 신청하기-->
-    <insert id="insertClass" parameterType="classes" >
-       INSERT INTO TB_CLASS_L (
-        CLASS_ID,
-        MENTO_ID,
-        CLASS_CTGR_CD,
-        CLASS_DETAIL_CTGR_CD,
-        CLASS_NM,
-        CLASS_FILE_SEQNO,
-        CLASS_TITLE,
-        CLASS_DSTN,
-        CLASS_STRT_DATE,
-        CLASS_STRT_TIME,
-        CLASS_DRTN_TIME,
-        CLASS_MAX_MTE,
-        CLASS_PLACE,
-        CLASS_CHARGE,
-        CRE_DTTM
 
+    <select id="selClassId"
+            resultType="String">
+       SELECT FN_PK_GEN('CS') FROM DUAL
+    </select>
+
+    <insert id="insertClass"
+            parameterType="classes" >
+       INSERT INTO TB_CLASS_L (
+            CLASS_ID,
+            MENTO_ID,
+            CLASS_CTGR_CD,
+            CLASS_DETAIL_CTGR_CD,
+            CLASS_NM,
+            CLASS_FILE_SEQNO,
+            CLASS_TITLE,
+            CLASS_DSTN,
+            CLASS_STRT_DATE,
+            CLASS_STRT_TIME,
+            CLASS_DRTN_TIME,
+            CLASS_MAX_MTE,
+            CLASS_PLACE,
+            CLASS_CHARGE,
+            CRE_DTTM
        ) VALUES(
-        #{classId},
-        #{mentoId},
-        #{classCtgrCd},
-        #{classDetailCtgrCd},
-        #{classNm},
-        #{classFileSeqno, jdbcType=INTEGER},
-        #{classTitle},
-        #{classDstn},
-        TO_DATE(#{classStrtDate},'YYYY-MM-DD'),
-        #{classStrtTime},
-        #{classDrtnTime},
-        #{classMaxMte},
-        #{classPlace},
-        #{classCharge},
-        sysdate
+            #{classId},
+            #{mentoId},
+            #{classCtgrCd},
+            #{classDetailCtgrCd},
+            #{classNm},
+            #{classFileSeqno, jdbcType=INTEGER},
+            #{classTitle},
+            #{classDstn},
+            DATE_FORMAT(#{classStrtDate},'%Y-%m-%d'),
+            #{classStrtTime},
+            #{classDrtnTime},
+            #{classMaxMte},
+            #{classPlace},
+            #{classCharge},
+            SYSDATE()
        )
     </insert>
-    <select id="selClassId" resultType="String">
-   SELECT FN_PK_GEN('CS') FROM DUAL
-    </select>
- <insert id="insertClassProcess" parameterType="classes">
-     <selectKey keyProperty="classProcessSeqno" resultType="integer" order="BEFORE">
-         SELECT TB_CLASS_P_SEQ.nextval FROM DUAL
-     </selectKey>
-    INSERT INTO TB_CLASS_PROCESS_L (
-        CLASS_PROCESS_SEQNO,
-        CLASS_ID,
-        CLASS_PROCESS_TITLE,
-        CLASS_PROCESS_DESC,
-        CRE_DTTM
+
+    <insert id="insertClassProcess"
+            parameterType="classes">
+       INSERT INTO TB_CLASS_PROCESS_L (
+           CLASS_PROCESS_SEQNO,
+           CLASS_ID,
+           CLASS_PROCESS_TITLE,
+           CLASS_PROCESS_DESC,
+           CRE_DTTM
        ) VALUES(
-   #{classProcessSeqno},
-   #{classId},
-   #{classProcessTitle},
-   #{classProcessDesc},
-    sysdate
-   )
- </insert>
-<!--    파일 일련번호 자동 생성 여부 체크 -->
- <insert id="insertClassDetail" parameterType="classes">
-     <selectKey keyProperty="classDetailSeqno" resultType="integer" order="BEFORE">
-         SELECT TB_CLASS_D_SEQ.nextval FROM DUAL
-     </selectKey>
-      INSERT INTO TB_CLASS_DETAIL_L (
-       CLASS_DETAIL_SEQNO,
-       CLASS_ID,
-       CLASS_DETAIL_TITLE,
-       CLASS_DETAIL_FILE_SEQNO,
-       CRE_DTTM
-      )VALUES(
-      #{classDetailSeqno},
-      #{classId},
-      #{classDetailTitle},
-      #{classDetailFileSeqno},
-      sysdate
-      )
- </insert>
+           nextval('CS_PROC_SEQ'),
+           #{classId},
+           #{classProcessTitle},
+           #{classProcessDesc},
+           SYSDATE()
+       )
+    </insert>
 
-<!--<select id="selectDateClass"  parameterType="classes" resultType="classes">-->
-<!--    SELECT-->
-<!--    C.CLASS_ID AS classId-->
-<!--    ,C.CLASS_NM AS classNm-->
-<!--    ,C.CLASS_DSTN AS classDstn-->
-<!--    ,M.MENTO_ID AS mentoId-->
-<!--    ,M.MENTO_NM AS mentoNm-->
-<!--    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm-->
-<!--    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm-->
-<!--    &#45;&#45;,(SELECT COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE CLASS_ID = TMCLL.CLASS_ID ) AS likeCnt-->
-<!--    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt-->
-<!--    FROM TB_CLASS_L C-->
-<!--    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID-->
-<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD-->
-<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD-->
-<!--    WHERE 1=1-->
-<!--    AND C.USE_YN = 'Y'-->
-<!--    AND CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')-->
-<!--    AND CLASS_STRT_DATE <![CDATA[<=]]>   TO_DATE(#{searchEndDate}, 'YYYYMMDD')-->
+    <insert id="insertClassDetail"
+            parameterType="classes">
+       INSERT INTO TB_CLASS_DETAIL_L (
+           CLASS_DETAIL_SEQNO,
+           CLASS_ID,
+           CLASS_DETAIL_TITLE,
+           CLASS_DETAIL_FILE_SEQNO,
+           CRE_DTTM
+       ) VALUES(
+           nextval('CS_DTL_SEQ'),
+           #{classId},
+           #{classDetailTitle},
+           #{classDetailFileSeqno},
+           SYSDATE()
+       )
+    </insert>
 
-<!--    ORDER BY CLASS_STRT_DATE DESC-->
-<!--</select>-->
+    <update id="updateClass"
+            parameterType="classes">
+       UPDATE TB_CLASS_L
+       SET
+          <if test='classNm !=null  and !classNm.equals("")'>
+              CLASS_NM = #{classNm},
+          </if>
+          <if test='classFileSeqno !=null'>
+              CLASS_FILE_SEQNO = #{classFileSeqno},
+          </if>
+          <if test='classTitle !=null  and !classTitle.equals("")'>
+              CLASS_TITLE = #{classTitle},
+          </if>
+          <if test='classDstn !=null  and !classDstn.equals("")'>
+              CLASS_DSTN = #{classDstn},
+          </if>
+          <if test='classStrtDate !=null  and !classStrtDate.equals("")'>
+              CLASS_STRT_DATE = DATE_FORMAT(#{classStrtDate},'%Y-%m-%d'),
+          </if>
+          <if test='classStrtTime !=null  and !classStrtTime.equals("")'>
+              CLASS_STRT_TIME = #{classStrtTime},
+          </if>
+          <if test='classDrtnTime !=null  and !classDrtnTime.equals("")'>
+              CLASS_DRTN_TIME = #{classDrtnTime},
+          </if>
+          <if test='classMaxMte !=null'>
+              CLASS_MAX_MTE = #{classMaxMte},
+          </if>
+          <if test='classPlace !=null  and !classPlace.equals("")'>
+              CLASS_PLACE = #{classPlace},
+          </if>
+          <if test='classCharge !=null  and !classCharge.equals("")'>
+              CLASS_CHARGE = #{classCharge},
+          </if>
+              UPT_DTTM = SYSDATE()
+       WHERE CLASS_ID = #{classId}
+    </update>
 
-<!--<select id="selectLikeClass" parameterType="classes" resultType="classes">-->
-<!--     SELECT-->
-<!--    C.CLASS_ID AS classId-->
-<!--    ,C.CLASS_NM AS classNm-->
-<!--    ,C.CLASS_DSTN AS classDstn-->
-<!--    ,M.MENTO_ID AS mentoId-->
-<!--    ,M.MENTO_NM AS mentoNm-->
-<!--    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm-->
-<!--    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm-->
-<!--    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt-->
-<!--    FROM TB_CLASS_L C-->
-<!--    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID-->
-<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD-->
-<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD-->
-<!--    WHERE  ROWNUM <![CDATA[<=]]> 5-->
-<!--    and C.USE_YN = 'Y'-->
-<!--    ORDER BY likeCnt DESC-->
-<!--</select>-->
+    <update id="updateClassDetail"
+            parameterType="classes">
+       UPDATE TB_CLASS_DETAIL_L
+       SET
+          <if test='classDetailTitle !=null  and !classDetailTitle.equals("")'>
+              CLASS_DETAIL_TITLE = #{classDetailTitle},
+          </if>
+          <if test='classDetailFileSeqno !=null'>
+              CLASS_DETAIL_FILE_SEQNO = #{classDetailFileSeqno},
+          </if>
+              UPT_DTTM = SYSDATE()
+       WHERE 1=1
+       AND CLASS_ID = #{classId}
+       AND CLASS_DETAIL_SEQNO = #{classDetailSeqno}
+    </update>
 
-<!--<select id="selectCategoryClass" parameterType="String" resultType="classes">-->
-<!--    SELECT-->
-<!--    C.CLASS_ID AS classId-->
-<!--    ,C.CLASS_NM AS classNm-->
-<!--    ,C.CLASS_DSTN AS classDstn-->
-<!--    ,M.MENTO_ID AS mentoId-->
-<!--    ,M.MENTO_NM AS mentoNm-->
-<!--    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm-->
-<!--    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm-->
-<!--    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt-->
-<!--    FROM TB_CLASS_L C-->
-<!--    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID-->
-<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD-->
-<!--    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD-->
-<!--    WHERE 1=1-->
-<!--    AND C.CLASS_CTGR_CD = #{classCtgrCd}-->
-<!--    ORDER BY C.CRE_DTTM DESC-->
-<!--</select>-->
+    <update id="updateClassProcess"
+            parameterType="classes">
+       UPDATE TB_CLASS_PROCESS_L
+       SET
+          <if test='classProcessTitle !=null  and !classProcessTitle.equals("")'>
+              CLASS_PROCESS_TITLE = #{classProcessTitle},
+          </if>
+          <if test='classProcessDesc !=null  and !classProcessDesc.equals("")'>
+              CLASS_PROCESS_DESC = #{classProcessDesc},
+          </if>
+              UPT_DTTM = SYSDATE()
+       WHERE 1=1
+       AND CLASS_ID = #{classId}
+       AND CLASS_PROCESS_SEQNO = #{classProcessSeqno}
+    </update>
 
-<update id="updateClass" parameterType="classes">
-UPDATE TB_CLASS_L
-    set
-        CLASS_NM=#{classNm},
-        CLASS_FILE_SEQNO=#{classFileSeqno, jdbcType=INTEGER},
-        CLASS_TITLE=#{classTitle},
-        CLASS_DSTN=#{classDstn},
-        CLASS_STRT_DATE=#{classStrtDate},
-        CLASS_STRT_TIME=TO_DATE(#{classStrtDate},'YYYY-MM-DD'),
-        CLASS_DRTN_TIME=#{classDrtnTime},
-        CLASS_MAX_MTE=#{classMaxMte},
-        CLASS_PLACE=#{classPlace},
-        CLASS_CHARGE=#{classCharge},
-        UPT_DTTM=sysdate
-       where CLASS_ID=#{classId}
-</update>
-<update id="updateClassDetail" parameterType="classes">
-    UPDATE
-     TB_CLASS_DETAIL_L
-    SET
-    <if test='classDetailTitle !=null  and !classDetailTitle.equals("")'>
-        CLASS_DETAIL_TITLE
-        =
-        #{classDetailTitle},
-    </if>
-    <if test='classDetailFileSeqno !=null'>
-        CLASS_DETAIL_FILE_SEQNO
-        =
-        #{classDetailFileSeqno},
-    </if>
-    UPT_DTTM = sysdate
-   WHERE
-   CLASS_ID=#{classId}
-    AND
-    CLASS_DETAIL_SEQNO = #{classDetailSeqno}
-</update>
-<update id="updateClassProcess" parameterType="classes">
-    UPDATE TB_CLASS_PROCESS_L
-    SET
-    <if test='classProcessTitle !=null  and !classProcessTitle.equals("")'>
-        CLASS_PROCESS_TITLE
-        =
-        #{classProcessTitle},
-    </if>
-    <if test='classProcessDesc !=null  and !classProcessDesc.equals("")'>
-        CLASS_PROCESS_DESC
-        =
-        #{classProcessDesc},
-    </if>
-    UPT_DTTM = sysdate
-    WHERE
-     CLASS_ID=#{classId}
-      AND
-       CLASS_PROCESS_SEQNO=#{classProcessSeqno}
-</update>
-<update id="updateClassesCount" parameterType="classes">
-    UPDATE TB_CLASS_L
-    set
-        UPT_DTTM=sysdate,
-    CLASS_CURRENT_MTE = (
-    SELECT nvl(CLASS_CURRENT_MTE,0)+1
-    FROM
-    TB_CLASS_L
-    WHERE CLASS_ID=#{classId}
-    )
-    WHERE CLASS_ID=#{classId}
-</update>
+    <update id="updateCurrentMte"
+            parameterType="classes">
+       UPDATE TB_CLASS_L
+       SET
+           UPT_DTTM = SYSDATE(),
+           CLASS_CURRENT_MTE = (SELECT
+                                     CLASS_CURRENT_MTE + 1
+                               FROM TB_CLASS_L
+                               WHERE CLASS_ID = #{classId}
+                              )
+       WHERE CLASS_ID = #{classId}
+    </update>
 
-<delete id="deleteClassProcess" parameterType="classes">
-UPDATE TB_CLASS_PROCESS_L
-  SET
-USE_YN = 'N'
-WHERE
-<if test='classProcessSeqno !=null'>
-     CLASS_PROCESS_SEQNO = #{classProcessSeqno}
-    and
-</if>
-  CLASS_ID = #{classId}
-</delete>
+    <update id="deleteProcess"
+            parameterType="classes">
+       UPDATE TB_CLASS_PROCESS_L
+       SET
+           USE_YN = 'N'
+          ,UPT_DTTM = SYSDATE()
+       WHERE CLASS_ID = #{classId}
+       <if test='classProcessSeqno != null'>
+       AND CLASS_PROCESS_SEQNO = #{classProcessSeqno}
+       </if>
+    </update>
 
-<delete id="deleteClassDetail" parameterType="classes">
-UPDATE TB_CLASS_DETAIL_L
-SET
-USE_YN = 'N'
-WHERE
-<if test='classDetailSeqno !=null'>
-    CLASS_DETAIL_SEQNO = #{classDetailSeqno}
-    and
-</if>
-CLASS_ID = #{classId}
-</delete>
+    <update id="deleteDetail"
+            parameterType="classes">
+       UPDATE TB_CLASS_DETAIL_L
+       SET
+           USE_YN = 'N'
+          ,UPT_DTTM = SYSDATE()
+       WHERE CLASS_ID = #{classId}
+       <if test='classDetailSeqno != null'>
+       AND CLASS_DETAIL_SEQNO = #{classDetailSeqno}
+       </if>
+    </update>
 
-<update id="deleteLikeClass" parameterType="classes">
-    UPDATE TB_MENTEE_CLASS_LIKE_L
-    SET
-    USE_YN = 'N'
-    WHERE
-    CLASS_ID = #{classId}
-</update>
+    <update id="deleteMteLike"
+            parameterType="classes">
+       UPDATE TB_MENTEE_CLASS_LIKE_L
+       SET
+           USE_YN = 'N'
+          ,UPT_DTTM = SYSDATE()
+       WHERE CLASS_ID = #{classId}
+    </update>
 
-<update id="deleteClass" parameterType="classes">
-    UPDATE TB_CLASS_L
-    SET
-    USE_YN = 'N'
-    WHERE
-    CLASS_ID = #{classId}
-</update>
+    <update id="delete"
+            parameterType="classes">
+       UPDATE TB_CLASS_L
+       SET
+           USE_YN = 'N'
+          ,UPT_DTTM = SYSDATE()
+       WHERE CLASS_ID = #{classId}
+    </update>
 
-<select id="selectClassAll" parameterType="String" resultType="classes">
-  SELECT
-    C.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
-    ,C.CLASS_TITLE AS classTitle
-    ,C.CLASS_DSTN AS classDstn
-    ,C.CLASS_STRT_DATE AS classStrtDate
-    ,C.CLASS_STRT_TIME AS classStrtTime
-    ,C.CLASS_CURRENT_MTE AS classCurrentMte
-    ,C.CLASS_MAX_MTE AS classMaxMte
-    ,C.CLASS_PLACE AS classPlace
-    ,C.CLASS_CHARGE AS classCharge
-    ,M.MENTO_ID AS mentoId
-    ,M.MENTO_NM AS mentoNm
-    ,M.MENTO_DSTN AS mentoDstn
-    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
-    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    FROM TB_CLASS_L C
-    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    WHERE C.CLASS_ID = #{classId}
-    and C.USE_YN = 'Y'
-</select>
-<select id="selectClassDetail" parameterType="String" resultType="classes">
-  SELECT
-   C.CLASS_DETAIL_TITLE AS classDetailTitle
-   ,C.CLASS_DETAIL_FILE_SEQNO AS classDetailFileSeqno
-   FROM TB_CLASS_DETAIL_L C
-   WHERE C.CLASS_ID = #{classId}
-    and C.USE_YN = 'Y'
-    ORDER BY C.CLASS_DETAIL_SEQNO
-</select>
-<select id="selectClassProcess" parameterType="String" resultType="classes">
- SELECT
-   C.CLASS_PROCESS_TITLE AS classProcessTitle
-   ,C.CLASS_PROCESS_DESC AS classProcessDesc
-   FROM TB_CLASS_PROCESS_L C
-    WHERE C.CLASS_ID = #{classId}
-    and C.USE_YN = 'Y'
-    ORDER BY C.CLASS_PROCESS_SEQNO
-</select>
+    <select id="getInfo"
+            parameterType="String"
+            resultType="classes">
+       SELECT
+              C.CLASS_ID AS classId
+             ,C.CLASS_NM AS classNm
+             ,C.CLASS_TITLE AS classTitle
+             ,C.CLASS_DSTN AS classDstn
+             ,C.CLASS_STRT_DATE AS classStrtDate
+             ,C.CLASS_STRT_TIME AS classStrtTime
+             ,C.CLASS_CURRENT_MTE AS classCurrentMte
+             ,C.CLASS_MAX_MTE AS classMaxMte
+             ,C.CLASS_PLACE AS classPlace
+             ,C.CLASS_CHARGE AS classCharge
+             ,M.MENTO_ID AS mentoId
+             ,M.MENTO_NM AS mentoNm
+             ,M.MENTO_DSTN AS mentoDstn
+             ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
+             ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
+             ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
+       FROM TB_CLASS_L C
+       LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
+       LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
+       LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
+       WHERE C.CLASS_ID = #{classId}
+       AND C.USE_YN = 'Y'
+    </select>
 
-<select id="selectMenteeLikeClass" parameterType="Classes" resultType="classes">
-   SELECT
-     ML.MENTEE_ID AS menteeId
-  	 ,ML.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
-    ,C.CLASS_DSTN AS classDstn
-    ,C.CLASS_STRT_DATE AS classStrtDate
-    ,M.MENTO_ID AS mentoId
-    ,M.MENTO_NM AS mentoNm
-    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
-    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    FROM TB_MENTEE_CLASS_LIKE_L ML
-    LEFT OUTER JOIN TB_CLASS_L C ON C.CLASS_ID = ML.CLASS_ID
-    LEFT OUTER JOIN TB_MENTO_I M ON M.MENTO_ID = C.MENTO_ID
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    WHERE ML.USE_YN = 'Y'
-    AND ML.MENTEE_ID = #{menteeId}
-</select>
+    <select id="getDetailList"
+            parameterType="String"
+            resultType="classes">
+       SELECT
+              C.CLASS_DETAIL_TITLE AS classDetailTitle
+             ,C.CLASS_DETAIL_FILE_SEQNO AS classDetailFileSeqno
+       FROM TB_CLASS_DETAIL_L C
+       WHERE C.CLASS_ID = #{classId}
+       AND C.USE_YN = 'Y'
+       ORDER BY C.CLASS_DETAIL_SEQNO
+    </select>
 
-<select id="selectClassesSearch" parameterType="classes" resultType="classes">
-SELECT
-  	C.CLASS_ID AS classId
-    ,C.CLASS_NM AS classNm
-    ,C.CLASS_DSTN AS classDstn
-    ,C.CLASS_STRT_DATE AS classStrtDate
-    ,C.CLASS_FILE_SEQNO AS classFileSeqno
-    ,M.MENTO_ID AS mentoId
-    ,M.MENTO_NM AS mentoNm
-    ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
-    ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
-    ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
-    <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
-    ,tmcl.MENTEE_ID AS menteeId
-    </if>
- FROM TB_CLASS_L C
-    LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
-    LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
-    <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
-    LEFT OUTER JOIN TB_MENTEE_CLASS_L tmcl ON tmcl.MENTEE_ID = #{menteeId}
-    </if>
-  WHERE C.USE_YN = 'Y'
-    <choose>
-        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS01")'>
-            <if test='searchStartDate !=null  and !searchStartDate.equals("")'>
-                AND C.CLASS_STRT_DATE <![CDATA[ >=]]>  TO_DATE(#{searchStartDate}, 'YYYYMMDD')
-            </if>
-            <if test='searchEndDate !=null  and !searchEndDate.equals("")'>
-                AND C.CLASS_STRT_DATE <![CDATA[<=]]>   TO_DATE(#{searchEndDate}, 'YYYYMMDD')
-            </if>
-        </when>
-        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS02")'>
-            <if test='classCtgrCd != null and !classCtgrCd.equals("")'>
-                AND C.CLASS_CTGR_CD = #{classCtgrCd}
-            </if>
-            <if test='classDetailCtgrCd != null and !classDetailCtgrCd.equals("")'>
-                AND C.CLASS_DETAIL_CTGR_CD = #{classDetailCtgrCd}
-            </if>
-        </when>
-        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS04")'>
-            AND M.MENTO_NM LIKE '%${searchText}%'
-        </when>
-        <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS05")'>
-            AND C.CLASS_NM LIKE '%${searchText}%'
-        </when>
-        <when test='(classesSearchTpCd != null and classesSearchTpCd.equals("CS06"))
-            or (classesSearchTpCd != null and classesSearchTpCd.equals("CS07"))'>
-              <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS06")'>
-                  AND TO_DATE(TO_CHAR(C.CLASS_STRT_DATE,'YYYY-MM-DD')
-                   || C.CLASS_STRT_TIME,'YYYY-MM-DD hh24:mi:ss')   <![CDATA[>]]>
-                  SYSDATE
-              </if>
-              <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS07")'>
-                  AND TO_DATE(TO_CHAR(C.CLASS_STRT_DATE,'YYYY-MM-DD')
-                  || C.CLASS_STRT_TIME,'YYYY-MM-DD hh24:mi:ss')  <![CDATA[<]]>
-                  SYSDATE - C.CLASS_DRTN_TIME/(24*60)
-              </if>
-            <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
-                AND C.CLASS_ID = tmcl.CLASS_ID
-            </if>
-            <if test='classesSearchMCd != null and classesSearchMCd.equals("MT02")'>
-                AND C.MENTO_ID = #{mentoId}
-            </if>
-        </when>
-    </choose>
-    ORDER BY C.CRE_DTTM DESC
-</select>
+    <select id="getProcessList"
+            parameterType="String"
+            resultType="classes">
+       SELECT
+              C.CLASS_PROCESS_TITLE AS classProcessTitle
+             ,C.CLASS_PROCESS_DESC AS classProcessDesc
+       FROM TB_CLASS_PROCESS_L C
+       WHERE C.CLASS_ID = #{classId}
+       AND C.USE_YN = 'Y'
+       ORDER BY C.CLASS_PROCESS_SEQNO
+    </select>
+
+    <select id="getMteLikeList"
+            parameterType="Classes"
+            resultType="classes">
+       SELECT
+              ML.MENTEE_ID AS menteeId
+             ,ML.CLASS_ID AS classId
+             ,C.CLASS_NM AS classNm
+             ,C.CLASS_DSTN AS classDstn
+             ,C.CLASS_STRT_DATE AS classStrtDate
+             ,M.MENTO_ID AS mentoId
+             ,M.MENTO_NM AS mentoNm
+             ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
+             ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
+             ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
+       FROM TB_MENTEE_CLASS_LIKE_L ML
+       LEFT OUTER JOIN TB_CLASS_L C ON C.CLASS_ID = ML.CLASS_ID
+       LEFT OUTER JOIN TB_MENTO_I M ON M.MENTO_ID = C.MENTO_ID
+       LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
+       LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
+       WHERE ML.USE_YN = 'Y'
+       AND ML.MENTEE_ID = #{menteeId}
+    </select>
+
+    <select id="getList"
+            parameterType="classes"
+            resultType="classes">
+       SELECT
+              C.CLASS_ID AS classId
+             ,C.CLASS_NM AS classNm
+             ,C.CLASS_DSTN AS classDstn
+             ,C.CLASS_STRT_DATE AS classStrtDate
+             ,C.CLASS_FILE_SEQNO AS classFileSeqno
+             ,M.MENTO_ID AS mentoId
+             ,M.MENTO_NM AS mentoNm
+             ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
+             ,(SELECT CLASS_HGRK_CTGR_CD FROM TB_CLASS_CATEGORY_L WHERE CLASS_CTGR_CD = CC.CLASS_CTGR_CD) AS classHrgkCtgrCdNm
+             ,F.FILE_SEQNO AS classFileSeqno
+             ,F.FILE_PATH AS classFilePath
+             ,F.FILE_NM AS classFileNm
+             ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
+             <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
+             ,tmcl.MENTEE_ID AS menteeId
+             </if>
+       FROM TB_CLASS_L C
+       LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
+       LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
+       LEFT OUTER JOIN TB_FILE_M F ON C.CLASS_FILE_SEQNO = F.FILE_SEQNO
+       <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
+       LEFT OUTER JOIN TB_MENTEE_CLASS_L tmcl ON tmcl.MENTEE_ID = #{menteeId}
+       </if>
+       WHERE C.USE_YN = 'Y'
+        <choose>
+            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS01")'>
+                <if test='searchStartDate !=null  and !searchStartDate.equals("")'>
+                    AND DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d') <![CDATA[ >=]]> DATE_FORMAT(#{searchStartDate}, '%Y-%m-%d')
+                </if>
+                <if test='searchEndDate !=null  and !searchEndDate.equals("")'>
+                    AND DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d') <![CDATA[ <=]]> DATE_FORMAT(#{searchEndDate}, '%Y-%m-%d')
+                </if>
+            </when>
+            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS02")'>
+                <if test='classCtgrCd != null and !classCtgrCd.equals("")'>
+                    AND C.CLASS_CTGR_CD = #{classCtgrCd}
+                </if>
+                <if test='classDetailCtgrCd != null and !classDetailCtgrCd.equals("")'>
+                    AND C.CLASS_DETAIL_CTGR_CD = #{classDetailCtgrCd}
+                </if>
+            </when>
+            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS04")'>
+                AND M.MENTO_NM LIKE '%${searchText}%'
+            </when>
+            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS05")'>
+                AND C.CLASS_NM LIKE '%${searchText}%'
+            </when>
+            <when test='(classesSearchTpCd != null and classesSearchTpCd.equals("CS06"))
+                or (classesSearchTpCd != null and classesSearchTpCd.equals("CS07"))'>
+                  <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS06")'>
+                      AND STR_TO_DATE(
+                                      CONCAT(
+                                              DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d')
+                                             ,tcl.CLASS_STRT_TIME)
+                                       ,'%Y-%m-%d %H:%i:%s'
+                                     ) <![CDATA[>]]> SYSDATE()
+                  </if>
+                  <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS07")'>
+                      AND DATE_ADD(
+                                   STR_TO_DATE(
+                                               CONCAT(
+                                                      DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d')
+                                                     ,tcl.CLASS_STRT_TIME)
+                                              ,'%Y-%m-%d %H:%i:%s')
+                                    ,interval cast(C.CLASS_DRTN_TIME as unsigned) minute
+                                   ) <![CDATA[<]]> SYSDATE()
+                  </if>
+                <if test='classesSearchMCd != null and classesSearchMCd.equals("MT01")'>
+                    AND C.CLASS_ID = tmcl.CLASS_ID
+                </if>
+                <if test='classesSearchMCd != null and classesSearchMCd.equals("MT02")'>
+                    AND C.MENTO_ID = #{mentoId}
+                </if>
+            </when>
+        </choose>
+       ORDER BY C.CRE_DTTM DESC
+    </select>
 </mapper>

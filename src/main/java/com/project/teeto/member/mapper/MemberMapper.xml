@@ -44,7 +44,7 @@
            , #{memTel, jdbcType=VARCHAR}
            , #{memProfileFileSeqno, jdbcType=INTEGER}
            , 'MT01'
-           , SYSDATE
+           , SYSDATE()
         )
     </insert>
 
@@ -66,9 +66,6 @@
 
     <insert id="insertSecInfo"
             parameterType="member">
-        <selectKey keyProperty="secessionSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_MEM_SECESSION_I_SEQ.nextval FROM DUAL
-        </selectKey>
        INSERT INTO /* insert - MemberMapper.xml : 210930 @eunseo */
         TB_MEM_SECESSION_I (
              SECESSION_SEQNO
@@ -78,12 +75,12 @@
             ,SECESSION_DATE
             ,CRE_DTTM
         ) VALUES (
-             #{secessionSeqno}
+             nextval('SCSS_SEQ')
             ,#{memId}
             ,#{secessionTpCd}
             ,#{secessionReason, jdbcType=VARCHAR}
-            ,SYSDATE
-            ,SYSDATE
+            ,SYSDATE()
+            ,SYSDATE()
         )
     </insert>
 
@@ -92,7 +89,7 @@
         UPDATE /* update - MemberMapper.xml : 210930 @eunseo */
                TB_MEMBER_L
         SET  USE_YN = 'N'
-            ,UPT_DTTM = SYSDATE
+            ,UPT_DTTM = SYSDATE()
         WHERE MEM_ID = #{memId}
     </update>
 
@@ -100,7 +97,7 @@
             parameterType="member">
         UPDATE TB_LOGIN_I /* update - MemberMapper.xml : 211008 @eunseo */
         SET PASSWORD = #{password}
-           ,UPT_DTTM = SYSDATE
+           ,UPT_DTTM = SYSDATE()
         WHERE 1=1
         AND USE_YN = 'Y'
         AND MEM_ID = #{memId}
@@ -119,10 +116,9 @@
               ,F.FILE_NM AS memProfileFileName
               ,F.FILE_PATH AS memProfileFilePath
         FROM TB_MEMBER_L M
-        LEFT OUTER JOIN TB_FILE_M F ON M.MEM_PROFILE_FILE_SEQNO = F.FILE_SEQNO
+        LEFT OUTER JOIN TB_FILE_M F ON M.MEM_PROFILE_FILE_SEQNO = F.FILE_SEQNO AND F.USE_YN = 'Y'
         WHERE 1=1
         AND M.USE_YN = 'Y'
-        AND F.USE_YN = 'Y'
         AND M.MEM_ID = #{memId}
     </select>
 
@@ -136,7 +132,7 @@
         <if test='memTel !=null and memTel != "" '>
             MEM_TEL = #{memTel},
         </if>
-            UPT_DTTM = SYSDATE
+            UPT_DTTM = SYSDATE()
         WHERE 1=1
         AND USE_YN = 'Y'
         AND MEM_ID = #{memId}

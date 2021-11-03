@@ -4,7 +4,7 @@
 
     <insert id="insertMemTermsInfo"
             parameterType="terms">
-       INSERT INTO
+       INSERT INTO /* insert - MemberMapper.xml : 210927 @eunseo */
         TB_MEMBER_TERMS_L (
              MEM_ID
            , TERMS_CD
@@ -13,9 +13,8 @@
         ) VALUES (
             #{memId}
             ,#{termsCd}
-            ,SYSDATE
-            ,SYSDATE
+            ,SYSDATE()
+            ,SYSDATE()
         )
-
     </insert>
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,6 +56,32 @@ public class FileService {
 
         return fileSeqno;
     }
+
+
+    /**
+     * 파일 삭제
+     * @param seqno
+     */
+    @Transactional
+    public void delete(Integer seqno) {
+        if(seqno != null) {
+            String path = fileMapper.getPath(seqno);
+            File file = new File(path);
+            if(file.exists()) {
+                if(file.delete()) {
+                    System.out.println(String.format("[FILE DELETED] name : %s", file.getName()));
+                } else {
+                    System.out.println(String.format("[FAILED TO DELETE FILE] name : %s", file.getName()));
+                }
+            } else {
+                System.out.println("[FAILED TO DELETE FILE] file is not exist");
+            }
+            fileMapper.delete(seqno);
+        } else {
+            log.info("[FAILED TO DELETE FILE] file seqno is not exist");
+        }
+    }
+
 
     /**
      * 디렉토리 경로에 파일이름 저장 후 파일 경로 반환

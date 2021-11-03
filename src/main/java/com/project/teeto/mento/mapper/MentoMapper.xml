@@ -2,42 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.teeto.mento.mapper.MentoMapper">
 
-    <!--멘토 생성-->
-    <!--멤버 아이디를 가지고와서 해당 아이디에 닉네임, 전화번호, 소개(선택), 은행, 계좌 추가-->
     <insert id="insert"
             parameterType="mento">
         <selectKey keyProperty="mentoId" resultType="String" order="BEFORE">
             SELECT FN_PK_GEN('TO') FROM DUAL
         </selectKey>
-       INSERT INTO TB_MENTO_I (
-        MENTO_ID,
-        MEM_ID,
-         MENTO_NM,
-          MENTO_TEL,
-          MENTO_DSTN,
-           MENTO_BANK,
+        INSERT INTO TB_MENTO_I (
+            MENTO_ID,
+            MEM_ID,
+            MENTO_NM,
+            MENTO_TEL,
+            MENTO_DSTN,
+            MENTO_BANK,
             MENTO_ACCOUNT,
-             CRE_DTTM
+            CRE_DTTM
          )
         VALUES
         (
-        #{mentoId},
-        #{memId},
-         #{mentoNm},
-         #{mentoTel},
-         #{mentoDstn, jdbcType=VARCHAR},
-         #{mentoBank},
-          #{mentoAccount} ,
-           sysdate)
+            #{mentoId},
+            #{memId},
+            #{mentoNm},
+            #{mentoTel},
+            #{mentoDstn, jdbcType=VARCHAR},
+            #{mentoBank},
+            #{mentoAccount},
+            SYSDATE()
+        )
     </insert>
 
-    <update id="updateMemberTpCd" parameterType="mento">
-     UPDATE TB_MEMBER_L
+    <update id="updateMemTpCd" parameterType="mento">
+        UPDATE TB_MEMBER_L
         SET
-       MEM_TP_CD = 'MT02',
-       UPT_DTTM = sysdate
-     WHERE
-     MEM_ID=#{memId}
+            MEM_TP_CD = 'MT02',
+            UPT_DTTM = SYSDATE()
+        WHERE MEM_ID = #{memId}
     </update>
 
     <!--멘토 닉네임 중복 체크-->
@@ -69,7 +67,7 @@
         <if test='mentoAccount !=null  and !mentoAccount.equals("")'>
             MENTO_ACCOUNT = #{mentoAccount},
         </if>
-            UPT_DTTM = SYSDATE
+            UPT_DTTM = SYSDATE()
         WHERE 1=1
         AND USE_YN = 'Y'
         AND MENTO_ID = #{mentoId}

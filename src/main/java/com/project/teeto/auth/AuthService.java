@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Random;
@@ -101,7 +103,7 @@ public class AuthService {
      * @return
      */
     @Transactional
-    public boolean checkCertNo(Auth auth) {
+    public boolean checkAuthCode(Auth auth) {
         boolean result = true;
 
         //유효시간 유닉스타임
@@ -110,7 +112,7 @@ public class AuthService {
         auth.setCheckApvTime(time.getTime()/1000 +"");
 
         Auth authRslt = authMapper.select(auth);
-        if (auth.getCheckCertNo() == null || !auth.getCheckCertNo().equals(authRslt.getCertNo())) {
+        if (authRslt == null || !auth.getCheckCertNo().equals(authRslt.getCertNo())) {
             result = false;
         }
         authMapper.update(authRslt);
@@ -167,6 +169,16 @@ public class AuthService {
             }
         }
         return result;
+    }
+
+    /**
+     * 세션 정보 가져오기
+     * @param req
+     * @return
+     */
+    public Auth getSession(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        return (Auth)session.getAttribute("member");
     }
 
 }
