@@ -1,6 +1,5 @@
 .my-list{max-width:320px; position:sticky; top:0; bottom:0;  overflow-y: auto;
     box-sizing: border-box; max-height:100vh;}
-.my-container{max-width:100% !important;margin-left:auto; margin-right:auto;
-    width: 100%;margin-top: 5px; background:#fff;}
+
 .my-breadcrumb li span{padding:0 0.75rem;}
 .my-breadcrumb li:first-child span{padding-left: 0;}

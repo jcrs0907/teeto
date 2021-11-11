@@ -22,6 +22,9 @@ MN		수익창출
 .cate-bg-pt{background-image: linear-gradient(294deg,#8400ff,#a25df4)}
 .cate-bg-mn{background-image: linear-gradient(294deg,#ae1de9,#c256ee)}
 
+
+
+
 .cate-badge-shape{padding: 0.3rem 0.8rem;
     display: inline-flex;
     align-items: center;
@@ -31,7 +34,11 @@ MN		수익창출
     color: #fff;
     font-size: 0.7rem;}
 .cate-badge-ds{background-color: #6227c1}
-.cate-badge-dv{background-color: #ac2bdf}
+.cate-badge-dv{background-color: #ac2bdf;}
+.cate-badge-shape.clicked:hover,
+.cate-badge-shape.clicked:active{border-color:#f9f8fb; color: #fff;}
+
+
 
 /*content*/
 .logo{font-size: 24px; letter-spacing: 0.5px; font-weight: 800; color:#0a0a0a;}
@@ -39,10 +46,19 @@ MN		수익창출
 main{padding: 200px 0 500px 0; background: beige}
 .user-icon{box-shadow: 0 2px 7px 0 rgb(0 0 0 / 11%);border-radius:50%;}
 .image-full{object-fit: contain}
+.teeto-container{max-width:100% !important;margin-left:auto;margin-right:auto;width: 100%;margin-top: 5px;}
 
 /*class*/
-.class-columns{flex-wrap: wrap; display: flex}
-.class-columns .class-column{ min-width: 25%;max-width: 25%;}
+.class-columns{
+	display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+	/* grid-template-rows: repeat(5, minmax(50px,auto)); */
+	grid-auto-flow: dense;
+	}
+/* .class-columns .class-column{ min-width: 25%;max-width: 25%;} */
+
+
 .class-card{overflow: hidden}
 .class-card:hover{cursor: pointer;}
 .class-card .class-icon{transform-origin: left;width: 4.4rem;height: 4.4rem;padding: 0.7rem;background-color: #fff; -webkit-border-radius: 50%; -moz-border-radius: 50%;
@@ -72,13 +88,15 @@ display: flex; align-items: center; justify-content: end;}
 .footer .site-info li{margin-bottom: 12px;opacity: 0.6;}
 
 @media screen and (max-width: 1024px){
-    .class-columns .class-column{min-width: 50%}
+   
+    /* .class-columns .class-column{min-width: 50%} */
 }
 
 @media screen and (max-width: 600px){
     .section > .hero-body{
         padding: 3rem 0;
     }
-    .class-columns .class-column{min-width: 100%}
+    .class-columns{	grid-template-columns: repeat(auto-fit, minmax(280px, auto));}
+    /* .class-columns .class-column{min-width: 100%} */
 }
 

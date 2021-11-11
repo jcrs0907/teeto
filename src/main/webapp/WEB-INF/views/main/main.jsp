@@ -151,9 +151,6 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -206,9 +203,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -261,9 +256,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -316,9 +309,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -382,9 +373,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -437,9 +426,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -492,9 +479,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -547,9 +532,7 @@
                                    <span>10</span>
                               </span>
                             </li>
-                            <li class="class-info is-size-6 has-text-weight-bold has-text-right has-text-grey-lighter" style="display: none">
-                                ₩ 37,000
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
