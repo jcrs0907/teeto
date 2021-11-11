@@ -1,1 +1,4 @@
 .login-form{max-width: 440px; width: 100%;margin: 0 auto;}
+.bank-list{display: flex;}
+.bank-list .button{padding: 0; flex: none;  width: 50%;}
+.bank-list .button img{width: 100px;height: auto;}

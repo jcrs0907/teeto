@@ -10,6 +10,7 @@ margin-bottom: 20px;}
 .category-list .category-btn.clicked .category-text{color: #fff;}
 .category-list .category-btn.clicked .category-count{color: #000; background-color: #fff;} 
 
+.sub-category-list{margin: -5px;}
 .sub-category-list .cate-badge-shape:not(.clicked){border-color: no;color: #363636;}
 .sub-category-list .cate-badge-shape{margin: 5px;}
 
