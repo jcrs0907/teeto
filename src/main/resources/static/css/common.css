@@ -36,7 +36,8 @@ MN		수익창출
 .cate-badge-ds{background-color: #6227c1}
 .cate-badge-dv{background-color: #ac2bdf;}
 .cate-badge-shape.clicked:hover,
-.cate-badge-shape.clicked:active{border-color:#f9f8fb; color: #fff;}
+.cate-badge-shape.clicked:active,
+.cate-badge-shape.clicked:focus{border-color:#f9f8fb; color: #fff;}
 
 
 

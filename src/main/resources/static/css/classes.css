@@ -1,5 +1,5 @@
 .class-apply-footer{border-top:1px solid rgb(248, 248, 248); position: fixed;bottom:0; left:auto !important; right: 0; width: calc(100% - 320px);}
-.class-apply-main{margin-left: 320px;}
+.class-apply-main{margin-left: 320px; width: calc(100% - 320px);}
 
 .category-list{ max-width: 320px;  position:sticky; top:0; bottom:0;  overflow-y: auto; box-sizing: border-box;  max-height:100vh;
   padding-top: 80px; padding-right: 3rem;}
@@ -31,6 +31,15 @@ margin-bottom: 20px;}
 
 .class-progress-btn.completed .class-progress-check{background-color: #485fc7; border-color:#485fc7;}
 .class-progress-btn.completed .progress-number{display: none;}
+
+.img-upload-area{display: flex;height: 300px; justify-content: flex-start; position: relative;}
+.img-upload-area:hover{cursor: pointer;}
+.img-upload-area label,
+.img-upload-area .preview{position: absolute;left: 0;right: 0;top: 0;bottom: 0;display: flex;align-items: center;justify-content: center;flex-direction: column;}
+.img-upload-area .img-option-box{position: absolute; right: 0; top: 0;}
+.img-upload-area .preview{display: none;}
+.img-upload-area input{/* display: none; */}
+.img-upload-area:active{outline: none; }
 
 @media screen and (max-width: 1024px){
 .category-list{max-width: 100%;display: flex;width: 100% !important;position: relative;flex-wrap: wrap;padding-right: 1rem; padding-top: 0px;}
