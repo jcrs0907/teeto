@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/main/resources/static/css/libs/datepickk.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/common.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/classes.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+     
+      
+    </style>
+</head>
+<body>
+    <nav  id="header" class="navbar is-black is-fixed-top scroll" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+              <span class="logo has-text-white">TEETO</span>
+          </a>
+  
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+          </a>
+      </div>
+  
+      <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+              <a href="/classes/list" class="navbar-item">
+                  클래스
+              </a>
+              <a href="/classes/list" class="navbar-item">
+                  날짜별 클래스
+              </a>
+              <a class="navbar-item is-hidden-desktop">
+                  커뮤니티 - 멘티 정기모임/스터디
+              </a>
+              <a class="navbar-item is-hidden-desktop">
+                  커뮤니티 - 멘토 정보 공유
+              </a>
+              <div class="navbar-item has-dropdown is-hoverable is-hidden-mobile is-hidden-tablet-only">
+                  <div class="navbar-link is-arrowless">
+                      커뮤니티
+                  </div>
+  
+                  <div class="navbar-dropdown is-boxed">
+                      <a href="/community/list" class="navbar-item">
+                          멘티 정기모임/스터디
+                      </a>
+                      <a href="/community/list" class="navbar-item">
+                          멘토 정보 공유
+                      </a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="navbar-end">
+              <a href="/mento/apply" class="navbar-item is-hidden-desktop">
+                  멘토 신청하기
+              </a>
+              <a href="/classes/apply" class="navbar-item is-hidden-desktop">
+                  클래스 신청하기
+              </a>
+              <a href="/login" class="navbar-item is-hidden-desktop">
+                  로그인
+              </a>
+              <a class="navbar-item is-hidden-desktop">
+                  마이페이지
+              </a>
+              <a class="navbar-item is-hidden-desktop">
+                  로그아웃
+              </a>
+              <div class="navbar-item is-hidden-mobile is-hidden-tablet-only">
+                  <div class="buttons">
+                      <a href="/mento/apply" class="button is-black">
+                          멘토 신청하기
+                      </a>
+                      <a href="/classes/apply" class="button is-black">
+                          클래스 신청하기
+                      </a>
+                      <a href="/login" class="button is-white">
+                          로그인
+                      </a>
+                  </div>
+              </div>
+              <div class="navbar-item has-dropdown is-hoverable is-hidden-mobile is-hidden-tablet-only">
+                  <div class="navbar-link is-arrowless">
+                      <span class="user-icon icon" style="font-size:30px">
+                           <ion-icon name="happy-outline"></ion-icon>
+                      </span>
+  
+                  </div>
+  
+                  <div class="navbar-dropdown is-boxed is-right">
+                      <a class="navbar-item">
+                          마이페이지
+                      </a>
+                      <a class="navbar-item">
+                          로그아웃
+                      </a>
+  
+                  </div>
+              </div>
+          </div>
+      </div>
+  </nav>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+       <div class="container is-size-2  has-text-centered">
+        원하는 날짜의 <br>
+        클래스를 검색해 보세요
+       </div>
+      </div>
+    </section>
+    <section class="hero has-background-black is-fullheight">
+      <div class="hero-body">   
+        <div class="columns"></div>     
+        <div class="ml-auto mr-auto mt-auto mb-auto has-text-centered">
+          <div id="rangePicker" class="datepicker mb-5"></div>
+          <button class="button is-white is-medium is-fullwidth">검색하기</button>
+        </div>
+      </div>       
+   </section>
+   <div class="search-result-bar pt-4 pb-4 pl-3 pr-3 has-background-black-bis has-text-white">
+     <div class="is-flex is-align-items-center">
+      <span class="icon-text">
+        <span class="icon is-size-3 mr-4">
+            <ion-icon name="calendar-number-outline"></ion-icon>
+        </span>
+        <span class="is-size-6">2021-03-10 ~ 2021-04-20</span>
+     </span>
+         <button class="delete ml-auto"></button>
+     </div>
+
+    <div class="mt-5 container is-max-desktop">
+      <!-- <p class="is-size-7 has-text-weight-bold mb-3 ml-4 mr-4">카테고리</p> -->
+      <div class="class-cate-icon-list has-background-black-ter">
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4 is-active">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          <span class="is-size-7 mt-2">전체</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="brush-outline"></ion-icon>
+          <span class="is-size-7 mt-2">디자인</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="code"></ion-icon>
+          <span class="is-size-7 mt-2">개발</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="restaurant-outline"></ion-icon>
+          <span class="is-size-7 mt-2">요리</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="musical-notes-outline"></ion-icon>
+          <span class="is-size-7 mt-2">음악</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="american-football-outline"></ion-icon>
+          <span class="is-size-7 mt-2">운동</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="camera-outline"></ion-icon>
+          <span class="is-size-7 mt-2">사진, 영상</span>
+        </button>
+        <button class="button is-flex-direction-column is-ghost has-text-white is-size-4">
+          <ion-icon name="card-outline"></ion-icon>
+          <span class="is-size-7 mt-2">수익창출</span>
+        </button>
+      </div>
+    </div>
+ 
+   </div>
+   <section class="section mt-6 mb-6">
+     <div class="container is-max-widescreen">
+       
+    <div class="class-columns columns is-desktop is-4">
+      <div class="class-column column">
+          <div class="class-card card">
+              <div class="class-icon">
+              </div>
+              <div class="class-card-header cate-bg-dv">
+                  <span class="cate-badge-shape cate-badge-dv">
+                      서버 · 백엔드
+                  </span>
+                  <button class="like-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                      </svg>
+                  </button>
+              </div>
+              <div class="class-card-content">
+                  <ul>
+                      <li class="mento-nickname is-size-7">
+                          멘토 닉네임
+                      </li>
+                      <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                          클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                      </li>
+                      <li class="class-info is-size-7 mb-1">
+                          <span class="icon-text">
+                              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span> 성남시 수정구</span>
+                          </span>
+                          <span class="icon-text">
+                              <span class="icon">
+                                  <ion-icon name="calendar-number-outline"></ion-icon>
+                              </span>
+                              <span>2021-03-10 금요일 2시</span>
+                           </span>
+                      </li>
+                      <li class="class-info is-size-7 has-text-grey-light ">
+                        <span class="icon-text">
+                             <span class="icon">
+                                  <ion-icon name="person"></ion-icon>
+                             </span>
+                              <span>0 / 10</span>
+                        </span>
+                          <span class="icon-text">
+                            <span class="icon">
+                                <ion-icon name="heart"></ion-icon>
+                            </span>
+                             <span>10</span>
+                        </span>
+                      </li>
+                     
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="class-column column">
+          <div class="class-card card">
+              <div class="class-icon">
+              </div>
+              <div class="class-card-header cate-bg-dv">
+                  <span class="cate-badge-shape cate-badge-dv">
+                      서버 · 백엔드
+                  </span>
+                  <button class="like-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                      </svg>
+                  </button>
+              </div>
+              <div class="class-card-content">
+                  <ul>
+                      <li class="mento-nickname is-size-7">
+                          멘토 닉네임
+                      </li>
+                      <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                          클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                      </li>
+                      <li class="class-info is-size-7 mb-1">
+                          <span class="icon-text">
+                              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span> 성남시 수정구</span>
+                          </span>
+                          <span class="icon-text">
+                              <span class="icon">
+                                  <ion-icon name="calendar-number-outline"></ion-icon>
+                              </span>
+                              <span>2021-03-10 금요일 2시</span>
+                           </span>
+                      </li>
+                      <li class="class-info is-size-7 has-text-grey-light ">
+                        <span class="icon-text">
+                             <span class="icon">
+                                  <ion-icon name="person"></ion-icon>
+                             </span>
+                              <span>0 / 10</span>
+                        </span>
+                          <span class="icon-text">
+                            <span class="icon">
+                                <ion-icon name="heart"></ion-icon>
+                            </span>
+                             <span>10</span>
+                        </span>
+                      </li>
+                     
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="class-column column">
+          <div class="class-card card">
+              <div class="class-icon">
+              </div>
+              <div class="class-card-header cate-bg-dv">
+                  <span class="cate-badge-shape cate-badge-dv">
+                      서버 · 백엔드
+                  </span>
+                  <button class="like-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                      </svg>
+                  </button>
+              </div>
+              <div class="class-card-content">
+                  <ul>
+                      <li class="mento-nickname is-size-7">
+                          멘토 닉네임
+                      </li>
+                      <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                          클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                      </li>
+                      <li class="class-info is-size-7 mb-1">
+                          <span class="icon-text">
+                              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span> 성남시 수정구</span>
+                          </span>
+                          <span class="icon-text">
+                              <span class="icon">
+                                  <ion-icon name="calendar-number-outline"></ion-icon>
+                              </span>
+                              <span>2021-03-10 금요일 2시</span>
+                           </span>
+                      </li>
+                      <li class="class-info is-size-7 has-text-grey-light ">
+                        <span class="icon-text">
+                             <span class="icon">
+                                  <ion-icon name="person"></ion-icon>
+                             </span>
+                              <span>0 / 10</span>
+                        </span>
+                          <span class="icon-text">
+                            <span class="icon">
+                                <ion-icon name="heart"></ion-icon>
+                            </span>
+                             <span>10</span>
+                        </span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="class-column column">
+          <div class="class-card card">
+              <div class="class-icon">
+              </div>
+              <div class="class-card-header cate-bg-dv">
+                  <span class="cate-badge-shape cate-badge-dv">
+                      서버 · 백엔드
+                  </span>
+                  <button class="like-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                      </svg>
+                  </button>
+              </div>
+              <div class="class-card-content">
+                  <ul>
+                      <li class="mento-nickname is-size-7">
+                          멘토 닉네임
+                      </li>
+                      <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                          클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                      </li>
+                      <li class="class-info is-size-7 mb-1">
+                          <span class="icon-text">
+                              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span> 성남시 수정구</span>
+                          </span>
+                          <span class="icon-text">
+                              <span class="icon">
+                                  <ion-icon name="calendar-number-outline"></ion-icon>
+                              </span>
+                              <span>2021-03-10 금요일 2시</span>
+                           </span>
+                      </li>
+                      <li class="class-info is-size-7 has-text-grey-light ">
+                        <span class="icon-text">
+                             <span class="icon">
+                                  <ion-icon name="person"></ion-icon>
+                             </span>
+                              <span>0 / 10</span>
+                        </span>
+                          <span class="icon-text">
+                            <span class="icon">
+                                <ion-icon name="heart"></ion-icon>
+                            </span>
+                             <span>10</span>
+                        </span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="class-column column">
+          <div class="class-card card">
+              <div class="class-icon">
+              </div>
+              <div class="class-card-header cate-bg-dv">
+                  <span class="cate-badge-shape cate-badge-dv">
+                      서버 · 백엔드
+                  </span>
+                  <button class="like-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M1.5 8.824C1.5 5.607 3.962 3 7 3c2.5 0 4 1.5 5 3 1-1.5 2.5-3 5-3 3.038 0 5.5 2.607 5.5 5.824C22.5 14.827 16.684 18.52 12 21 7.316 18.52 1.5 14.827 1.5 8.824z" fill="#fff"></path>
+                      </svg>
+                  </button>
+              </div>
+              <div class="class-card-content">
+                  <ul>
+                      <li class="mento-nickname is-size-7">
+                          멘토 닉네임
+                      </li>
+                      <li class="class-title subtitle is-size-5 has-text-weight-bold is-size-4">
+                          클래스 제목 최대 2줄 클래스 제목 최대 2줄 클래스 제목 최대 2줄
+                      </li>
+                      <li class="class-info is-size-7 mb-1">
+                          <span class="icon-text">
+                              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span> 성남시 수정구</span>
+                          </span>
+                          <span class="icon-text">
+                              <span class="icon">
+                                  <ion-icon name="calendar-number-outline"></ion-icon>
+                              </span>
+                              <span>2021-03-10 금요일 2시</span>
+                           </span>
+                      </li>
+                      <li class="class-info is-size-7 has-text-grey-light ">
+                        <span class="icon-text">
+                             <span class="icon">
+                                  <ion-icon name="person"></ion-icon>
+                             </span>
+                              <span>0 / 10</span>
+                        </span>
+                          <span class="icon-text">
+                            <span class="icon">
+                                <ion-icon name="heart"></ion-icon>
+                            </span>
+                             <span>10</span>
+                        </span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+   </section>
+    <footer class="footer">
+        asdf
+    </footer>
+    <script src="/src/main/resources/static/js/libs/datepickk.js"></script>
+    <script>
+     
+     var currentDate = new Date();
+     var rangePicker = new Datepickk({
+      container: document.querySelector('#rangePicker'),
+      inline: true,
+      range: true,
+      today:false,
+      minDate: currentDate.setDate(currentDate.getDate() - 1)
+    });
+    // rangePicker.today = false;
+
+    </script>
+</body>
+</html>

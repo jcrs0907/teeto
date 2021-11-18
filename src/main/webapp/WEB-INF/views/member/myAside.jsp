@@ -3,7 +3,7 @@
 <aside class="my-list column menu is-4 pb-4 pr-4">
     <div class="is-flex is-justify-content-space-between is-align-items-center pt-4 pb-3">
         <%--To-Do : edit 버튼 추후 추가--%>
-        <span class="is-size-4 has-text-weight-bold">멘토닉네임</span>
+        <span class="is-size-4 has-text-weight-bold">eunseo@test.com</span>
 
         <div class="image user-icon is-64x64 mb-2">
 
@@ -24,9 +24,6 @@
             <li class="mb-3 pl-2">
                 <a href="" class="is-size-6 has-text-black">종료 클래스</a>
             </li>
-            <li class="pl-2 mb-2">
-                <a href="" class="is-size-6 has-text-black">클래스 후기</a>
-            </li>
         </ul>
     </div>
     <div class="my-mento-list pt-3 pb-6">
@@ -42,7 +39,7 @@
                 <a href="" class="is-size-6 has-text-black">종료 클래스</a>
             </li>
             <li class="pl-2 mb-2">
-                <a href="" class="is-size-6 has-text-black">클래스 후기</a>
+                <a href="" class="is-size-6 has-text-black">멘토 정보 설정</a>
             </li>
         </ul>
     </div>
