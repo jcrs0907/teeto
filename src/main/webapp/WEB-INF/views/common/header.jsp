@@ -15,17 +15,10 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item">
+            <a href="/classes/list" class="navbar-item">
                 클래스
             </a>
-
-            <a class="navbar-item">
-                멘토
-            </a>
-            <a class="navbar-item">
-                인기있는 클래스
-            </a>
-            <a class="navbar-item">
+            <a href="/classes/list" class="navbar-item">
                 날짜별 클래스
             </a>
             <a class="navbar-item is-hidden-desktop">
@@ -51,10 +44,10 @@
         </div>
 
         <div class="navbar-end">
-            <a class="navbar-item is-hidden-desktop">
+            <a href="/mento/apply" class="navbar-item is-hidden-desktop">
                 멘토 신청하기
             </a>
-            <a class="navbar-item is-hidden-desktop">
+            <a href="/classes/apply" class="navbar-item is-hidden-desktop">
                 클래스 신청하기
             </a>
             <a href="/login" class="navbar-item is-hidden-desktop">
@@ -68,10 +61,10 @@
             </a>
             <div class="navbar-item is-hidden-mobile is-hidden-tablet-only">
                 <div class="buttons">
-                    <a class="button is-black">
+                    <a href="/mento/apply" class="button is-black">
                         멘토 신청하기
                     </a>
-                    <a class="button is-black">
+                    <a href="/classes/apply" class="button is-black">
                         클래스 신청하기
                     </a>
                     <a href="/login" class="button is-white">

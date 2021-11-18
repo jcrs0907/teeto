@@ -11,20 +11,20 @@
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
     </definition>
     <!--member-->
-    <definition name="loginBase" template="/WEB-INF/views/member/base.jsp">
+    <definition name="emptyBase" template="/WEB-INF/views/common/emptyBase.jsp">
         <put-attribute name="head" value="/WEB-INF/views/common/head.jsp"/>
         <put-attribute name="content"/>
     </definition>
     <definition name="index" extends="base">
         <put-attribute name="content" value="/WEB-INF/views/main/main.jsp" />
     </definition>
-    <definition name="login" extends="loginBase">
+    <definition name="login" extends="emptyBase">
         <put-attribute name="content" value="/WEB-INF/views/member/login.jsp" />
     </definition>
-    <definition name="signup" extends="loginBase">
+    <definition name="signup" extends="emptyBase">
         <put-attribute name="content" value="/WEB-INF/views/member/signup.jsp" />
     </definition>
-    <definition name="resetPassword" extends="loginBase">
+    <definition name="resetPassword" extends="emptyBase">
         <put-attribute name="content" value="/WEB-INF/views/member/resetPassword.jsp" />
     </definition>
     <!--community-->
@@ -51,4 +51,19 @@
             </definition>
         </put-attribute>
     </definition>
+    <!--class 목록-->
+    <definition name="classesList" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/classes/classesList.jsp" />
+    </definition>
+    <definition name="classesDetail" extends="base">
+        <put-attribute name="content" value="/WEB-INF/views/classes/classesDetail.jsp" />
+    </definition>
+    <definition name="classesApply" extends="emptyBase">
+        <put-attribute name="content" value="/WEB-INF/views/classes/classesApply.jsp" />
+    </definition>
+    <!--멘토 신청하기-->
+    <definition name="mentoApply" extends="emptyBase">
+        <put-attribute name="content" value="/WEB-INF/views/member/mentoApply.jsp" />
+    </definition>
+
 </tiles-definitions>

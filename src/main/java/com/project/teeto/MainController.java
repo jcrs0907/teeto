@@ -52,4 +52,24 @@ public class MainController {
         return "myPage";
     }
 
+    @GetMapping("/mento/apply")
+    public String mentoApply() {
+        return "mentoApply";
+    }
+
+    @GetMapping("/classes/list")
+    public String classesList() {
+        return "classesList";
+    }
+
+    @GetMapping("/classes/detail")
+    public String classesDetail() {
+        return "classesDetail";
+    }
+
+    @GetMapping("/classes/apply")
+    public String classesApply() {
+        return "classesApply";
+    }
+
 }
