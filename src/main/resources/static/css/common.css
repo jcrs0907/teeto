@@ -1,9 +1,9 @@
 body{ word-break:  keep-all;}
 
-/*navbar(header) scroll*/
+/*navbar(header) scroll background-color: rgb(255 255 255 / 95%);*/
 .navbar{min-height:3rem;}
-.navbar.scroll{box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%); background-color: rgb(255 255 255 / 95%); transition: .3s;}
-.navbar.scroll .navbar-menu{background-color: rgb(255 255 255 / 95%);}
+.navbar.scroll{box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%);  transition: .3s;}
+/* .navbar.scroll .navbar-menu{background-color: rgb(255 255 255 / 95%);} */
 /*class category background color*/
 /*
 DS		디자인
