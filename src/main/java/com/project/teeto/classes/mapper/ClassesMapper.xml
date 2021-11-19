@@ -153,12 +153,17 @@
        UPDATE TB_CLASS_L
        SET
            UPT_DTTM = SYSDATE(),
-           CLASS_CURRENT_MTE = (SELECT
-                                     CLASS_CURRENT_MTE + 1
-                               FROM TB_CLASS_L
-                               WHERE CLASS_ID = #{classId}
-                              )
+           CLASS_CURRENT_MTE = CLASS_CURRENT_MTE + 1
        WHERE CLASS_ID = #{classId}
+    </update>
+
+    <update id="deleteFileSeqno"
+            parameterType="classes">
+        UPDATE TB_CLASS_L /* update - ClassesMapper.xml : 211118 @eunseo */
+        SET
+            CLASS_FILE_SEQNO = #{classFileSeqno, jdbcType=INTEGER}
+           ,UPT_DTTM = SYSDATE()
+        WHERE CLASS_ID = #{classId}
     </update>
 
     <update id="deleteProcess"
@@ -211,8 +216,19 @@
              ,C.CLASS_NM AS classNm
              ,C.CLASS_TITLE AS classTitle
              ,C.CLASS_DSTN AS classDstn
-             ,C.CLASS_STRT_DATE AS classStrtDate
-             ,C.CLASS_STRT_TIME AS classStrtTime
+             ,STR_TO_DATE(
+                           CONCAT(
+                                  DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d')
+                                 ,C.CLASS_STRT_TIME)
+                          ,'%Y-%m-%d %H:%i') AS classStrtDateTime
+             ,DATE_ADD(
+                       STR_TO_DATE(
+                                   CONCAT(
+                                          DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d')
+                                         ,C.CLASS_STRT_TIME)
+                                  ,'%Y-%m-%d %H:%i')
+                        ,interval cast(C.CLASS_DRTN_TIME as unsigned) minute) AS classEndDateTime
+             ,CONCAT(C.CLASS_DRTN_TIME, '분') AS classDrtnTime
              ,C.CLASS_CURRENT_MTE AS classCurrentMte
              ,C.CLASS_MAX_MTE AS classMaxMte
              ,C.CLASS_PLACE AS classPlace
@@ -223,10 +239,15 @@
              ,CC.CLASS_CTGR_CD_NM AS classCtgrCdNm
              ,CCC.CLASS_CTGR_CD_NM AS classHrgkCtgrCdNm
              ,(SELECT  COUNT(*) FROM TB_MENTEE_CLASS_LIKE_L tmcll WHERE C.CLASS_ID = TMCLL.CLASS_ID and tmcll.USE_YN = 'Y') AS likeCnt
+             ,C.CLASS_FILE_SEQNO AS classFileSeqno
+             ,F.FILE_PATH AS classFilePath
+             ,F.FILE_NM AS classFileNm
+             ,COALESCE(C.UPT_DTTM, C.CRE_DTTM) AS creDttm
        FROM TB_CLASS_L C
        LEFT OUTER JOIN TB_MENTO_I M ON C.MENTO_ID = M.MENTO_ID
        LEFT OUTER JOIN TB_CLASS_CATEGORY_L CC ON C.CLASS_DETAIL_CTGR_CD = CC.CLASS_CTGR_CD
        LEFT OUTER JOIN TB_CLASS_CATEGORY_L CCC ON C.CLASS_CTGR_CD = CCC.CLASS_CTGR_CD
+       LEFT OUTER JOIN TB_FILE_M F ON C.CLASS_FILE_SEQNO = F.FILE_SEQNO AND F.USE_YN= 'Y'
        WHERE C.CLASS_ID = #{classId}
        AND C.USE_YN = 'Y'
     </select>
@@ -237,7 +258,10 @@
        SELECT
               C.CLASS_DETAIL_TITLE AS classDetailTitle
              ,C.CLASS_DETAIL_FILE_SEQNO AS classDetailFileSeqno
+             ,F.FILE_PATH AS classDetailFilePath
+             ,F.FILE_NM AS classDetailFileNm
        FROM TB_CLASS_DETAIL_L C
+       LEFT OUTER JOIN TB_FILE_M F ON C.CLASS_DETAIL_FILE_SEQNO = F.FILE_SEQNO AND F.USE_YN = 'Y'
        WHERE C.CLASS_ID = #{classId}
        AND C.USE_YN = 'Y'
        ORDER BY C.CLASS_DETAIL_SEQNO
@@ -256,7 +280,7 @@
     </select>
 
     <select id="getMteLikeList"
-            parameterType="Classes"
+            parameterType="String"
             resultType="classes">
        SELECT
               ML.MENTEE_ID AS menteeId
@@ -306,6 +330,12 @@
        LEFT OUTER JOIN TB_MENTEE_CLASS_L tmcl ON tmcl.MENTEE_ID = #{menteeId}
        </if>
        WHERE C.USE_YN = 'Y'
+        <if test='classCtgrCd != null and !classCtgrCd.equals("")'>
+            AND C.CLASS_CTGR_CD = #{classCtgrCd}
+        </if>
+        <if test='classDetailCtgrCd != null and !classDetailCtgrCd.equals("")'>
+            AND C.CLASS_DETAIL_CTGR_CD = #{classDetailCtgrCd}
+        </if>
         <choose>
             <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS01")'>
                 <if test='searchStartDate !=null  and !searchStartDate.equals("")'>
@@ -316,35 +346,27 @@
                 </if>
             </when>
             <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS02")'>
-                <if test='classCtgrCd != null and !classCtgrCd.equals("")'>
-                    AND C.CLASS_CTGR_CD = #{classCtgrCd}
-                </if>
-                <if test='classDetailCtgrCd != null and !classDetailCtgrCd.equals("")'>
-                    AND C.CLASS_DETAIL_CTGR_CD = #{classDetailCtgrCd}
-                </if>
-            </when>
-            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS04")'>
                 AND M.MENTO_NM LIKE '%${searchText}%'
             </when>
-            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS05")'>
+            <when test='classesSearchTpCd != null and classesSearchTpCd.equals("CS03")'>
                 AND C.CLASS_NM LIKE '%${searchText}%'
             </when>
-            <when test='(classesSearchTpCd != null and classesSearchTpCd.equals("CS06"))
-                or (classesSearchTpCd != null and classesSearchTpCd.equals("CS07"))'>
-                  <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS06")'>
+            <when test='(classesSearchTpCd != null and classesSearchTpCd.equals("CS04"))
+                or (classesSearchTpCd != null and classesSearchTpCd.equals("CS05"))'>
+                  <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS04")'>
                       AND STR_TO_DATE(
                                       CONCAT(
                                               DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d')
-                                             ,tcl.CLASS_STRT_TIME)
+                                             ,C.CLASS_STRT_TIME)
                                        ,'%Y-%m-%d %H:%i:%s'
                                      ) <![CDATA[>]]> SYSDATE()
                   </if>
-                  <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS07")'>
+                  <if test='classesSearchTpCd != null and classesSearchTpCd.equals("CS05")'>
                       AND DATE_ADD(
                                    STR_TO_DATE(
                                                CONCAT(
                                                       DATE_FORMAT(C.CLASS_STRT_DATE, '%Y-%m-%d')
-                                                     ,tcl.CLASS_STRT_TIME)
+                                                     ,C.CLASS_STRT_TIME)
                                               ,'%Y-%m-%d %H:%i:%s')
                                     ,interval cast(C.CLASS_DRTN_TIME as unsigned) minute
                                    ) <![CDATA[<]]> SYSDATE()
@@ -357,6 +379,12 @@
                 </if>
             </when>
         </choose>
-       ORDER BY C.CRE_DTTM DESC
+        <if test='searchFilterTpCd != null and searchFilterTpCd.equals("FT01")'>
+            ORDER BY C.CRE_DTTM DESC
+        </if>
+        <if test='searchFilterTpCd != null and searchFilterTpCd.equals("FT02")'>
+            ORDER BY likeCnt DESC
+        </if>
+
     </select>
 </mapper>

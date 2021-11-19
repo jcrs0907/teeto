@@ -4,9 +4,6 @@
 
     <insert id="insert"
             parameterType="review">
-        <selectKey keyProperty="rvwSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_REVIEW_L_SEQ.nextval FROM DUAL
-        </selectKey>
        INSERT INTO /* select - ReviewMapper.xml : 211005 @eunseo */
         TB_REVIEW_L (
             RVW_SEQNO
@@ -17,13 +14,13 @@
            ,RVW_SCOR
            ,CRE_DTTM
         ) VALUES (
-            #{rvwSeqno}
+            nextval('RVW_SEQ')
            ,#{menteeId}
            ,#{classId}
            ,#{rvwTitle}
            ,#{rvwCtt}
            ,#{rvwScor}
-           ,SYSDATE
+           ,SYSDATE()
         )
     </insert>
 
@@ -33,40 +30,57 @@
         SELECT /* select - ReviewMapper.xml : 211005 @eunseo */
                R.RVW_SEQNO AS rvwSeqno
               ,TMI.MENTEE_NM AS menteeNm
+              ,TMI.MENTEE_ID AS menteeId
               ,R.RVW_TITLE AS rvwTitle
               ,R.RVW_CTT AS rvwCtt
               ,R.RVW_SCOR AS rvwScor
               ,R.REPLY_YN AS replyYn
         FROM TB_REVIEW_L R
         LEFT OUTER JOIN TB_MENTEE_I TMI ON R.MENTEE_ID = TMI.MENTEE_ID
-        WHERE CLASS_ID = #{classId}
+        WHERE R.CLASS_ID = #{classId}
+        AND R.USE_YN = 'Y'
     </select>
 
     <update id="update"
             parameterType="review">
         UPDATE TB_REVIEW_L /* update - ReviewMapper.xml : 211006 @eunseo */
-        SET  RVW_TITLE = #{rvwTitle}
-            ,RVW_CTT = #{rvwCtt}
-            ,RVW_SCOR = #{rvwScor}
-            ,UPT_DTTM = SYSDATE
-        WHERE 1=1
-        AND RVW_SEQNO = #{rvwSeqno}
+        SET
+        <if test='rvwTitle != null and !rvwTitle.equals("")'>
+            RVW_TITLE = #{rvwTitle},
+        </if>
+        <if test='rvwCtt != null and !rvwCtt.equals("")'>
+            RVW_CTT = #{rvwCtt},
+        </if>
+        <if test='rvwScor != null'>
+            RVW_SCOR = #{rvwScor},
+        </if>
+            UPT_DTTM = SYSDATE()
+        WHERE RVW_SEQNO = #{rvwSeqno}
     </update>
 
     <update id="delete"
             parameterType="int">
         UPDATE TB_REVIEW_L /* update - ReviewMapper.xml : 211006 @eunseo */
         SET USE_YN = 'N'
-           ,UPT_DTTM = SYSDATE
-        WHERE 1=1
-        AND RVW_SEQNO = #{rvwSeqno}
+           ,UPT_DTTM = SYSDATE()
+        WHERE RVW_SEQNO = #{rvwSeqno}
     </update>
 
     <update id="updateReplyYn"
             parameterType="review">
         UPDATE TB_REVIEW_L /* update - ReviewMapper.xml : 211007 @eunseo */
         SET REPLY_YN = #{replyYn}
-           ,UPT_DTTM = SYSDATE
+           ,UPT_DTTM = SYSDATE()
         WHERE RVW_SEQNO = #{rvwSeqno}
     </update>
+
+    <select id="getAvg"
+            parameterType="String"
+            resultType="int">
+        SELECT /* getAvg - ReviewMapper.xml : 211112 @eunseo */
+              IFNULL(AVG(RVW_SCOR),0) AS rvwAvg
+        FROM TB_REVIEW_L
+        WHERE CLASS_ID = #{classId}
+        AND USE_YN = 'Y'
+    </select>
 </mapper>

@@ -1,15 +1,16 @@
 package com.project.teeto.community;
 
 import com.project.teeto.auth.AuthService;
-import com.project.teeto.auth.model.Auth;
 import com.project.teeto.community.model.Community;
+import com.project.teeto.intergrate.paging.model.Pagination;
+import com.project.teeto.intergrate.paging.model.PagingResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -44,8 +45,8 @@ public class CommunityController {
      */
     @GetMapping("/{cmmtTpCd}")
     @ResponseBody
-    public Community getList(@PathVariable String cmmtTpCd, HttpServletRequest req) {
-        return communityService.getList(cmmtTpCd, authService.getSession(req));
+    public PagingResponse<List<Community>> getList(@PathVariable String cmmtTpCd, HttpServletRequest req, Pagination page) {
+        return communityService.getList(cmmtTpCd, authService.getSession(req), page);
     }
 
 

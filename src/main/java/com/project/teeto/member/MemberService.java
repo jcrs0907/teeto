@@ -1,11 +1,11 @@
 package com.project.teeto.member;
 
 import com.project.teeto.auth.AuthService;
-import com.project.teeto.file.FileService;
+import com.project.teeto.intergrate.file.FileService;
 import com.project.teeto.member.mapper.MemberMapper;
 import com.project.teeto.member.model.Member;
 import com.project.teeto.mentee.MenteeService;
-import com.project.teeto.pwd.PwdService;
+import com.project.teeto.intergrate.pwd.PwdService;
 import com.project.teeto.terms.TermsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,9 +84,9 @@ public class MemberService {
         String pwd = "";
         try {
             //프로필 파일이 있을 경우
-            if(member.getMemProfileFile() != null) {
-                member.setMemProfileFileSeqno(insertImage(member.getMemProfileFile()));
-            }
+//            if(member.getMemProfileFile() != null) {
+//                member.setMemProfileFileSeqno(insertImage(member.getMemProfileFile()));
+//            }
 
             //회원ID
             memId = memberMapper.selJoinMemId();
@@ -195,5 +195,10 @@ public class MemberService {
     //이미지 등록 후 fileSeqno 반환
     public Integer insertImage(MultipartFile file) {
         return fileService.insert(file, MEM_FILE_PATH, MEM_FILE_GROUP_CD);
+    }
+    //이미지 삭제 후 등록 하고 seqno 반환
+    public Integer updateImage(MultipartFile file, int fileSeqno) {
+        fileService.delete(fileSeqno);
+        return insertImage(file);
     }
 }

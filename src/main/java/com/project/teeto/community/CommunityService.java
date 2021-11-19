@@ -3,7 +3,10 @@ package com.project.teeto.community;
 import com.project.teeto.auth.model.Auth;
 import com.project.teeto.community.mapper.CommunityMapper;
 import com.project.teeto.community.model.Community;
-import com.project.teeto.file.FileService;
+import com.project.teeto.intergrate.file.FileService;
+import com.project.teeto.intergrate.paging.model.Pagination;
+import com.project.teeto.intergrate.paging.model.PagingResponse;
+import com.project.teeto.intergrate.paging.model.Search;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,27 +71,15 @@ public class CommunityService {
      * @param auth
      * @return
      */
-    public Community getList(String cmmtTpCd, Auth auth) {
-        List<Community> communityList = null;
-        List<Community> myCommunityList = null;
-        Community communityRes = new Community();
-        Community communityReq = new Community();
-        int myCmmtCnt = 0;
+    public PagingResponse<List<Community>> getList(String cmmtTpCd, Auth auth, Pagination page) {
+        Search search = Search.builder()
+                .info(cmmtTpCd)
+                .page(page)
+                .build();
+        int totalCnt = communityMapper.getTotalCount(cmmtTpCd);
+        page.setPageInfoWithTotalCount(totalCnt);
 
-        communityReq.setMemId(auth.getMemId());
-        communityReq.setCmmtTpCd(cmmtTpCd);
-
-        communityList = communityMapper.getList(cmmtTpCd);
-        myCommunityList = communityMapper.getMyList(communityReq);
-        if(myCommunityList != null) {
-            myCmmtCnt = myCommunityList.size();
-        }
-
-        communityRes.setCommunityList(communityList);
-        communityRes.setMyCommunityList(myCommunityList);
-        communityRes.setMyCommunityCnt(myCmmtCnt);
-
-        return communityRes;
+        return new PagingResponse<>(communityMapper.getList(search), page);
     }
 
     /**

@@ -27,6 +27,7 @@ public interface ClassesMapper {
     void updateClassProcess(Classes classes);
     void updateClassDetail(Classes classes);
     void updateCurrentMte(Classes classes);
+    void deleteFileSeqno(Classes classes);
 
     /**
      * 삭제
@@ -43,7 +44,7 @@ public interface ClassesMapper {
     List<Classes> getDetailList(String classId);
     List<Classes> getProcessList(String classId);
 
-    List<Classes> getMteLikeList(Classes classes);      //찜한 목록
+    List<Classes> getMteLikeList(String menteeId);      //찜한 목록
     List<Classes> getList(Classes classes);             //목록(검색)
 
 }

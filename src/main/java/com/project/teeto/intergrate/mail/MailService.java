@@ -1,4 +1,4 @@
-package com.project.teeto.mail;
+package com.project.teeto.intergrate.mail;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

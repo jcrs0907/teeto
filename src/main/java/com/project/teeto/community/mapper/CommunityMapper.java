@@ -1,6 +1,7 @@
 package com.project.teeto.community.mapper;
 
 import com.project.teeto.community.model.Community;
+import com.project.teeto.intergrate.paging.model.Search;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,9 +11,9 @@ public interface CommunityMapper {
 
     int insert(Community community);
 
-    List<Community> getList(String cmmtTpCd);
+    List<Community> getList(Search search);
 
-    List<Community> getMyList(Community community);
+//    List<Community> getMyList(Community community);
 
     Community getDetail(int cmmtSeqno);
 
@@ -31,4 +32,6 @@ public interface CommunityMapper {
     List<Community> getCommentList(int cmmtSeqno);
 
     void deleteFileSeqno(Community community);
+
+    int getTotalCount(String cmmtTpCd);
 }

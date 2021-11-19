@@ -3,10 +3,10 @@ package com.project.teeto.auth;
 
 import com.project.teeto.auth.mapper.AuthMapper;
 import com.project.teeto.auth.model.Auth;
-import com.project.teeto.mail.MailService;
+import com.project.teeto.intergrate.mail.MailService;
 import com.project.teeto.member.model.Member;
-import com.project.teeto.pwd.PwdService;
-import com.project.teeto.sms.SmsService;
+import com.project.teeto.intergrate.pwd.PwdService;
+import com.project.teeto.intergrate.sms.SmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,7 +139,7 @@ public class AuthService {
      */
     public Auth login(Auth auth) {
         Auth member = new Auth();
-        Auth login = new Auth();
+        Auth login = null;
         String mentoId = "";
 
         login = authMapper.login(auth);

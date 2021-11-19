@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 public interface MenteeMapper {
 
     void insert(Mentee mentee);
-    void likeClass(Mentee mentee);
-    void deleteClass(Mentee mentee);
+    void updateLike(Mentee mentee);
 
     boolean insertPayment(Mentee mentee);
     boolean insertClasses(Mentee mentee);
+
+    Mentee getLikeInfo(Mentee mentee);
+    int getNextLikeSeqno();
 }

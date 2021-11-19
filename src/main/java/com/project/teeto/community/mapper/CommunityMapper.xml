@@ -28,7 +28,7 @@
     </insert>
 
     <select id="getList"
-            parameterType="String"
+            parameterType="search"
             resultType="community">
         SELECT /* select - CommunityMapper.xml : 211013 @eunseo */
                C.CMMT_SEQNO AS cmmtSeqno
@@ -46,8 +46,11 @@
         LEFT OUTER JOIN TB_MENTO_I T ON C.MENTO_ID = T.MENTO_ID
         WHERE 1=1
         AND C.USE_YN = 'Y'
-        AND C.CMMT_TP_CD = #{cmmtTpCd}
+        AND C.CMMT_TP_CD = #{info}
         ORDER BY C.CRE_DTTM DESC
+        <include refid="com.project.teeto.intergrate.paging.mapper.PaginationMapper.searching">
+            <property name="search" value="search"/>
+        </include>
     </select>
 
     <select id="getMyList"
@@ -208,5 +211,15 @@
            ,UPT_DTTM = SYSDATE()
         WHERE CMMT_SEQNO = #{cmmtSeqno}
     </update>
+
+    <select id="getTotalCount"
+            parameterType="String"
+            resultType="int">
+      SELECT /* getTotalCount - CommunityMapper.xml : 211117 @eunseo */
+            COUNT(CMMT_SEQNO)
+      FROM TB_COMMUNITY_L
+      WHERE CMMT_TP_CD = #{cmmtTpCd}
+      AND USE_YN = 'Y'
+    </select>
 
 </mapper>

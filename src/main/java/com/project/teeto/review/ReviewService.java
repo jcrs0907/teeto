@@ -44,20 +44,28 @@ public class ReviewService {
      * @param classId
      * @return
      */
-    public List<Review> select(String classId) {
+    public Review select(String classId) {
+        Review review = new Review();
         List<Review> reviewList = null;
+        int rvwAvg = 0;
 
         Reply reply = null;
 
         reviewList = reviewMapper.select(classId);
+        rvwAvg = reviewMapper.getAvg(classId);
 
-        for(Review r : reviewList) {
-            if(r.getReplyYn().equals("Y")) {
-                reply = replyService.select(r.getRvwSeqno());
-                r.setReplyInfo(reply);
+        if(reviewList != null) {
+            for(Review r : reviewList) {
+                if(r.getReplyYn().equals("Y")) {
+                    reply = replyService.select(r.getRvwSeqno());
+                    r.setReplyInfo(reply);
+                }
             }
         }
-        return reviewList;
+        review.setReviewList(reviewList);
+        review.setRvwAvg(rvwAvg);
+
+        return review;
     }
 
 

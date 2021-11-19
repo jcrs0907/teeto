@@ -21,74 +21,80 @@
         )
     </insert>
 
-    <insert id="likeClass" parameterType="mentee">
-        <selectKey keyProperty="classLikeSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_MENTEE_CLASS_LIKE_L_SEQ.nextval FROM DUAL
-        </selectKey>
-        INSERT INTO
-        TB_MENTEE_CLASS_LIKE_L (
-        CLASS_LIKE_SEQNO
-        , MENTEE_ID
-        , CLASS_ID
-        , CRE_DTTM
+    <insert id="updateLike"
+            parameterType="mentee">
+        INSERT INTO TB_MENTEE_CLASS_LIKE_L (
+            CLASS_LIKE_SEQNO
+           ,MENTEE_ID
+           ,CLASS_ID
+           ,CRE_DTTM
         ) VALUES (
-         #{classLikeSeqno}
-        , #{menteeId}
-        , #{classId}
-        , sysdate
+            #{classLikeSeqno}
+           ,#{menteeId}
+           ,#{classId}
+           ,SYSDATE()
         )
-    </insert>
-
-    <update id="deleteClass" parameterType="mentee">
+        ON DUPLICATE KEY
         UPDATE
-        TB_MENTEE_CLASS_LIKE_L
-        SET
-        USE_YN = 'N'
-        WHERE
-        MENTEE_ID = #{menteeId}
-        and CLASS_ID = #{classId}
-    </update>
+              USE_YN = CASE
+              WHEN #{useYn} = 'Y' THEN 'N'
+              ELSE 'Y' END
+             ,UPT_DTTM = SYSDATE()
+    </insert>
 
-    <insert id="insertPayment" parameterType="mentee">
+    <insert id="insertPayment"
+            parameterType="mentee">
         <selectKey keyProperty="paymentSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_PAYMENT_L_SEQ.nextval FROM DUAL
+            SELECT nextval('PAYMENT_SEQ') FROM DUAL
         </selectKey>
-        INSERT INTO
-        TB_PAYMENT_L (
-        PAYMENT_SEQNO
-        ,MENTEE_ID
-        ,CLASS_ID
-        ,PAYMENT_TP_CD
-        ,PAYMENT_PRICE
-        , CRE_DTTM
+        INSERT INTO TB_PAYMENT_L (
+             PAYMENT_SEQNO
+            ,MENTEE_ID
+            ,CLASS_ID
+            ,PAYMENT_TP_CD
+            ,PAYMENT_PRICE
+            ,CRE_DTTM
         ) VALUES (
-        #{paymentSeqno}
-        ,#{menteeId}
-        ,#{classId}
-        ,#{paymentTpCd}
-        ,#{paymentPrice}
-        ,sysdate
+             #{paymentSeqno}
+            ,#{menteeId}
+            ,#{classId}
+            ,#{paymentTpCd}
+            ,#{paymentPrice}
+            ,SYSDATE()
         )
     </insert>
 
-    <insert id="insertClasses" parameterType="mentee">
-        <selectKey keyProperty="paymentSeqno" resultType="integer" order="BEFORE">
-            SELECT TB_PAYMENT_L_SEQ.CURRVAL FROM DUAL
-        </selectKey>
-        INSERT INTO
-        TB_MENTEE_CLASS_L (
-        CLASS_ID
-        ,MENTEE_ID
-        ,CLASS_APPL_DATE
-        ,PAYMENT_SEQNO
-        ,CRE_DTTM
+    <insert id="insertClasses"
+            parameterType="mentee">
+        INSERT INTO TB_MENTEE_CLASS_L (
+             CLASS_ID
+            ,MENTEE_ID
+            ,CLASS_APPL_DATE
+            ,PAYMENT_SEQNO
+            ,CRE_DTTM
         ) VALUES (
-        #{classId}
-        ,#{menteeId}
-        ,sysdate
-        ,#{paymentSeqno}
-        , sysdate
+             #{classId}
+            ,#{menteeId}
+            ,SYSDATE()
+            ,#{paymentSeqno}
+            ,SYSDATE()
         )
     </insert>
+
+    <select id="getLikeInfo"
+            parameterType="mentee"
+            resultType="mentee">
+        SELECT
+                CLASS_LIKE_SEQNO AS classLikeSeqno
+               ,USE_YN AS useYn
+        FROM TB_MENTEE_CLASS_LIKE_L
+        WHERE CLASS_ID = #{classId}
+        AND MENTEE_ID = #{menteeId}
+    </select>
+
+    <select id="getNextLikeSeqno"
+            resultType="int">
+        SELECT nextval('MTE_CS_LIKE_SEQ') FROM DUAL;
+    </select>
 
 </mapper>

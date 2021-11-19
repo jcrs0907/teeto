@@ -42,7 +42,7 @@ public class ReviewController {
      */
     @GetMapping("/{classId}")
     @ResponseBody
-    public List<Review> select(@PathVariable String classId) {
+    public Review select(@PathVariable String classId) {
         return reviewService.select(classId);
     }
 

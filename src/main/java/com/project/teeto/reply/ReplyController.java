@@ -1,10 +1,13 @@
 package com.project.teeto.reply;
 
+import com.project.teeto.auth.AuthService;
 import com.project.teeto.reply.model.Reply;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
@@ -14,6 +17,9 @@ public class ReplyController {
     @Autowired
     ReplyService replyService;
 
+    @Autowired
+    AuthService authService;
+
     /**
      * 답변 등록
      * @param reply
@@ -21,9 +27,9 @@ public class ReplyController {
      */
     @PostMapping
     @ResponseBody
-    public boolean insert(@ModelAttribute Reply reply) {
+    public boolean insert(Reply reply, HttpServletRequest req) {
         log.info(String.format("[Insert Reply] RvwSeqno : %s", reply.getRvwSeqno()));
-        return replyService.insert(reply);
+        return replyService.insert(reply, authService.getSession(req));
     }
 
     /**
@@ -33,7 +39,7 @@ public class ReplyController {
      */
     @PatchMapping("/{replySeqno}")
     @ResponseBody
-    public boolean update(@ModelAttribute Reply reply) {
+    public boolean update(Reply reply) {
         log.info(String.format("[Update Reply] replySeqno : %s", reply.getReplySeqno()));
         return replyService.update(reply);
     }
@@ -45,7 +51,7 @@ public class ReplyController {
      */
     @DeleteMapping("/{replySeqno}")
     @ResponseBody
-    public boolean delete(@ModelAttribute Reply reply) {
+    public boolean delete(Reply reply) {
         log.info(String.format("[Delete Reply] replySeqno : %s", reply.getReplySeqno()));
         return replyService.delete(reply);
     }

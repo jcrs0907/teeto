@@ -10,7 +10,7 @@
               ,T.MENTO_ID AS mentoId
               ,R.REPLY_SEQNO AS replySeqno
               ,R.REPLY_CTT AS replyCtt
-              ,TO_CHAR(R.CRE_DTTM) AS creDttm
+              ,DATE_FORMAT(R.CRE_DTTM, '%Y-%m-%d %H:%i:%s')AS creDttm
         FROM TB_REPLY_L R
         LEFT OUTER JOIN TB_MENTO_I T ON R.MENTO_ID = T.MENTO_ID
         WHERE RVW_SEQNO = #{rvwSeqno}
@@ -18,9 +18,6 @@
 
     <insert id="insert"
             parameterType="reply">
-        <selectKey keyProperty="replySeqno" resultType="integer" order="BEFORE">
-        SELECT TB_REPLY_L_SEQ.nextval FROM DUAL
-        </selectKey>
        INSERT INTO /* insert - ReplyMapper.xml : 211006 @eunseo */
         TB_REPLY_L (
             REPLY_SEQNO
@@ -29,11 +26,11 @@
            ,REPLY_CTT
            ,CRE_DTTM
         ) VALUES (
-            #{replySeqno}
+            nextval('REPLY_SEQ')
            ,#{rvwSeqno}
            ,#{mentoId}
            ,#{replyCtt}
-           ,SYSDATE
+           ,SYSDATE()
         )
     </insert>
 
@@ -41,7 +38,7 @@
             parameterType="reply">
         UPDATE TB_REPLY_L /* update - ReplyMapper.xml : 211006 @eunseo */
         SET REPLY_CTT = #{replyCtt}
-           ,UPT_DTTM = SYSDATE
+           ,UPT_DTTM = SYSDATE()
         WHERE REPLY_SEQNO = #{replySeqno}
     </update>
 
@@ -49,7 +46,7 @@
             parameterType="int">
         UPDATE TB_REPLY_L /* update - ReplyMapper.xml : 211006 @eunseo */
         SET USE_YN = 'N'
-           ,UPT_DTTM = SYSDATE
+           ,UPT_DTTM = SYSDATE()
         WHERE REPLY_SEQNO = #{replySeqno}
     </delete>
 

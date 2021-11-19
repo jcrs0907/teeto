@@ -2,7 +2,8 @@ package com.project.teeto.classes;
 
 import com.project.teeto.auth.model.Auth;
 import com.project.teeto.classes.mapper.ClassesMapper;
-import com.project.teeto.file.FileService;
+import com.project.teeto.intergrate.file.FileService;
+import com.project.teeto.mentee.MenteeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.teeto.classes.model.Classes;
@@ -24,6 +25,9 @@ public class ClassesService {
     @Autowired
     FileService fileService;
 
+    @Autowired
+    MenteeService menteeService;
+
     /**
      * 클래스 등록
      * @param classes
@@ -42,12 +46,14 @@ public class ClassesService {
             classes.setMentoId(auth.getMentoId());
             classesProcessList = classes.getClassesProcessList();
             classesDetailList = classes.getClassesDetailList();
+
+            //클래스 기본 이미지 파일 있을 시
             if(classes.getClassFile() != null) {
                 classes.setClassFileSeqno(insertImage(classes.getClassFile()));
             }
-
             //클래스 기본
             classesMapper.insertClass(classes);
+
             //클래스 프로세스
             for(Classes cl : classesProcessList) {
                 cl.setClassId(classes.getClassId());
@@ -85,17 +91,30 @@ public class ClassesService {
                 for(Classes cl : classesDetailList) {
                     cl.setClassId(classes.getClassId());
 
-                    //삭제 여부 Y일시
-                    if(cl.getClassDetailDeleteYn().equals("Y")) {
-                        classesMapper.deleteDetail(cl);
-                    }
+                    //상세 일련번호 있을 시
                     if(cl.getClassDetailSeqno() != null) {
-                        if(cl.getClassDetailFile() != null) {
-                            cl.setClassFileSeqno(updateImage(cl.getClassDetailFile(),cl.getClassFileSeqno()));
+
+                        //삭제 여부 Y
+                        if(cl.getClassDetailDeleteYn().equals("Y")) {
+                            //사진 삭제
+                            if(cl.getClassDetailFileSeqno() != null) {
+                                fileService.delete(cl.getClassDetailFileSeqno()); //파일 일련번호 필요
+                            }
+                            //상세 삭제
+                            classesMapper.deleteDetail(cl);
                         }
-                        classesMapper.updateClassDetail(cl);
-                    }else {
-                        cl.setClassFileSeqno(insertImage(cl.getClassDetailFile()));
+                        //삭제 여부 N
+                        else {
+                            //파일 있을 시
+                            if(cl.getClassDetailFile() != null) {
+                                cl.setClassDetailFileSeqno(updateImage(cl.getClassDetailFile(),cl.getClassDetailFileSeqno())); //파일 일련번호 필요
+                            }
+                            classesMapper.updateClassDetail(cl);
+                        }
+                    }
+                    //상세 일련번호 없을 시(추가)
+                    else {
+                        cl.setClassDetailFileSeqno(insertImage(cl.getClassDetailFile()));
                         classesMapper.insertClassDetail(cl);
                     }
                 }
@@ -106,18 +125,43 @@ public class ClassesService {
                 for(Classes cl : classesProcessList) {
                     cl.setClassId(classes.getClassId());
 
-                    //삭제 여부 Y일시
-                    if(cl.getClassProcessDeleteYn().equals("Y")){
-                        classesMapper.deleteProcess(cl);
-                    }
+                    //프로세스 일련번호 있을 시
                     if(cl.getClassProcessSeqno() != null) {
-                        classesMapper.updateClassProcess(cl);
-                    }else {
+                        //삭제 여부 Y
+                        if(cl.getClassProcessDeleteYn().equals("Y")){
+                            classesMapper.deleteProcess(cl);
+                        }
+                        //삭제 여부 N
+                        else {
+                            classesMapper.updateClassProcess(cl);
+                        }
+                    }
+                    //프로세스 일련번호 없을 시 (추가)
+                    else {
                         classesMapper.insertClassProcess(cl);
                     }
                 }
             }
 
+            //기본 파일 일련번호 있을 시
+            if(classes.getClassFileSeqno() != null) {
+                //파일이 있을 시
+                if(classes.getClassFile() != null) {
+                    classes.setClassFileSeqno(updateImage(classes.getClassFile(), classes.getClassFileSeqno()));
+                }
+                //파일이 없을 시
+                else {
+                    fileService.delete(classes.getClassFileSeqno());
+                    classes.setClassFileSeqno(null);
+                    classesMapper.deleteFileSeqno(classes);
+                }
+            }
+            //기본 파일 일련번호 없을 시
+            else {
+                if(classes.getClassFile() != null) {
+                    classes.setClassFileSeqno(insertImage(classes.getClassFile()));
+                }
+            }
             //클래스 기본
             classesMapper.updateClass(classes);
 
@@ -193,6 +237,7 @@ public class ClassesService {
      */
     public List<Classes> getList(Classes classes, Auth auth){
         List<Classes> list = null;
+        List<Classes> likeList = null;
         String classSearchCd = classes.getClassesSearchTpCd();
 
         if(classes.getClassesSearchMCd() != null && classes.getClassesSearchMCd().equals(MEM_TP_CD_MENTEE)){
@@ -201,16 +246,31 @@ public class ClassesService {
 
         if(classes.getClassesSearchMCd() != null && classes.getClassesSearchMCd().equals(MEM_TP_CD_MENTO)){
             classes.setMentoId(auth.getMentoId());
-
         }
 
-        if(classSearchCd.equals(CLASS_SEARCH_TP_CD_DATE)){
+        if(classSearchCd != null && classSearchCd.equals(CLASS_SEARCH_TP_CD_DATE)){
             if(classes.getSearchEndDate() == null || classes.getSearchEndDate().equals("")){
                 classes.setSearchEndDate(classes.getSearchStartDate());
             }
         }
 
         list = classesMapper.getList(classes);
+
+        //로그인 시
+        if(auth != null) {
+            //찜한 클래스
+            likeList = classesMapper.getMteLikeList(auth.getMenteeId());
+
+            //클래스 목록과 찜한 클래스 목록 중 같다면 찜여부 'Y' list뿌릴 시 필요
+            for(Classes c : list) {
+                for(Classes likeClass : likeList) {
+                    if(c.getClassId().equals(likeClass.getClassId())) {
+                        c.setClassLikeYn("Y");
+                    }
+                }
+            }
+
+        }
 
         return list;
     }

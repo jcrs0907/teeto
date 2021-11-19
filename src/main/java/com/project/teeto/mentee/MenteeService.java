@@ -68,34 +68,25 @@ public class MenteeService {
     }
 
     /**
-     * 클래스 찜하기
+     * 클래스 찜/해제
      * @param mentee
      * @return
      */
-    public boolean likeClass(Mentee mentee){
+    @Transactional
+    public boolean updateLike(Mentee mentee){
         boolean result = false;
+        Mentee likeInfo = null;
+
         try{
-            menteeMapper.likeClass(mentee);
+            likeInfo = menteeMapper.getLikeInfo(mentee);
+            if(likeInfo == null ) {
+                mentee.setClassLikeSeqno(menteeMapper.getNextLikeSeqno());
+            }else {
+                mentee.setClassLikeSeqno(likeInfo.getClassLikeSeqno());
+                mentee.setUseYn(likeInfo.getUseYn());
+            }
+            menteeMapper.updateLike(mentee);
             result = true;
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
-    /**
-     * 클래스 찜 해제
-     * @param mentee
-     * @return
-     */
-    public boolean deleteClass(Mentee mentee){
-        boolean result = false;
-        try{
-            menteeMapper.deleteClass(mentee);
-            result = true;
-
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,15 +102,12 @@ public class MenteeService {
      */
     public List<Classes> selectClass(Auth auth){
         List<Classes> list = null;
-        Classes classes = new Classes();
 
         if(auth.getMemTpCd() != null && auth.getMemTpCd().equals(MEM_TP_CD_MENTEE)){
-            classes.setMenteeId(auth.getMenteeId());
-            list = classesMapper.getMteLikeList(classes);
+            list = classesMapper.getMteLikeList(auth.getMenteeId());
         }
 
         return list;
     }
-
 
 }

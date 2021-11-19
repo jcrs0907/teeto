@@ -18,4 +18,6 @@ public interface ReviewMapper {
 
     void updateReplyYn(Review review);
 
+    int getAvg(String classId);
+
 }

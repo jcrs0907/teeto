@@ -1,7 +1,7 @@
-package com.project.teeto.file;
+package com.project.teeto.intergrate.file;
 
-import com.project.teeto.file.mapper.FileMapper;
-import com.project.teeto.file.model.TeetoFile;
+import com.project.teeto.intergrate.file.mapper.FileMapper;
+import com.project.teeto.intergrate.file.model.TeetoFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,16 +1,19 @@
 package com.project.teeto.classes.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Date;
 
 @Alias("classes")
 @Getter
 @Setter
+@ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Classes {
 
     private String memId;                       //회원 ID
@@ -45,6 +48,10 @@ public class Classes {
     private List<Classes> classesDetailList;    //상세 목록
     private String classProcessDeleteYn= "N";   //프로세스 삭제 여부
     private String classDetailDeleteYn= "N";    //디테일 삭제 여부
+    private String classLikeYn= "N";            //클래스 찜 여부
+
+    private String classStrtDateTime;           //클래스 시작날짜시간
+    private String classEndDateTime;            //클래스 종료날짜시간
 
     /**
      *  프로세스
@@ -66,18 +73,19 @@ public class Classes {
     /**
      *  카테고리
      */
-    private String classHgrkCtgrCd;
-    private String classCtgrCdNm;
-    private String classHrgkCtgrCdNm;
-    private String srtSeq;
+    private String classHgrkCtgrCd;             //상위 카테고리 코드
+    private String classCtgrCdNm;               //카테고리 코드 명
+    private String classHrgkCtgrCdNm;           //상위 카테고리 코드 명
+    private String srtSeq;                      //시작 시퀀스
 
     /**
      *  검색
      */
-    private String searchStartDate;
-    private String searchEndDate;
-    private String classesSearchTpCd;
-    private String classesSearchMCd;
-    private String searchText;
+    private String searchStartDate;             //시작 날짜
+    private String searchEndDate;               //종료 날짜
+    private String classesSearchTpCd;           //검색 타입 코드
+    private String classesSearchMCd;            //검색 멤버 타입 코드
+    private String searchText;                  //검색 명
+    private String searchFilterTpCd = "FT01";            //검색 필터 타입 코드
 
 }

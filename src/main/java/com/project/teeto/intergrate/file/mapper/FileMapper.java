@@ -1,7 +1,7 @@
-package com.project.teeto.file.mapper;
+package com.project.teeto.intergrate.file.mapper;
 
 
-import com.project.teeto.file.model.TeetoFile;
+import com.project.teeto.intergrate.file.model.TeetoFile;
 import org.springframework.stereotype.Repository;
 
 @Repository

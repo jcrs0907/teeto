@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.teeto.intergrate.paging.mapper.PaginationMapper">
+
+    <sql id="paging">
+        LIMIT #{rowsPerPage} OFFSET #{offset}
+    </sql>
+
+    <sql id="searching">
+        <if test="@com.project.teeto.intergrate.helper.CommonHelper@isExists(page)">
+        LIMIT #{page.rowsPerPage} OFFSET #{page.offset}
+        </if>
+    </sql>
+
+</mapper>

@@ -13,6 +13,11 @@ public class FaqService {
     @Autowired
     FaqMapper faqMapper;
 
+    /**
+     * 목록
+     * @param faqCd
+     * @return
+     */
     public List<Faq> getList(String faqCd) {
         List<Faq> faqList = faqMapper.getList(faqCd);
         return faqList;

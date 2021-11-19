@@ -1,4 +1,4 @@
-package com.project.teeto.pwd;
+package com.project.teeto.intergrate.pwd;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;

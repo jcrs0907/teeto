@@ -1,5 +1,6 @@
 package com.project.teeto.community.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
@@ -10,6 +11,7 @@ import java.util.List;
 @Alias("community")
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Community {
 
     /**
@@ -34,10 +36,10 @@ public class Community {
     private String cmmtFileDeleteYn = "N";      //파일 삭제 여부
 
     private Integer cmmtCnt;                    //글 수
-    private Integer cmmtCmtCnt;                //댓글 수
+    private Integer cmmtCmtCnt;                 //댓글 수
 
-    private Integer cmmtCmtSeqno;              //댓글 일련번호
-    private String cmmtCmtCtt;                 //댓글 내용
+    private Integer cmmtCmtSeqno;               //댓글 일련번호
+    private String cmmtCmtCtt;                  //댓글 내용
 
     private Integer myCommunityCnt;             //내가 쓴 글 수
     private List<Community> communityList;      //목록

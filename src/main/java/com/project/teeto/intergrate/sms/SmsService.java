@@ -1,4 +1,4 @@
-package com.project.teeto.sms;
+package com.project.teeto.intergrate.sms;
 
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;

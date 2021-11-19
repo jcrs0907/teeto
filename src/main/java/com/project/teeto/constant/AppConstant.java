@@ -55,16 +55,15 @@ public interface AppConstant {
     /**
      * 클래스 검색 타입코드
      */
-    String CLASS_SEARCH_TP_CD_DATE = "CS01";
-    String CLASS_SEARCH_TP_CD_CATEGORY = "CS02";
-    String CLASS_SEARCH_TP_CD_LIKE = "CS03";
-    String CLASS_SEARCH_TP_CD_MN = "CS04";
-    String CLASS_SEARCH_TP_CD_CN = "CS05";
-    //시작 종료의 경우 세션에 있는 멘티, 멘토 아이 가져다가 사용하기
-    String CLASS_SEARCH_TP_CD_START = "CS06";
-    String CLASS_SEARCH_TP_CD_END = "CS07";
+    String CLASS_SEARCH_TP_CD_DATE = "CS01";        //날짜별
+    String CLASS_SEARCH_TP_CD_MN = "CS02";          //멘토명
+    String CLASS_SEARCH_TP_CD_CN = "CS03";          //클래스명
+    String CLASS_SEARCH_TP_CD_START = "CS04";       //시작예정
+    String CLASS_SEARCH_TP_CD_END = "CS05";         //종료된
 
-
-
-
+    /**
+     * 클래스 필터 타입 코드
+     */
+    String CLASS_SEARCH_FILTER_TP_CD_DATE = "FT01"; //최신순
+    String CLASS_SEARCH_FILTER_TP_CD_LIKE = "FT02"; //인기순
 }

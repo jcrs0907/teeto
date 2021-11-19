@@ -1,5 +1,6 @@
 package com.project.teeto.reply;
 
+import com.project.teeto.auth.model.Auth;
 import com.project.teeto.reply.mapper.ReplyMapper;
 import com.project.teeto.reply.model.Reply;
 import com.project.teeto.review.ReviewService;
@@ -36,11 +37,12 @@ public class ReplyService {
      * @return
      */
     @Transactional
-    public boolean insert(Reply reply) {
+    public boolean insert(Reply reply, Auth auth) {
         boolean result = false;
         int cnt = 0;
         Review review = new Review();
 
+        reply.setMentoId(auth.getMentoId());
         cnt = replyMapper.insert(reply);
         if(cnt == 1) {
             review.setReplyYn("Y");
@@ -56,6 +58,7 @@ public class ReplyService {
      * @param reply
      * @return
      */
+    @Transactional
     public boolean update(Reply reply) {
         boolean result = false;
         int cnt = 0;
@@ -71,6 +74,7 @@ public class ReplyService {
      * @param reply
      * @return
      */
+    @Transactional
     public boolean delete(Reply reply) {
         boolean result = false;
         int cnt = 0;

@@ -67,7 +67,7 @@ public class ClassesController {
      * @param req
      * @return
      */
-    @PostMapping(value = "/list")
+    @PostMapping("/list")
     @ResponseBody
     public List<Classes> searchClasses(Classes classes, HttpServletRequest req) {
         return classesService.getList(classes, authService.getSession(req));
@@ -80,9 +80,10 @@ public class ClassesController {
      */
     //상세
     @GetMapping("/detail/{classId}")
-    public String detail(@PathVariable String classId, Model model){
-        model.addAttribute("classDetail", classesService.classDetail(classId));
-        return "classDetail";
+    @ResponseBody
+    public Classes detail(@PathVariable String classId, Model model){
+//        model.addAttribute("classDetail", classesService.classDetail(classId));
+        return classesService.classDetail(classId);
     }
 
 }

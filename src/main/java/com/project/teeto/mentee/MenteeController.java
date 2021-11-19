@@ -33,7 +33,7 @@ public class MenteeController {
     }
 
     /**
-     * 클래스 찜하기
+     * 클래스 찜/해제
      * @param mentee
      * @param req
      * @return
@@ -42,28 +42,16 @@ public class MenteeController {
     @ResponseBody
     public boolean likeClass(Mentee mentee, HttpServletRequest req){
         mentee.setMenteeId(authService.getSession(req).getMenteeId());
-        return menteeService.likeClass(mentee);
+        return menteeService.updateLike(mentee);
     }
 
-    /**
-     * 찜 해제
-     * @param mentee
-     * @param req
-     * @return
-     */
-    @DeleteMapping("/class/delete")
-    @ResponseBody
-    public boolean delete(Mentee mentee, HttpServletRequest req) {
-        mentee.setMenteeId(authService.getSession(req).getMenteeId());
-        return menteeService.deleteClass(mentee);
-    }
 
     /**
      * 찜한 목록
      * @param req
      * @return
      */
-    @GetMapping("/class/like/list")
+    @GetMapping("/class/like")
     @ResponseBody
     public List<Classes> likeClassList(HttpServletRequest req){
         return menteeService.selectClass(authService.getSession(req));
