@@ -65,7 +65,6 @@ display: flex; align-items: center; justify-content: center;}
 .class-info-table .column:not(:last-child){border-bottom:1px solid rgb(248, 248, 248); }
 
 /* class date */
-.datepicker{max-width: 60vh;	height: 60vh;width: 100%; margin:auto; border-radius: 4px; overflow: hidden;box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%); }
 .search-result-bar{position:sticky; top: 48px; z-index: 10;}
 .class-cate-icon-list{display: flex; align-items: center; justify-content: space-between; margin:1rem; padding:0.5rem 1rem;}
 .class-cate-icon-list .button{border-radius: 2px;height: 60px; min-width: 60px;}

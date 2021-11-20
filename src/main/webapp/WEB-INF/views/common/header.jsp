@@ -53,10 +53,10 @@
             <a href="/login" class="navbar-item is-hidden-desktop">
                 로그인
             </a>
-            <a class="navbar-item is-hidden-desktop">
+            <a class="navbar-item is-hidden-desktop is-hidden">
                 마이페이지
             </a>
-            <a class="navbar-item is-hidden-desktop">
+            <a class="navbar-item is-hidden-desktop is-hidden">
                 로그아웃
             </a>
             <div class="navbar-item is-hidden-mobile is-hidden-tablet-only">
@@ -64,7 +64,7 @@
                     <a href="/mento/apply" class="button is-black">
                         멘토 신청하기
                     </a>
-                    <a href="/classes/apply" class="button is-black">
+                    <a href="/classes/apply" class="button is-black is-hidden">
                         클래스 신청하기
                     </a>
                     <a href="/login" class="button is-white">
@@ -72,7 +72,7 @@
                     </a>
                 </div>
             </div>
-            <div class="navbar-item has-dropdown is-hoverable is-hidden-mobile is-hidden-tablet-only">
+            <div class="navbar-item has-dropdown is-hoverable is-hidden-mobile is-hidden-tablet-only is-hidden">
                 <div class="navbar-link is-arrowless">
                     <span class="user-icon icon" style="font-size:30px">
                          <ion-icon name="happy-outline"></ion-icon>
@@ -80,7 +80,7 @@
 
                 </div>
 
-                <div class="navbar-dropdown is-boxed is-right">
+                <div class="navbar-dropdown is-boxed is-right ">
                     <a class="navbar-item">
                         마이페이지
                     </a>
