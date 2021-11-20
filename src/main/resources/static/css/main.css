@@ -1,5 +1,5 @@
 /*main*/
-.main-tabs.tabs a{padding:0.5em 0.7em 0.5em 0.3em;}
+.main-tabs.tabs a{padding:0.5em 0.7em 0.5em 0.3em;margin-bottom: -;}
 .main-tabs.tabs ul{    width: 100%;
     border-bottom-color: #dbdbdb;
     border-bottom-style: solid;
@@ -8,6 +8,10 @@
 .category-icon-list .category-btn{white-space: normal; flex-direction: column;
     height: 58px; width: 100%;}
 .category-btn ion-icon{font-size: 24px;}
+
+
+.today-class-list{box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%);max-height: 60vh; height: 100%; overflow-y: auto;/* overflow-x: hidden; */}
+.today-class-list .today-class-item{color: #000; overflow: hidden;}
 
 @media screen and (max-width: 1024px){
     /*.main-bg-area{display: none !important;}*/
