@@ -81,6 +81,7 @@
         SELECT /* select - AuthMapper.xml : 210929 @eunseo */
               L.MEM_ID AS memId
              ,L.PASSWORD AS password
+             ,M.MEM_NM AS memNm
              ,M.MEM_TP_CD AS memTpCd
              ,MT.MENTEE_ID AS menteeId
         FROM TB_LOGIN_I L

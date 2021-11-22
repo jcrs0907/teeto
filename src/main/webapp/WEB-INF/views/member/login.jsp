@@ -13,7 +13,7 @@
                     <div class="field">
                         <label class="label">이메일</label>
                         <div class="control">
-                            <input class="input" type="email" placeholder="이메일을 입력해 주세요.">
+                            <input name="id" class="input" type="email" placeholder="이메일을 입력해 주세요.">
                         </div>
                         <p class="help is-success is-invisible">
                             필수 항목 입니다.
@@ -22,13 +22,13 @@
                     <div class="field">
                         <label class="label">비밀번호</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="비밀번호를 입력해 주세요.">
+                            <input name="pwd" class="input" type="text" placeholder="비밀번호를 입력해 주세요.">
                         </div>
                         <p class="help is-danger is-invisible">
                             필수 항목 입니다.
                         </p>
                     </div>
-                    <button type="submit" class="button is-medium is-black is-fullwidth">
+                    <button name="login_button" type="button" class="button is-medium is-black is-fullwidth">
                         <strong>로그인 하기</strong>
                     </button>
                     <button type="submit" class="button is-medium is-black is-fullwidth  is-loading">
@@ -44,3 +44,32 @@
         </div>
     </div>
 </section>
+<script>
+
+    <%--로그인 ajax--%>
+    $(document).ready(function(){
+
+        $('button[name="login_button"]').on('click', function(){
+
+            $.ajax( {
+                url : "/auth/login",
+                data : {
+                        'loginId': $('input[name="id"]').val(),
+                        'password' : $('input[name="pwd"]').val()
+                        } ,
+                type : 'post' ,
+                dataType : 'json',
+                success :  function(serverdata){
+                    if(serverdata) {
+                        alert("login success");
+                        window.location.href = "/";
+                    }else {
+                        alert("이메일 ID 혹은 비밀번호를 확인해주세요.");
+                    }
+                },
+                error:function() {
+                }
+            } );//ajax
+        });//on
+    });//ready
+</script>

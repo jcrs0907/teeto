@@ -27,3 +27,5 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="/js/libs/datepikk.js"></script>
 <script type="module" src="/js/app.js"></script>
+<%--jquery--%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -89,4 +89,17 @@ public class AuthController {
         auth.setMemId(authService.getSession(req).getMemId());
         return authService.checkPassword(auth);
     }
+
+    /**
+     * 로그아웃
+     * @param session
+     * @return
+     */
+    @GetMapping("/logout")
+    @ResponseBody
+    public boolean logout(HttpSession session) {
+        session.invalidate();
+        return true;
+    }
+
 }

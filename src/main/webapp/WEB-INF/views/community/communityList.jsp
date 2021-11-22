@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <section class="community-section section">
     <div class="hero-body">
         <div class="container is-max-desktop">
@@ -115,7 +116,14 @@
                     </ul>
                 </nav>
             </div>
+            <div>
+            <c:forEach var="comm" items="${communityList.list}">
 
+                <p>${comm.cmmtSeqno}</p>
+                <p>${comm.cmmtTitle}</p>
+
+            </c:forEach>
+            </div>
         </div>
     </div>
 </section>
