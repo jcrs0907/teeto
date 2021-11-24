@@ -1,5 +1,6 @@
 import View from './View.js'
 const tag = '[main]'
+
 const MainView = Object.create(View);
 
 MainView.setup = function (el) {
@@ -19,9 +20,8 @@ MainView.bindEvents = function () {
     if (this.navbarBurgers.length > 0) {
         this.navbarBurgers.forEach( element => this.onNavToggle(element));
     }
-
-
 }
+
 MainView.onNavScroll = function(element){
     let last_known_scroll_position = 0;
     let ticking = false;

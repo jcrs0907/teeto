@@ -22,10 +22,12 @@
 <link rel="stylesheet" href="/css/faq.css">
 <link rel="stylesheet" href="/css/myPage.css">
 <%--js--%>
+<%--jquery--%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <%--icon--%>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="/js/libs/datepikk.js"></script>
-<script type="module" src="/js/app.js"></script>
-<%--jquery--%>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="./js/libs/datepikk.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+
+
