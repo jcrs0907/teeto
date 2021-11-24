@@ -27,7 +27,7 @@
 <%--icon--%>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script type="text/javascript" src="./js/libs/datepikk.js"></script>
-<script type="text/javascript" src="./js/common.js"></script>
+<script src="/js/libs/datepickk.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 
 
