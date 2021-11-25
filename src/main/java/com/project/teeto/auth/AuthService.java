@@ -138,18 +138,20 @@ public class AuthService {
      * @return
      */
     public Auth login(Auth auth) {
-        Auth member = new Auth();
+        Auth member = null;
         Auth login = null;
         String mentoId = "";
 
         login = authMapper.login(auth);
 
-        if(pwdService.matchPassword(auth.getPassword(),login.getPassword())) {
-            member = login;
-            //멘토일 시
-            if(login.getMemTpCd().equals(MEM_TP_CD_MENTO)) {
-                mentoId = authMapper.getMentoId(login.getMemId());
-                member.setMentoId(mentoId);
+        if(login != null) {
+            if(pwdService.matchPassword(auth.getPassword(),login.getPassword())) {
+                //멘토일 시
+                member = login;
+                if(login.getMemTpCd().equals(MEM_TP_CD_MENTO)) {
+                    mentoId = authMapper.getMentoId(login.getMemId());
+                    member.setMentoId(mentoId);
+                }
             }
         }
         return member;

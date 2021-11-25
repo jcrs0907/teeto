@@ -69,7 +69,7 @@ public class AuthController {
     public boolean login(Auth auth, HttpServletRequest req) {
         Auth member = null;
         member = authService.login(auth);
-        if(member.getMemId() != null) {
+        if(member != null) {
             HttpSession session = req.getSession();
             session.setAttribute("member", member);
             return true;
