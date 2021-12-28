@@ -19,8 +19,15 @@
                     </div>
                     <div class="field">
                         <label class="label">닉네임(멘티)</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="닉네임을 입력해 주세요.">
+                        <div class="field is-grouped mb-0">
+                            <p class="control is-expanded">
+                                <input class="input" type="text" placeholder="인증번호를 입력해 주세요.">
+                            </p>
+                            <p class="control">
+                                <button class="button is-black">
+                                    확인
+                                </button>
+                            </p>
                         </div>
                         <p class="help is-success is-invisible">
                             필수 항목 입니다.
@@ -28,15 +35,22 @@
                     </div>
                     <div class="field">
                         <label class="label">이메일</label>
-                        <div class="control">
-                            <input class="input" type="email" placeholder="이메일을 입력해 주세요.">
+                        <div class="field is-grouped mb-0">
+                            <p class="control is-expanded">
+                                <input class="input" type="text" placeholder="인증번호를 입력해 주세요.">
+                            </p>
+                            <p class="control">
+                                <button class="button is-black">
+                                    인증
+                                </button>
+                            </p>
                         </div>
                         <p class="help is-success is-invisible">
                             필수 항목 입니다.
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label is-size-7">인증번호 받기</label>
+                        <label class="label">인증번호 받기</label>
                         <div class="field is-grouped mb-0">
                             <p class="control is-expanded">
                                 <input class="input" type="text" placeholder="인증번호를 입력해 주세요.">
@@ -69,3 +83,7 @@
         </div>
     </div>
 </section>
+
+<script>
+
+</script>

@@ -4,7 +4,7 @@
     <div class="hero-body">
         <div class="container is-max-desktop">
 
-            <div class="community-detail community-padding card ml-0 mr-0 mb-6">
+            <div class="community-detail community-padding ml-0 mr-0 mb-6">
                 <div class="community-card">
                     <div class="columns">
                         <div class="column">

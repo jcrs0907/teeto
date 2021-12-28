@@ -77,6 +77,7 @@ public class Classes {
     private String classCtgrCdNm;               //카테고리 코드 명
     private String classHrgkCtgrCdNm;           //상위 카테고리 코드 명
     private String srtSeq;                      //시작 시퀀스
+    private int cateCount;
 
     /**
      *  검색
@@ -86,6 +87,6 @@ public class Classes {
     private String classesSearchTpCd;           //검색 타입 코드
     private String classesSearchMCd;            //검색 멤버 타입 코드
     private String searchText;                  //검색 명
-    private String searchFilterTpCd = "FT01";            //검색 필터 타입 코드
+    private String searchFilterTpCd = "FT01";   //검색 필터 타입 코드
 
 }

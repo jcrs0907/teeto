@@ -385,6 +385,23 @@
         <if test='searchFilterTpCd != null and searchFilterTpCd.equals("FT02")'>
             ORDER BY likeCnt DESC
         </if>
+    </select>
+    <select id="getCategoryList" parameterType="classes" resultType="classes">
+        SELECT
+		C.CLASS_CTGR_CD AS classCtgrCd
+        ,C.CLASS_CTGR_CD_NM AS classCtgrCdNm
+        ,(SELECT COUNT(CC.CLASS_CTGR_CD) FROM TB_CLASS_L CC WHERE C.CLASS_CTGR_CD = CC.CLASS_CTGR_CD and CC.USE_YN = 'Y') AS cateCount
+        FROM TB_CLASS_CATEGORY_L C
+        where C.CLASS_HGRK_CTGR_CD is NULL
+        AND C.USE_YN = 'Y'
+    </select>
 
+    <select id="getSubCategoryList" parameterType="classes" resultType="classes">
+       SELECT
+		C.CLASS_CTGR_CD AS classCtgrCd
+        ,C.CLASS_CTGR_CD_NM AS classCtgrCdNm
+        FROM TB_CLASS_CATEGORY_L C
+        where C.CLASS_HGRK_CTGR_CD = #{classCtgrCd}
+        AND C.USE_YN = 'Y'
     </select>
 </mapper>

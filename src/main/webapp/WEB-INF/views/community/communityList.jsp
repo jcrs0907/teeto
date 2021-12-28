@@ -4,7 +4,7 @@
 <section class="community-section section">
     <div class="hero-body">
         <div class="container is-max-desktop">
-            <div class="community-list community-padding card">
+            <div class="community-list community-padding">
                 <div class="notification is-link columns ml-0 mr-0 mt-0 mb-5">
                     <div class="column">
                         <img src="/img/main.png" class="image-full">

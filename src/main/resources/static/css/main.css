@@ -13,6 +13,7 @@
 .today-class-list{box-shadow: 0 0 0.3rem 0 rgb(41 27 55 / 21%);max-height: 60vh; height: 100%; overflow-y: auto;/* overflow-x: hidden; */}
 .today-class-list .today-class-item{color: #000; overflow: hidden;}
 
+.review-section {flex-direction: row-reverse}
 @media screen and (max-width: 1024px){
     /*.main-bg-area{display: none !important;}*/
 }

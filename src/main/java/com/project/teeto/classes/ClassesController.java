@@ -86,4 +86,18 @@ public class ClassesController {
         return classesService.classDetail(classId);
     }
 
+
+     /**
+     * 카테고리 검색, 카테고리 클래스 갯수
+     * @param classes
+     * @return
+     */
+
+     @PostMapping("/category/list")
+     @ResponseBody
+     public List<Classes> searchCategory(Classes classes){
+         return classesService.getCategoryList(classes);
+     }
+
+
 }

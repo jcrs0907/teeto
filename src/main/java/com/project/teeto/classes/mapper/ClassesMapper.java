@@ -47,4 +47,8 @@ public interface ClassesMapper {
     List<Classes> getMteLikeList(String menteeId);      //찜한 목록
     List<Classes> getList(Classes classes);             //목록(검색)
 
+    List<Classes> getCategoryList(Classes classes); //카테고리 목록 검색
+    List<Classes> getSubCategoryList(Classes classes);
+
+
 }

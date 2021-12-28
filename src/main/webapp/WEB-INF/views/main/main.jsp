@@ -1,44 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<section class="hero-body" style="display:none">
-    <div class="container is-max-widescreen">
-        <div class="columns is-variable is-4 is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
-            <div class="column">
-                <div style="padding:50px 0; box-sizing: border-box">
-                    <h1 class="title is-2">
-                        <span>617,425</span> 명이 <br>티토와
-                        함께합니다.
-                    </h1>
-                    <div class="text is-1">
-                        학교에서 배우기 어렵거나 큰 비용을 <br>지불해야만 배울 수 있는 전문적인 지식들을 제공합니다.<br>
-                        오픈 플랫폼의 이점을 통해 다양성과 경제성을 모두 높입니다.
-                    </div>
-                </div>
-            </div>
-            <div class="column" style="position:relative">
-                <div style="width: 100%; height: 48px; background: linear-gradient(180deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.72));
-    position: absolute; bottom: 0; z-index: 1;"></div>
-                <div>
-                    <div class="box">
-                        상자 안에 있어요.
-                    </div>
-                    <div class="box">
-                        상자 안에 있어요.
-                    </div>
-                    <div class="box">
-                        상자 안에 있어요.
-                    </div>
-                    <div class="box">
-                        상자 안에 있어요.
-                    </div>
-                    <div class="box">
-                        상자 안에 있어요.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <section class="section hero is-fullheight">
     <div class="hero-body">
         <div class="container is-max-widescreen">
@@ -585,7 +547,7 @@
         </div>
     </div>
 </a>
-<section class="hero-body">
+<section class="hero-body mb-6">
     <div class="container is-max-widescreen">
         <h3 class="is-size-3 has-text-weight-bold mb-6 has-text-centered">오늘의 클래스</h3>
         <div class="has-text-right mb-4">
@@ -621,6 +583,48 @@
         </div>
     </div>
 </section>
+<section class="hero-body has-background-light pt-6 pb-6" style="display: none">
+    <div class="container is-max-widescreen">
+        <div class="review-section columns is-variable is-6 is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+            <div class="column pt-6 pb-6 has-text-right-desktop">
+                <h1 class="title is-2">
+                    <span>617,425</span> 명이 <br>티토와
+                    함께합니다.
+                </h1>
+                <div class="text is-1">
+                    학교에서 배우기 어렵거나 큰 비용을 지불해야만 배울 수 있는 전문적인 지식들을 제공합니다.
+                    오픈 플랫폼의 이점을 통해 다양성과 경제성을 모두 높입니다.
+                </div>
+            </div>
+            <div class="review-list column is-6" style="ㅌposition:relative">
+                <div class="review-item box">
+                    <p class="mb-2">쉽게 설명해 주셔서 감사합니다</p>
+                    <p class="has-text-right is-size-7">**님</p>
+                </div>
+                <div class="review-item box">
+                    <p class="mb-2">좋아요 좋아요.</p>
+                    <p class="has-text-right is-size-7">**님</p>
+
+                </div>
+                <div class="review-item box">
+                    <p class="mb-2">너무 너무 좋아요. 내용이 꽉 차네요.</p>
+                    <p class="has-text-right is-size-7">**님</p>
+
+                </div>
+                <div class="review-item box">
+                    <p class="mb-2">드디어 결제해서 강의를 듣는 중입니다!
+                        많은 진도를 나가지는 않았지만 목소리나 진행하는 흐름 전부 다 맘에 드네요ㅎㅎ 빨리 진도 다 뺀다음 여기서 배운걸 기반으로 새로운 컨텐츠를 개발하고 싶습니다</p>
+                    <p class="has-text-right is-size-7">**님</p>
+                </div>
+                <div class="review-item box">
+                    <p class="mb-2">너무 좋은 강의입니다. 다시 듣고 싶을 정도입니다.
+                        강의를 보며 쉬운 설명과 좋은 내용으로 많은 도움이 되었습니다</p>
+                    <p class="has-text-right is-size-7">**님</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="hero mt-6 mb-6">
     <div class="hero-body">
         <a class="container is-max-widescreen is-block pt-6 pb-6">
@@ -641,7 +645,9 @@
         container: document.querySelector('#mainPicker'),
         inline: true,
         range: false,
-        tooltip: false
+        tooltip: false,
+        today:false,
+        locked:true
     });
     mainPicker.selectDate(new Date());
 </script>

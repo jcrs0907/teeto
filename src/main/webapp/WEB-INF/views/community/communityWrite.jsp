@@ -3,7 +3,7 @@
 <section class="community-section section">
     <div class="hero-body">
         <div class="container is-max-desktop">
-            <div class="community-padding card ml-0 mr-0 mb-6">
+            <div class="community-padding ml-0 mr-0 mb-6">
                 <div class="control mb-5">
                     <input class="input" type="text" placeholder="제목을 입력해 주세요.">
                 </div>

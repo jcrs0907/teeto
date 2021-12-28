@@ -287,4 +287,24 @@ public class ClassesService {
         fileService.delete(fileSeqno);
         return insertImage(file);
     }
+
+    /**
+     * 클래스 카테고리 검색
+     */
+
+    public List<Classes> getCategoryList(Classes classes){
+        List<Classes> list = null;
+        list = classesMapper.getCategoryList(classes);
+
+        //카테고리 목록 이름이 있으면
+        //세부 카테고리 검색
+
+        return list;
+    }
+
+    public List<Classes> getSubCategoryList(Classes classes){
+        List<Classes> list = null;
+        list = classesMapper.getSubCategoryList(classes);
+        return list;
+    }
 }
