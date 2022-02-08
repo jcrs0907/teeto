@@ -5,7 +5,7 @@
 - java 8, spring boot, Maven, jsp(tiles, bulma Css framework)
 - DB: oracle, mySql(oracle에서 mySql로 마이그레이션 작업 진행)
 - 개발 도구: intelliJ, DBeaver, Postman, git
-- 협업 도구: google 문서, notion, aquerytool erd
+- 협업 도구: google spreadsheets, google docs, notion, aquerytool erd
 
 ## 개발 기간
 2021.08.31 ~
