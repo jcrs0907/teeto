@@ -43,7 +43,7 @@
     </definition>
     <!--mypage-->
     <definition name="myPage" extends="base">
-        <!--중첩 사-->
+        <!--중첩 사용-->
         <put-attribute name="content">
             <definition template="/WEB-INF/views/member/myPage.jsp">
                 <put-attribute name="myAside" value="/WEB-INF/views/member/myAside.jsp"/>

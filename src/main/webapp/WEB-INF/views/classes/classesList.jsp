@@ -16,12 +16,12 @@
         <c:forEach var="data" items="${cateList}">
             <c:set var="totalCount" value="${totalCount + data.cateCount}" />
         </c:forEach>
-            <a href="/classes/list" class="category-btn button cate-bg-all <c:if test="${null eq classes.classCtgrCd}">has-background-black clicked</c:if>">
+            <a href="/class/list" class="category-btn button cate-bg-all <c:if test="${null eq classes.classCtgrCd}">has-background-black clicked</c:if>">
                 <span class="category-text">전체 코스</span>
                 <em class="category-count is-size-7">${totalCount}</em>
             </a>
             <c:forEach var="data" items="${cateList}" varStatus="status">
-                <a href="/classes/list/${data.classCtgrCd}" data-cate-type="${data.classCtgrCd}"
+                <a href="/class/list/${data.classCtgrCd}" data-cate-type="${data.classCtgrCd}"
                    class="category-btn button <c:if test="${classes.classCtgrCd eq data.classCtgrCd}">has-background-black clicked</c:if>">
                     <span class="category-text">${data.classCtgrCdNm}</span>
                     <em class="category-count is-size-7">${data.cateCount}</em>
@@ -54,12 +54,12 @@
             </div>
             <div class="sub-category-list pb-6">
                 <c:if test="${null ne classes.classCtgrCd}">
-                    <a href="/classes/list/${classes.classCtgrCd}" class="button cate-badge-shape <c:if test="${null eq classes.classDetailCtgrCd}">has-background-black clicked</c:if>">
+                    <a href="/class/list/${classes.classCtgrCd}" class="button cate-badge-shape <c:if test="${null eq classes.classDetailCtgrCd}">has-background-black clicked</c:if>">
                        전체
                     </a>
                 </c:if>
                 <c:forEach var="data" items="${subCateList}" varStatus="status">
-                    <a href="/classes/list/${classes.classCtgrCd}/${data.classCtgrCd}" class="button cate-badge-shape <c:if test="${classes.classDetailCtgrCd eq data.classCtgrCd}">has-background-black clicked</c:if>">
+                    <a href="/class/list/${classes.classCtgrCd}/${data.classCtgrCd}" class="button cate-badge-shape <c:if test="${classes.classDetailCtgrCd eq data.classCtgrCd}">has-background-black clicked</c:if>">
                             ${data.classCtgrCdNm}
                     </a>
                 </c:forEach>
