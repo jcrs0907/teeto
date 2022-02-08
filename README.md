@@ -18,7 +18,6 @@
 - session, Authentication
 - web , security config
 - paging 처리
-- Maven(pom.xml) 설정
 
 > jcrs0907(https://github.com/jcrs0907)
 - 멘티(클래스 찜 해제, 멘티 클래스 목록)
